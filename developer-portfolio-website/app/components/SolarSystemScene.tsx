@@ -1,41 +1,34 @@
 "use client";
 
 import { useThree, Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useAnimations, Billboard } from "@react-three/drei";
+import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera } from "@react-three/drei";
 import { useState, Suspense, useEffect, useRef, RefObject } from "react";
 import { Group, LoopOnce, LoopRepeat, Mesh, Vector3 } from "three";
 import { Text } from "@react-three/drei";
 import React from "react";
 
-interface SolarSystemModelProp {
-  controls: RefObject<any>;
-}
-
 interface Offsets {
     yOffset : number,
-    xOffset : number
+    xOffset : number,
+    zOffset : number
 }
 
 
-function SolarSystemModel({ controls }: SolarSystemModelProp) { 
-    //ToDo: remove after testing
-    const { camera } = useThree();
-
+function SolarSystemModel() { 
+    const cameraRef = useRef<any>(null);
     const group = useRef<Group>(null);
     const { scene, animations } = useGLTF("/models/solar-system.glb");
     const { actions } = useAnimations(animations, group);
     const [planetRefs, setPlanetRefs] = useState<{ mesh: any; textRef: React.RefObject<any> }[]>([]);
     const planetOffsets: Record<string, Offsets> = {
-        mercury: { xOffset: 1, yOffset: 1 },
-        venus: { xOffset: 8, yOffset: 4 },
-        earth: { xOffset: 8, yOffset: 4 },
-        mars: { xOffset: 8, yOffset: 1 },
-        jupiter: { xOffset: 12, yOffset: 5 },
-        saturn: { xOffset: 4, yOffset: 4 },
-        uranus: { xOffset: 2, yOffset: 2 },
-        neptune: { xOffset: 3, yOffset: 3 },
-        sun: { xOffset: 26, yOffset: 9 },
-        moon: { xOffset: 1, yOffset: 1 },
+        venus: { xOffset: 8, yOffset: 4, zOffset : 4 },
+        earth: { xOffset: 8, yOffset: 2, zOffset : 2 },
+        mars: { xOffset: 8, yOffset: 1, zOffset : 8 },
+        jupiter: { xOffset: 12, yOffset: 5, zOffset : 4 },
+        saturn: { xOffset: 4, yOffset: 4, zOffset : 4 },
+        uranus: { xOffset: 2, yOffset: 2, zOffset : 8 },
+        neptune: { xOffset: 3, yOffset: 3, zOffset : 8 },
+        sun: { xOffset: 26, yOffset: 9, zOffset : 3},
     };
     const planetNameToSectionName: Record<string, string> = {
         venus: "My tech stack",
@@ -45,7 +38,8 @@ function SolarSystemModel({ controls }: SolarSystemModelProp) {
     };
 
     const targetPlanet = useRef<any>(null);
-    const targetCameraPos = useRef<Vector3 | null>(null);
+    const offset = useRef<Vector3>(new Vector3());
+    const isReparented = useRef(false);
 
     useEffect(() => {
         if (actions) {
@@ -64,10 +58,9 @@ function SolarSystemModel({ controls }: SolarSystemModelProp) {
         const planets: { mesh: any; textRef: React.RefObject<any> }[] = []; 
         scene.traverse((child) => { 
             if (!child.name.includes("_") && child.name.toLowerCase() != "scene") {
-                    console.log("pushed: " + child.name)
                     planets.push({                    
-                    mesh: child, 
-                    textRef: React.createRef(), 
+                        mesh: child, 
+                        textRef: React.createRef(), 
                 }); 
             }                     
         }); 
@@ -77,27 +70,14 @@ function SolarSystemModel({ controls }: SolarSystemModelProp) {
     useFrame(() => {
         planetRefs.forEach((planet) => {
             if (planet.textRef.current) {
-                const offSets = planetOffsets[planet.mesh.name] ?? 5;
-                const worldPos = new Vector3();
-                planet.mesh.getWorldPosition(worldPos);
-                planet.textRef.current.position.set(worldPos.x, worldPos.y + offSets.yOffset, worldPos.z);
+                if (planetOffsets[planet.mesh.name]) {
+                    const offSets = planetOffsets[planet.mesh.name] ?? 5;
+                    const worldPos = new Vector3();
+                    planet.mesh.getWorldPosition(worldPos);
+                    planet.textRef.current.position.set(worldPos.x, worldPos.y + offSets.yOffset, worldPos.z);
+                }
             }
         });
-
-        if (targetPlanet.current && targetCameraPos.current) {
-            const planetPos = new Vector3();
-            targetPlanet.current.getWorldPosition(planetPos);
-
-            // Transform the local offset into world space
-            const worldOffset = targetCameraPos.current
-                .clone()
-                .applyQuaternion(targetPlanet.current.quaternion); 
-
-            const desiredPos = planetPos.clone().add(worldOffset);
-
-            camera.position.lerp(desiredPos, 0.05);
-            camera.lookAt(planetPos);
-        }
     });
 
     return (
@@ -108,23 +88,34 @@ function SolarSystemModel({ controls }: SolarSystemModelProp) {
                     const planet = planetRefs.find(p => p.mesh.name === e.object.name);
                     if (!planet) return;
 
-                    // Choose the offset you want (e.g. right side of planet)
-                    const offset = new Vector3(
-                        planetOffsets[planet.mesh.name].xOffset, 
-                        0, 
-                        0
-                    );
+                    //targetPlanet.current = planet.mesh; // optional if you still want to track
+                    const planetOffset = planetOffsets[planet.mesh.name];
+                    // Re-parent the camera into the planet's group
+                    if (cameraRef.current && planetOffset) {
+                        // Remove from previous parent
+                        cameraRef.current.parent?.remove(cameraRef.current);
 
-                    if (controls.current) {
-                        controls.current.enabled = false; // freeze orbit controls
+                        // Add to the planet mesh or its group
+                        planet.mesh.add(cameraRef.current);
+                        var earthYOffset = 0;
+                        if (planet.mesh.name == "earth") {
+                            earthYOffset = planetOffset.yOffset
+                        }
+                        // Set offset relative to planet
+                        cameraRef.current.position.set(
+                            0,
+                            earthYOffset,
+                            planetOffset.zOffset
+                        );
+
+                        // Look at the planet center
+                        cameraRef.current.lookAt(0, 0, 0);
                     }
-
-                    targetCameraPos.current = offset; // <-- store as RELATIVE offset
-                    targetPlanet.current = planet.mesh;
                 }}
-        />
+            />
 
             {planetRefs.map((planet) => {
+                if (!planetOffsets[planet.mesh.name]) return;
                 const position = new Vector3();
                 planet.mesh.getWorldPosition(position); 
 
@@ -146,21 +137,21 @@ function SolarSystemModel({ controls }: SolarSystemModelProp) {
                 );
 
             })}
+            <PerspectiveCamera ref={cameraRef} makeDefault fov={50} position={[0, 55, 0]} />
         </group>
     )
 }
 
 export default function SolarSystemScene() {
-    const controls = useRef<any>(null);
     return (
         <div className="w-screen h-screen">
-        <Canvas camera={{ position: [0, 40, 0], fov: 30 }}>
+        <Canvas>
             <ambientLight intensity={0.4} />
             <directionalLight position={[5, 5, 5]} intensity={1} />
             <Suspense fallback={null}>
-            <SolarSystemModel controls={ controls }/>
+            <SolarSystemModel/>
             </Suspense>
-            <OrbitControls ref={controls} enableZoom={true}  />
+            <OrbitControls enableZoom={true}  />
         </Canvas>
         </div>
     );
