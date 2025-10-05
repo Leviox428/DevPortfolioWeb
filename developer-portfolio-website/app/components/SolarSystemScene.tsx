@@ -1,26 +1,28 @@
 "use client";
 
-import { useThree, Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera, Html, Loader } from "@react-three/drei";
 import { useState, Suspense, useEffect, useRef, RefObject } from "react";
-import { Group, LoopOnce, LoopRepeat, Mesh, Object3D, Object3DEventMap, Vector3 } from "three";
+import { Group, LoopRepeat, Object3D, Object3DEventMap, Vector3 } from "three";
 import { Text } from "@react-three/drei";
 import React from "react";
-import { Play, Pause } from "lucide-react";
+import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { PlayPauseButton } from "./PausePlayButton";
+import handlePlanetClick from "../functions/handlePlanetClick";
 
-interface PlanetInfo {
+export interface PlanetInfo {
     yOffset : number,
     xOffset : number,
     zOffset : number,
-    sectionName : string
+    sectionKey : string
 }
 
 type SolarSystemModelProps = {
     isPlaying: boolean;
+    controlsRef: React.RefObject<OrbitControlsImpl | null>;
 };
 
-function SolarSystemModel( { isPlaying } : SolarSystemModelProps) { 
+function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) { 
     const cameraRef = useRef<any>(null);
     const group = useRef<Group>(null);
 
@@ -34,12 +36,13 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
     } | null>(null);
 
     const planetInfoDict: Record<string, PlanetInfo> = {
-        venus: { xOffset: 8, yOffset: 4, zOffset : 4, sectionName: "My tech stack" },
-        earth: { xOffset: 8, yOffset: 2, zOffset : 2, sectionName: "My Projects" },
-        mars: { xOffset: 8, yOffset: 1, zOffset : 8, sectionName: "Working Experience" },
-        sun: { xOffset: 26, yOffset: 9, zOffset : 3, sectionName: "About me"},
+        venus: { xOffset: 8, yOffset: 4, zOffset : 4, sectionKey: "My tech stack" },
+        earth: { xOffset: 8, yOffset: 2, zOffset : 2, sectionKey: "My Projects" },
+        mars: { xOffset: 8, yOffset: 3, zOffset : 8, sectionKey: "Working Experience" },
+        sun: { xOffset: 26, yOffset: 9, zOffset : 3, sectionKey: "About me"},
     };
 
+    //controls animation of scene
     useEffect(() => {
         if (actions) {
             Object.values(actions).forEach((action) => {
@@ -58,6 +61,7 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
         }
     }, [actions, isPlaying]);
 
+    //fills planet from scene into planetRefs
     useEffect(() => { 
         const planets: { mesh: Object3D<Object3DEventMap>; textRef: React.RefObject<any> }[] = []; 
         scene.traverse((child) => { 
@@ -71,6 +75,7 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
         setPlanetRefs(planets); 
     }, [scene]);
 
+    //moves labels and handles orbitcontrols change
     useFrame(() => {
         planetRefs.forEach((planet) => {
             if (planet.textRef.current) {
@@ -82,6 +87,16 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
                 }
             }
         });
+        if (!controlsRef.current) return;
+
+        if (activePlanet) {
+            const worldPos = new Vector3();
+            activePlanet.mesh.getWorldPosition(worldPos);
+            controlsRef.current.target.copy(worldPos);
+            controlsRef.current.update();
+        } else {
+            controlsRef.current.target.set(0, 0, 0);
+        }
         
     });
 
@@ -89,34 +104,20 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
         <group ref={group} scale={1}>
             <primitive
                 object={scene}
-                onPointerDown={(e: { object: { name: any; }; }) => {
-                    const planet = planetRefs.find(p => p.mesh.name === e.object.name);
+                onPointerDown={(e: { stopPropagation: () => void; intersections: any[]; }) => {
+                    
+                    e.stopPropagation();
+                    const intersection = e.intersections.find((i: { object: Object3D<Object3DEventMap>; }) =>
+                        planetRefs.some((p) => p.mesh === i.object)
+                    );
+
+                    if (!intersection) return;
+
+                    const planet = planetRefs.find((p) => p.mesh === intersection.object);
+                    //const planet = planetRefs.find(p => p.mesh.name === e.object.name);
                     if (!planet) return;
-                    setActivePlanet(planet);
-                    //targetPlanet.current = planet.mesh; // optional if you still want to track
-                    const planetOffset = planetInfoDict[planet.mesh.name];
-                    // Re-parent the camera into the planet's group
-                    if (cameraRef.current && planetOffset) {
-                        // Remove from previous parent
-                        cameraRef.current.parent?.remove(cameraRef.current);
-
-                        // Add to the planet mesh or its group
-                        planet.mesh.add(cameraRef.current);
-                        var earthYOffset = 0;
-                        if (planet.mesh.name == "earth") {
-                            earthYOffset = planetOffset.yOffset
-                        }
-                        
-                        // Set offset relative to planet
-                        cameraRef.current.position.set(
-                            0,
-                            earthYOffset,
-                            planetOffset.zOffset
-                        );
-
-                        // Look at the planet center
-                        cameraRef.current.lookAt(0, 0, 0);
-                    }
+                    const planetInfo = planetInfoDict[planet.mesh.name];
+                    handlePlanetClick(planet, planetInfo, cameraRef, setActivePlanet, controlsRef);
                 }}
             />
 
@@ -138,11 +139,10 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
                             anchorX="center"
                             anchorY="top"
                             >
-                            {planetInfoDict[planet.mesh.name].sectionName}
+                            {planetInfoDict[planet.mesh.name].sectionKey}
                         </Text>            
                     </Billboard>
                 );
-
             })}
             
             <PerspectiveCamera
@@ -151,7 +151,7 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
                 fov={50}
                 position={[0, 55, 0]}
                 >
-                {activePlanet && (
+                {activePlanet && planetInfoDict[activePlanet.mesh.name] && (
                     <Html
                         position={[0, 0, -2]} // 2 units in front of camera
                         transform
@@ -160,7 +160,7 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
                     <div className="bg-white/80 p-4 rounded-xl shadow-lg">
                         <h2 className="text-black font-bold">{activePlanet.mesh.name}</h2>
                         <p className="text-black text-sm">
-                            {planetInfoDict[activePlanet.mesh.name].sectionName || "Unknown Section"}
+                            {planetInfoDict[activePlanet.mesh.name].sectionKey || "Unknown Section"}
                         </p>
                         <button
                         className="mt-2 px-3 py-1 bg-blue-500 text-white rounded"
@@ -178,6 +178,7 @@ function SolarSystemModel( { isPlaying } : SolarSystemModelProps) {
 
 export default function SolarSystemScene() {
     const [isPlaying, setIsPlaying] = useState(true);
+    const controlsRef = useRef<OrbitControlsImpl>(null);
 
     return (
         <div className="w-screen h-screen">
@@ -191,9 +192,9 @@ export default function SolarSystemScene() {
                         </div>
                     </Html>                  
                 }>
-                    <SolarSystemModel isPlaying={isPlaying} />
+                    <SolarSystemModel isPlaying={isPlaying} controlsRef={controlsRef} />
                 </Suspense>
-                <OrbitControls enableZoom={true}  />
+                <OrbitControls ref={controlsRef} enableZoom={true}  />
             </Canvas>
             <PlayPauseButton
                 isPlaying={isPlaying}
