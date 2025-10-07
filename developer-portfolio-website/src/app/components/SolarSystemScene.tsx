@@ -1,14 +1,13 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera, Html, Loader } from "@react-three/drei";
-import { useState, Suspense, useEffect, useRef, RefObject } from "react";
+import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera, Html } from "@react-three/drei";
+import { useState, Suspense, useEffect, useRef } from "react";
 import { Group, LoopRepeat, Object3D, Object3DEventMap, Vector3 } from "three";
 import { Text } from "@react-three/drei";
 import React from "react";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { PlayPauseButton } from "./PausePlayButton";
-import handlePlanetClick from "../functions/handlePlanetClick";
 import { LanguageButton } from "./LanguageButton";
 import { useTranslations } from 'next-intl';
 
@@ -126,7 +125,7 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
 
                     const planetInfo = planetInfoDict[planet.mesh.name];                                           
                     if (!cameraRef.current || !planetInfo) return;
-                    
+
                     // Reparent camera 
                     cameraRef.current.parent?.remove(cameraRef.current);
                     const pivot = new Object3D();
