@@ -1,8 +1,8 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera, Html } from "@react-three/drei";
-import { useState, Suspense, useEffect, useRef } from "react";
+import { OrbitControls, useGLTF, useAnimations, Billboard, PerspectiveCamera, Html, Loader } from "@react-three/drei";
+import { useState, Suspense, useEffect, useRef, RefObject } from "react";
 import { Group, LoopRepeat, Object3D, Object3DEventMap, Vector3 } from "three";
 import { Text } from "@react-three/drei";
 import React from "react";
@@ -10,6 +10,7 @@ import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { PlayPauseButton } from "./PausePlayButton";
 import { LanguageButton } from "./LanguageButton";
 import { useTranslations } from 'next-intl';
+import PortfolioSecion from "./PortfolioSection";
 
 export interface PlanetInfo {
     yOffset : number,
@@ -21,9 +22,10 @@ export interface PlanetInfo {
 type SolarSystemModelProps = {
     isPlaying: boolean;
     controlsRef: React.RefObject<OrbitControlsImpl | null>;
+    setShowPortfolioSection: React.Dispatch<React.SetStateAction<boolean>>,
 };
 
-function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) { 
+function SolarSystemModel( { isPlaying, controlsRef, setShowPortfolioSection } : SolarSystemModelProps) { 
     const cameraRef = useRef<any>(null);
     const group = useRef<Group>(null);
 
@@ -55,13 +57,17 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
                     action.reset();
                     action.setLoop(LoopRepeat, Infinity);
                     action.clampWhenFinished = true;
-
-                    if (isPlaying) {
-                        action.play();
-                    } else {
-                        action.paused = true;
-                    }
+                    action.play();
                 }
+            });
+        }
+    }, [actions]);
+
+    useEffect(() => {
+        if (actions) {
+            Object.values(actions).forEach((action) => {
+                if (!action) return;
+                action.paused = !isPlaying; 
             });
         }
     }, [actions, isPlaying]);
@@ -83,14 +89,15 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
     //moves labels, active pivot and handles orbitcontrols change
     useFrame((state, delta) => {
         planetRefs.forEach((planet) => {
-            if (planet.textRef.current &&  planetInfoDict[planet.mesh.name]) {           
+            if (planet.textRef.current &&  planetInfoDict[planet.mesh.name]) {
+               
                 const offSets = planetInfoDict[planet.mesh.name] ?? 5;
                 const worldPos = new Vector3();
                 planet.mesh.getWorldPosition(worldPos);
-                planet.textRef.current.position.set(worldPos.x, worldPos.y + offSets.yOffset, worldPos.z);         
+                planet.textRef.current.position.set(worldPos.x, worldPos.y + offSets.yOffset, worldPos.z);
+                
             }
         });
-
         if (!controlsRef.current) return;
 
         if (activePlanet.current && activePivot.current) {
@@ -100,11 +107,16 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
             const worldPos = new Vector3();
             activePlanet.current.mesh.getWorldPosition(worldPos);
             controlsRef.current.target.copy(worldPos);
-            controlsRef.current.update();            
+            controlsRef.current.update();
+
+            activePlanet.current.mesh.rotation.y += delta * 0.5;
+
         } else {
             controlsRef.current.target.set(0, 0, 0);
-        }        
+        }
+        
     });
+
 
     return (
         <group ref={group} scale={1}>
@@ -121,11 +133,11 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
                     const planet = planetRefs.find((p) => p.mesh === intersection.object);
                                      
                     if (!planet) return;
+                    
+                    const planetInfo = planetInfoDict[planet.mesh.name];                                           
                     activePlanet.current = planet;
 
-                    const planetInfo = planetInfoDict[planet.mesh.name];                                           
                     if (!cameraRef.current || !planetInfo) return;
-
                     // Reparent camera 
                     cameraRef.current.parent?.remove(cameraRef.current);
                     const pivot = new Object3D();
@@ -139,13 +151,7 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
                     cameraRef.current.position.set(0, yOffset, planetInfo.zOffset);
                     cameraRef.current.lookAt(pivot.position);
 
-                    // Update OrbitControls target if available
-                    if (controlsRef.current) {
-                        const worldPos = new Vector3();
-                        planet.mesh.getWorldPosition(worldPos);
-                        controlsRef.current.target.copy(worldPos);
-                        controlsRef.current.update();
-                    }
+                    setShowPortfolioSection(true);
                 }}
             />
 
@@ -186,24 +192,26 @@ function SolarSystemModel( { isPlaying, controlsRef } : SolarSystemModelProps) {
 
 export default function SolarSystemScene() {
     const [isPlaying, setIsPlaying] = useState(true);
+    const [showPortfolioSection, setShowPortfolioSection] = useState(false);
     const controlsRef = useRef<OrbitControlsImpl>(null);
 
     return (
-        <div className="w-screen h-screen">
+        <div className="relative w-screen h-screen">       
             <Canvas>
                 <ambientLight intensity={0.4} />
                 <directionalLight position={[5, 5, 5]} intensity={1} />
                 <Suspense fallback={
-                    <Html center>
+                    <Html key="persistent-spinner" center>
                         <div className="flex items-center justify-center h-screen">
                             <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
                         </div>
                     </Html>                  
                 }>
-                    <SolarSystemModel isPlaying={isPlaying} controlsRef={controlsRef} />
+                    <SolarSystemModel setShowPortfolioSection={setShowPortfolioSection} isPlaying={isPlaying} controlsRef={controlsRef} />
                 </Suspense>
                 <OrbitControls ref={controlsRef} enableZoom={true}  />
-            </Canvas>
+            </Canvas>          
+            { showPortfolioSection && <PortfolioSecion onClose={() => setShowPortfolioSection(false)}></PortfolioSecion> }
             <PlayPauseButton
                 isPlaying={isPlaying}
                 onToggle={() => setIsPlaying((prev) => !prev)}
