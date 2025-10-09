@@ -5,5 +5,9 @@
         "projects": "My Projects",
         "experience": "Working Experience",
         "about": "About me"
+    },
+    "AboutMeSection":
+    {
+        "intro": "Zdravím, volám sa Marek Dvorský a som"
     }
 }

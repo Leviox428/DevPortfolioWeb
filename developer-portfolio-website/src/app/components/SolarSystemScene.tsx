@@ -202,9 +202,7 @@ export default function SolarSystemScene() {
                 <directionalLight position={[5, 5, 5]} intensity={1} />
                 <Suspense fallback={
                     <Html key="persistent-spinner" center>
-                        <div className="flex items-center justify-center h-screen">
-                            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white"></div>
-                        </div>
+                        <Loader/>
                     </Html>                  
                 }>
                     <SolarSystemModel setShowPortfolioSection={setShowPortfolioSection} isPlaying={isPlaying} controlsRef={controlsRef} />

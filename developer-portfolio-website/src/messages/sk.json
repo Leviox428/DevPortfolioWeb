@@ -5,5 +5,9 @@
         "projects": "Moje projekty",
         "experience": "Pracovné skúsenosti",
         "about": "O mne"
-    }  
+    },
+    "AboutMeSection":
+    {
+        "intro": "Zdravím, volám sa Marek Dvorský a som"
+    }
 }
