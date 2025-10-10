@@ -21,7 +21,7 @@ const ShinyText: React.FC<ShinyTextProps> = ({ text, disabled = false, speed = 5
         animationDuration: animationDuration
       }}
     >
-      {text}
+      <h1>{text}</h1>
     </div>
   );
 };

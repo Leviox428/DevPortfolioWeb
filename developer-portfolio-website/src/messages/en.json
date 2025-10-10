@@ -1,13 +1,14 @@
 {
     "SolarSystemScene":
     {
-        "techStack": "My tech stack",
+        "techStack": "My Tech Stack",
         "projects": "My Projects",
         "experience": "Working Experience",
-        "about": "About me"
+        "about": "About Me"
     },
     "AboutMeSection":
     {
-        "intro": "Zdravím, volám sa Marek Dvorský a som"
+        "intro": "Hi, my name is Marek Dvorský and I am a",
+        "aboutMeContent": "I am a software developer with experience in object oriented programming. I build applications that are reliable, maintainable, and efficient. My work includes desktop and web applications, Wordpress, backend systems and tools that solve practical problems. I write clear, reliable code for practical applications."
     }
 }

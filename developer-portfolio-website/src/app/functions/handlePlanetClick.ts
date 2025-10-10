@@ -1,33 +1,35 @@
 import { RefObject } from "react";
-import { Object3D, Vector3 } from "three";
-import { PlanetInfo } from "../components/SolarSystemScene";
-import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
+import { Group, Object3D, Object3DEventMap, Vector3 } from "three";
+import { planetInfoDict, PlanetRef } from "../components/models/SolarSystemModel";
 
 export default function handlePlanetClick(
     planet: { mesh: Object3D; textRef: React.RefObject<any> },
-    planetInfo: PlanetInfo,
     cameraRef: RefObject<any>,
-    setActivePlanet: React.Dispatch<React.SetStateAction<any>>,
-    controlsRef: RefObject<OrbitControlsImpl | null>
+    activePlanet: React.RefObject<PlanetRef | null>,
+    activePivot: React.RefObject<any>,
+    scene: Group<Object3DEventMap>,
+    setShowPortfolioSection: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
    
-    setActivePlanet(planet);
+    const planetInfo = planetInfoDict[planet.mesh.name];                                      
+    activePlanet.current = planet;
 
     if (!cameraRef.current || !planetInfo) return;
-    // Reparent camera to planet
+    // Reparent camera 
     cameraRef.current.parent?.remove(cameraRef.current);
-    planet.mesh.add(cameraRef.current);
+    const pivot = new Object3D();
+    scene.add(pivot);
+    planet.mesh.getWorldPosition(pivot.position);
+    pivot.add(cameraRef.current);
+    activePivot.current = pivot;
+
+    //activePlanet.current.textRef
 
     const yOffset = planet.mesh.name === "earth" ? planetInfo.yOffset : 0;
 
     cameraRef.current.position.set(0, yOffset, planetInfo.zOffset);
-    cameraRef.current.lookAt(0, 0, 0);
+    cameraRef.current.lookAt(planet);
 
-    // Update OrbitControls target if available
-    if (controlsRef.current) {
-        const worldPos = new Vector3();
-        planet.mesh.getWorldPosition(worldPos);
-        controlsRef.current.target.copy(worldPos);
-        controlsRef.current.update();
-    }
+    setShowPortfolioSection(true);
+    
 }

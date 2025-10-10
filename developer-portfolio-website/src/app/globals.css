@@ -1,5 +1,31 @@
 @import "tailwindcss";
+/* Fonts + colors in base layer */
+@layer base {
+  :root {
+    --font-body: var(--font-jakarta), var(--font-inter), sans-serif;
+    --font-heading: var(--font-montserrat), sans-serif;
+    --font-mono: var(--font-fira-code), monospace;
 
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+}
+
+/* Utilities */
 @layer utilities {
   @keyframes shine {
     0% { background-position: 100%; }
@@ -9,29 +35,4 @@
   .animate-shine {
     animation: shine 5s linear infinite;
   }
-}
-
-:root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }

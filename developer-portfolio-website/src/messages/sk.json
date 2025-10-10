@@ -1,13 +1,14 @@
 {
     "SolarSystemScene":
     {
-        "techStack": "Moje technológie",
-        "projects": "Moje projekty",
-        "experience": "Pracovné skúsenosti",
-        "about": "O mne"
+        "techStack": "Používané Technológie",
+        "projects": "Moje Projekty",
+        "experience": "Pracovné Skúsenosti",
+        "about": "O Mne"
     },
     "AboutMeSection":
     {
-        "intro": "Zdravím, volám sa Marek Dvorský a som"
+        "intro": "Zdravím, volám sa Marek Dvorský a som",
+        "aboutMeContent": "Som softvérový vývojár so skúsenosťami v objektovo orientovanom programovaní. Vytváram aplikácie, ktoré sú spoľahlivé, udržiavateľné a efektívne. Moja práca zahŕňa desktopové a webové aplikácie, Wordpress, backend systémy a nástroje, ktoré riešia praktické problémy. Píšem čistý a spoľahlivý kód pre praktické aplikácie."
     }
 }

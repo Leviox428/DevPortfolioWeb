@@ -1,40 +1,56 @@
-import Image from "next/image";
-import ShinyText from "../aestheticComponents/ShinyText"
-import AboutMeImage from "../../../../public/images/photoOfMe.png"; 
+import { SiGmail } from "react-icons/si";
+import { MdOutlinePhoneAndroid } from "react-icons/md";
+import ShinyText from "../importedComponents/ShinyText"
+import { useTranslations } from "next-intl";
+import { ScrollArea } from "../importedComponents/ScrollArea";
+
 
 export default function AboutMeSection() {
+
+    const t = useTranslations('AboutMeSection');
+
     return(
-        <div className="relative justify-between flex flex-col w-full h-full">  
+        <div className="relative flex gap-4 justify-center flex-col w-full h-full bg-cover bg-[url('/images/photoOfMeBG.png')] bg-position-[79%] md:bg-position-[80%] lg:bg-position-[90%] xl:bg-position-[100%]">  
             <div className="absolute bottom-0 z-0 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0"
             >
-                <Image        
-                    alt=""            
-                    src={AboutMeImage}
-                    width={500}
-                    height={600}
-                    className="object-cover h-max
-                    w-[60vw] max-w-[400px] sm:w-[350px] md:w-[400px] lg:w-[500px]"
-                />
+
             </div>    
             
             <div className="ml-5 mr-5 mt-5">
-                <p className="text-2xl">Hi, my name is Marek Dvorský and I am a</p>
+                <p className="text-sm sm:text-base md:text-xl lg:text-3xl xl:text-5xl">{t("intro")}</p>
                 <ShinyText 
                     text="Software Developer" 
                     disabled={false} 
                     speed={2} 
-                    className='text-2xl' 
+                    className='text-xl md:text-4xl lg:text-5xl xl:text-7xl mt-5' 
                 />
             </div>
 
-            <div className="justify-self-end w-full h-1/10 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between">
-                <div>
-                    <p className="text-sm font-medium">Let’s Connect</p>
-                    <p className="text-xs text-gray-300">me@example.com</p>
+            <div className="flex w-full px-5 mt-6 sm:w-md md:w-lg lg:w-xl h-auto">            
+                <ScrollArea type="always" className="rounded-md border p-4 md:text-lg lg:text-xl xl:text-2xl bg-gray-600/10">
+                    {t("aboutMeContent")}
+                </ScrollArea>
+            </div>
+
+            <div className="absolute bottom-0 w-full h-1/10 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between md:justify-start md:gap-2">
+                <div className="flex items-center gap-2">
+                    <SiGmail size={26} />
+                    <a
+                        href="mailto:ma12rek@gmail.com"
+                        className="text-xs sm:text-sm md:text-base text-gray-300 hover:underline"
+                    >
+                        ma12rek@gmail.com
+                    </a>
                 </div>
-                <button className="z-10 bg-white/10 border border-white/30 text-white text-sm px-4 py-2 rounded-lg hover:bg-white/20 transition">
-                    Contact Me
-                </button>
+                <div className="flex items-center gap-2">
+                    <MdOutlinePhoneAndroid size={26} />
+                    <a
+                        href="tel:0944502198"
+                        className="text-xs sm:text-sm md:text-base text-gray-300 hover:underline"
+                    >
+                        0944502198
+                    </a>
+                </div>
             </div>
         </div>
     )

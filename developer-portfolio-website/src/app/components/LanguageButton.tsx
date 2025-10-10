@@ -25,7 +25,7 @@ export function LanguageButton() {
       >
          <Image
             src={currentLang === "sk" ? SkFlagPng : GbFlagPng}
-            alt={currentLang === "sk" ? "Slovak flag" : "UK flag"}
+            alt={currentLang === "sk" ? "Slovenská vlajka" : "UK flag"}
             width={32} 
             height={32}
         />
