@@ -1,18 +1,24 @@
 import AboutMeSection from "./portfolioSections/AboutMeSection";
 import Image from "next/image";
 import CloseSVG from "../../../public/svgs/close.svg";
+import TechStackSection from "./portfolioSections/TechStackSection";
+import MyProjectsSection from "./portfolioSections/MyProjectsSection";
 
-interface Props {
+interface PortfolioSectionProps {
     onClose: () => void;
     planetIndex: number;
 }
 
 
-export default function PortfolioSecion({ onClose, planetIndex } : Props) {
+export default function PortfolioSecion({ onClose, planetIndex } : PortfolioSectionProps) {
     const renderSection = () => {
         switch (planetIndex) {
             case 1:
-                return <AboutMeSection />;
+                return <AboutMeSection/>;
+            case 2:
+                return <TechStackSection/>;
+            case 3:
+                return <MyProjectsSection/>;
             default:
                 return <div className="text-white p-6">Coming soon 🚀</div>;
         }

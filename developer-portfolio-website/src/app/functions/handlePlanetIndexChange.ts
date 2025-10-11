@@ -1,15 +1,11 @@
 import { indexToPlanet, planetInfoDict, SolarSystemModelRef } from "../components/models/SolarSystemModel";
+import { PlanetIndexChangeAction } from "@/src/enums/PlanetIndexChangeAction";
 
-export enum HandlePlanetIndexChangeAction {
-    Increment,
-    Decrement
-}
-
-export default function handlePlanetIndexChange(action: HandlePlanetIndexChangeAction, solarSystemModelRef: React.RefObject<SolarSystemModelRef | null>, 
+export default function handlePlanetIndexChange(action: PlanetIndexChangeAction, solarSystemModelRef: React.RefObject<SolarSystemModelRef | null>, 
     setPlanetIndex: React.Dispatch<React.SetStateAction<number>>, currentIndex: number) {
         if (!solarSystemModelRef.current) return;
 
-        const newIndex = action === HandlePlanetIndexChangeAction.Increment ? currentIndex + 1 : currentIndex - 1;
+        const newIndex = action === PlanetIndexChangeAction.Increment ? currentIndex + 1 : currentIndex - 1;
         setPlanetIndex(newIndex);
 
         const planetName = indexToPlanet[newIndex];

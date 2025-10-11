@@ -1,8 +1,8 @@
 import { SiGmail } from "react-icons/si";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
-import ShinyText from "../importedComponents/ShinyText"
+import ShinyText from "../animatedComponents/ShinyText"
 import { useTranslations } from "next-intl";
-import { ScrollArea } from "../importedComponents/ScrollArea";
+import { ScrollArea } from "../animatedComponents/ScrollArea";
 
 
 export default function AboutMeSection() {
@@ -27,7 +27,7 @@ export default function AboutMeSection() {
             </div>
 
             <div className="flex w-full px-5 mt-6 sm:w-md md:w-lg lg:w-xl h-auto">            
-                <ScrollArea type="always" className="rounded-md border p-4 md:text-lg lg:text-xl xl:text-2xl bg-gray-600/10">
+                <ScrollArea type="always" className="rounded-md border p-4 md:text-lg lg:text-xl xl:text-2xl bg-zinc-800/30">
                     {t("aboutMeContent")}
                 </ScrollArea>
             </div>

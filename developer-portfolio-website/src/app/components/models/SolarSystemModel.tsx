@@ -14,8 +14,8 @@ interface PlanetInfo {
 };
 
 export const planetInfoDict: Record<string, PlanetInfo> = {
-    venus: { yOffset: 3, zOffset: 5, sectionKey: "techStack", index: 2 },
-    earth: { yOffset: 3, zOffset: 4, sectionKey: "projects", index: 3 },
+    venus: { yOffset: 2.5, zOffset: 4, sectionKey: "techStack", index: 2 },
+    earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
     mars: { yOffset: 2, zOffset: 20, sectionKey: "experience", index: 4 },
     sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1},
 };
@@ -130,7 +130,7 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
             controlsRef.current.target.copy(worldPos);
             controlsRef.current.update();
 
-            activePlanet.current.mesh.rotation.y += delta * 0.5;
+            activePlanet.current.mesh.rotation.y += delta * 0.3;
 
         } else {
             controlsRef.current.target.set(0, 0, 0);

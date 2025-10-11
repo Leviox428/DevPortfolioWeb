@@ -10,9 +10,10 @@ import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import { PlayPauseButton } from "./PausePlayButton";
 import { LanguageButton } from "./LanguageButton";
 import PortfolioSecion from "./PortfolioSection";
-import Particles from "./importedComponents/Particles";
+import Particles from "./animatedComponents/Particles";
 import SolarSystemModel, { planetInfoDict, SolarSystemModelRef } from "./models/SolarSystemModel";
-import handlePlanetIndexChange, { HandlePlanetIndexChangeAction } from "../functions/handlePlanetIndexChange";
+import handlePlanetIndexChange from "../functions/handlePlanetIndexChange";
+import { PlanetIndexChangeAction } from "@/src/enums/PlanetIndexChangeAction";
 
 
 export default function SolarSystemScene() {
@@ -57,7 +58,7 @@ export default function SolarSystemScene() {
                 <div className="fixed bottom-4 left-4">
                 <button
                     onClick={() =>
-                        handlePlanetIndexChange(HandlePlanetIndexChangeAction.Decrement, solarSystemRef, setPlanetIndex, planetIndex)
+                        handlePlanetIndexChange(PlanetIndexChangeAction.Decrement, solarSystemRef, setPlanetIndex, planetIndex)
                     }
                     className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
                 >
@@ -69,7 +70,7 @@ export default function SolarSystemScene() {
                 <div className="fixed bottom-4 right-4">
                     <button
                         onClick={() =>
-                            handlePlanetIndexChange(HandlePlanetIndexChangeAction.Increment, solarSystemRef, setPlanetIndex, planetIndex)
+                            handlePlanetIndexChange(PlanetIndexChangeAction.Increment, solarSystemRef, setPlanetIndex, planetIndex)
                         }
                         className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
                     >

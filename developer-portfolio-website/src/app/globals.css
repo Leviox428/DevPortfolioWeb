@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+
 /* Fonts + colors in base layer */
 @layer base {
   :root {
@@ -36,3 +39,4 @@
     animation: shine 5s linear infinite;
   }
 }
+
