@@ -3,6 +3,7 @@ import Image from "next/image";
 import CloseSVG from "../../../public/svgs/close.svg";
 import TechStackSection from "./portfolioSections/TechStackSection";
 import MyProjectsSection from "./portfolioSections/MyProjectsSection";
+import ExperienceAndEducation from "./portfolioSections/ExperienceAndEducation";
 
 interface PortfolioSectionProps {
     onClose: () => void;
@@ -19,6 +20,8 @@ export default function PortfolioSecion({ onClose, planetIndex } : PortfolioSect
                 return <TechStackSection/>;
             case 3:
                 return <MyProjectsSection/>;
+            case 4:
+                return <ExperienceAndEducation/>;
             default:
                 return <div className="text-white p-6">Coming soon 🚀</div>;
         }

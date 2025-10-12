@@ -67,7 +67,7 @@ export default function TechStackSection() {
         },
     ];
     return (
-        <div className="relative flex flex-col md:flex-row w-full h-full p-7 gap-3 overflow-y-auto">
+        <div className="relative flex flex-col md:flex-row w-full h-full p-6 gap-3 overflow-y-auto">
             {stacks.map((stack, i) => (
                 <TechStack key={i} {...stack} />
             ))}
