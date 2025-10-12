@@ -11,10 +11,15 @@ import { PlayPauseButton } from "./PausePlayButton";
 import { LanguageButton } from "./LanguageButton";
 import PortfolioSecion from "./PortfolioSection";
 import Particles from "./animatedComponents/Particles";
-import SolarSystemModel, { planetInfoDict, SolarSystemModelRef } from "./models/SolarSystemModel";
+import { planetInfoDict, SolarSystemModelRef } from "./models/SolarSystemModel";
 import handlePlanetIndexChange from "../functions/handlePlanetIndexChange";
 import { PlanetIndexChangeAction } from "@/src/enums/PlanetIndexChangeAction";
+import dynamic from "next/dynamic";
 
+const SolarSystemModel = dynamic(
+    () => import("./models/SolarSystemModel"),
+    { ssr: false }
+);
 
 export default function SolarSystemScene() {
     const [isPlaying, setIsPlaying] = useState(true);

@@ -1,3 +1,5 @@
+"use client";
+
 import { useGLTF, useAnimations, Billboard, Text, PerspectiveCamera   } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useTranslations } from "next-intl";
@@ -198,3 +200,4 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
 })
 
 export default SolarSystemModel;
+useGLTF.preload("/models/solar-system.glb");
