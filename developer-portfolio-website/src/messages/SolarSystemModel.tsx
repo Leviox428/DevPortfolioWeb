@@ -4,7 +4,8 @@ import { useGLTF, useAnimations, Billboard, Text, PerspectiveCamera   } from "@r
 import { useFrame } from "@react-three/fiber";
 import { useTranslations } from "next-intl";
 import React, { useRef, useState, useEffect, forwardRef, RefObject, useImperativeHandle } from "react";
-import { Group, Object3D, Object3DEventMap, LoopRepeat, Vector3 } from "three";
+import { Group, Object3D, Object3DEventMap, LoopRepeat, Vector3, Intersection } from "three";
+import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import handlePlanetClick from "../app/functions/handlePlanetClick";
 
@@ -28,7 +29,7 @@ export const indexToPlanet: Record<number, string> = Object.fromEntries(
 
 export interface PlanetRef {
     mesh: Object3D;
-    textRef: RefObject<any>;
+    textRef: RefObject<Group<Object3DEventMap> | null>;
 };
 
 type SolarSystemModelProps = {
@@ -39,13 +40,13 @@ type SolarSystemModelProps = {
 };
 
 export interface SolarSystemModelRef {
-    handlePlanetClick: (planet: { mesh: Object3D; textRef: RefObject<any> }) => void;
+    handlePlanetClick: (planet: PlanetRef) => void;
     planetRefs: PlanetRef[];
 };
 
 const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
     ({ isPlaying, controlsRef, setShowPortfolioSection, setPlanetIndex }, ref) => {
-    const cameraRef = useRef<any>(null);
+    const cameraRef = useRef<ThreePerspectiveCamera | null>(null);
     const group = useRef<Group>(null);
     const { scene, animations } = useGLTF("/models/solar-system.glb");
     const t = useTranslations('SolarSystemScene');
@@ -55,7 +56,7 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
     const [planetRefs, setPlanetRefs] = useState<PlanetRef[]>([]);
     const activePlanet = useRef<PlanetRef | null>(null);
 
-    const activePivot = useRef<Object3D>(null);
+    const activePivot = useRef<Object3D | null>(null);
 
 
     useImperativeHandle(ref, () => ({
@@ -97,7 +98,7 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
 
     //fills planet from scene into planetRefs
     useEffect(() => { 
-        const planets: { mesh: Object3D<Object3DEventMap>; textRef: React.RefObject<any> }[] = []; 
+        const planets: { mesh: Object3D<Object3DEventMap>; textRef: React.RefObject<Group<Object3DEventMap> | null> }[] = []; 
         scene.traverse((child) => { 
             if (!child.name.includes("_") && child.name.toLowerCase() != "scene") {
                     planets.push({                    
@@ -145,7 +146,7 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
         <group ref={group} scale={1}>
             <primitive
                 object={scene}
-                onPointerDown={(e: { stopPropagation: () => void; intersections: any[]; }) => {                    
+                onPointerDown={(e: { stopPropagation: () => void; intersections: Intersection<Object3D>[] ; }) => {                    
                     e.stopPropagation();
                     const intersection = e.intersections.find((i: { object: Object3D<Object3DEventMap>; }) =>
                         planetRefs.some((p) => p.mesh === i.object)
@@ -198,6 +199,7 @@ const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
         </group>
     )
 })
+SolarSystemModel.displayName = "SolarSystemModel";
 
 export default SolarSystemModel;
 useGLTF.preload("/models/solar-system.glb");

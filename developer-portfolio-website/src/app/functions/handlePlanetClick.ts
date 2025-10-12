@@ -1,12 +1,13 @@
 import { RefObject } from "react";
 import { Group, Object3D, Object3DEventMap, Vector3 } from "three";
 import { planetInfoDict, PlanetRef } from "../../messages/SolarSystemModel";
+import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 
 export default function handlePlanetClick(
-    planet: { mesh: Object3D; textRef: React.RefObject<any> },
-    cameraRef: RefObject<any>,
+    planet: PlanetRef,
+    cameraRef: RefObject<ThreePerspectiveCamera | null>,
     activePlanet: React.RefObject<PlanetRef | null>,
-    activePivot: React.RefObject<any>,
+    activePivot: React.RefObject<Object3D | null>,
     scene: Group<Object3DEventMap>,
     setShowPortfolioSection: React.Dispatch<React.SetStateAction<boolean>>,
 ) {
@@ -28,7 +29,7 @@ export default function handlePlanetClick(
     const yOffset = planet.mesh.name === "earth" ? planetInfo.yOffset : 0;
 
     cameraRef.current.position.set(0, yOffset, planetInfo.zOffset);
-    cameraRef.current.lookAt(planet);
+    cameraRef.current.lookAt(planet.mesh.position);
 
     setShowPortfolioSection(true);
     

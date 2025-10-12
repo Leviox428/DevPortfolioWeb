@@ -242,7 +242,7 @@ const Particles: React.FC<ParticlesProps> = ({
     particleBaseSize,
     sizeRandomness,
     cameraDistance,
-    disableRotation
+    disableRotation,
   ]);
 
   return <div ref={containerRef} className={`absolute inset-0 ${className}`} />;
