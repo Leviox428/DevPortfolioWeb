@@ -14,8 +14,8 @@ export default function TechStack({ title, image, icons }: SkillSectionProps) {
             <div className="max-w-1/4 md:max-w-none md:h-auto md:max-h-1/5">
                 <Image src={image} alt={title} className="object-cover w-full h-full" />
             </div>
-            <div className="relative rounded-md border border-zinc-800/30 w-full h-full">
-                <div className="flex items-center justify-center min-h-[50px] h-1/6 bg-zinc-800/30">
+            <div className="relative rounded-md border border-zinc-800/50 w-full h-full">
+                <div className="flex items-center justify-center min-h-[50px] h-1/6 bg-zinc-800/50">
                 <p className="text-center text-xl lg:text-2xl xl:text-3xl">{title}</p>
                 </div>
                     <div className="p-3 flex flex-wrap gap-6 items-center justify-center">

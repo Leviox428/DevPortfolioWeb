@@ -29,7 +29,7 @@ export default function PortfolioSecion({ onClose, planetIndex } : PortfolioSect
 
             <svg 
                 onClick={onClose}
-                className="absolute top-1 right-1 hover:text-red-500 z-2"
+                className="absolute top-1 right-1 transform transition-transform duration-300 hover:rotate-90 z-2"
                 width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" 
                 stroke="#ffffffff">
                 <g id="SVGRepo_tracerCarrier"></g>

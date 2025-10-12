@@ -21,35 +21,14 @@ import {
 
 export interface ComboBoxProps {
   programmingLanguages: string[];
-  placeHolderText: string;
+  searchPlaceHolderText: string;
   selectionPlaceHolderText: string;
+  width: number;
+  notFoundText: string;
+  setSelection: React.Dispatch<React.SetStateAction<string>>;
 }
 
-
-const frameworks = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-]
-
-export function ComboBox({ programmingLanguages, placeHolderText, selectionPlaceHolderText }: ComboBoxProps) {
+export function ComboBox({ programmingLanguages, searchPlaceHolderText, notFoundText, selectionPlaceHolderText, width, setSelection }: ComboBoxProps) {
   const [open, setOpen] = React.useState(false)
   const [value, setValue] = React.useState("")
 
@@ -60,7 +39,8 @@ export function ComboBox({ programmingLanguages, placeHolderText, selectionPlace
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          style={{ width: `${width}px` }}
+          className="w-auto justify-between"
         >
           {value
             ? programmingLanguages.find((language) => language === value)
@@ -68,11 +48,14 @@ export function ComboBox({ programmingLanguages, placeHolderText, selectionPlace
           <ChevronsUpDownIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent 
+        className="w-[260px] p-0 bg-zinc-800/90"
+        style={{ width: `${width}px` }}
+        >
         <Command>
-          <CommandInput placeholder={placeHolderText} />
+          <CommandInput placeholder={searchPlaceHolderText} />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>{notFoundText}</CommandEmpty>
             <CommandGroup>
               {programmingLanguages.map((language) => (
                 <CommandItem
@@ -80,6 +63,7 @@ export function ComboBox({ programmingLanguages, placeHolderText, selectionPlace
                   value={language}
                   onSelect={(currentValue) => {
                     setValue(currentValue === value ? "" : currentValue)
+                    setSelection(currentValue)
                     setOpen(false)
                   }}
                 >

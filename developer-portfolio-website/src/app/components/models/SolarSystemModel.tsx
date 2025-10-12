@@ -16,7 +16,7 @@ interface PlanetInfo {
 export const planetInfoDict: Record<string, PlanetInfo> = {
     venus: { yOffset: 2.5, zOffset: 4, sectionKey: "techStack", index: 2 },
     earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
-    mars: { yOffset: 2, zOffset: 20, sectionKey: "experience", index: 4 },
+    mars: { yOffset: 1.5, zOffset: 2, sectionKey: "experience", index: 4 },
     sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1},
 };
 

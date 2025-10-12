@@ -1,0 +1,137 @@
+[
+    {
+        "id": 1,
+        "title": {
+            "en": "Virus Simulation",
+            "sk": "Simulacia vírusu"
+        },
+        "shortDescription": {
+            "en": "Adjustable virus simulation desktop app built with Java and JavaFX UI library.",
+            "sk": "Nastaviteľná desktopová aplikácia simulácia vírusu naprogramovaná v Jave a JavaFX UI knižnici."
+        },
+        "languages": ["Java"],
+        "thumbnail": "/images/pandemia.png"
+    },
+    {
+        "id": 2,
+        "title": {
+            "en": "Defend Castle",
+            "sk": "Defend Castle"
+        },
+        "shortDescription": {
+            "en": "RTS 2D Wave defence game built with Java and JavaFX UI library",
+            "sk": "RTS 2D Wave defence hra naprogramovaná v Jave a JavaFX UI knižnici."
+        },
+        "languages": ["Java"],
+        "thumbnail":"/images/defendCastle.png"
+    },
+    {
+        "id": 3,
+        "title": {
+            "en": "FileWatcher",
+            "sk": "FileWatcher"
+        },
+        "shortDescription": {
+            "en": "C# desktop console application that monitors one or more folders in real-time and automatically synchronizes changes to specified destination directories.",
+            "sk": "C# desktopová konzolová aplikácia, ktorá v reálnom čase sleduje jeden alebo viac priečinkov a automaticky synchronizuje zmeny do určených cieľových adresárov."
+        },
+        "languages":["C#"],
+        "thumbnail":"/images/fileWatcher.png"
+    },
+    {
+        "id": 4,
+        "title": {
+            "en": "FitiflowManager",
+            "sk": "FitiflowManager"
+        },
+        "shortDescription": {
+            "en": "C# desktop application using the Avalonia UI framework, designed for administrators to manage users and monitor traffic statistics.",
+            "sk": "C# desktopová aplikácia využívajúca framework Avalonia UI, určená pre administrátorov na správu používateľov a sledovanie štatistík prevádzky."
+        },
+        "languages": ["C#"],
+        "thumbnail": "/images/fitiflowManager.png"
+    },
+    {
+        "id": 5,
+        "title": {
+            "en": "ProfesiaScrapper",
+            "sk": "ProfesiaScrapper"
+        },
+        "shortDescription": {
+            "en": "A Python-based application with a Flask server and a CustomTkinter desktop client, using Firebase as the database. It collects, stores, and analyzes current job market data from Profesia.sk.",
+            "sk": "Aplikácia postavená na Pythone s Flask serverom a desktopovým klientom v CustomTkinter, využívajúca Firebase ako databázu. Zbierá, ukladá a analyzuje aktuálne údaje o pracovnom trhu z Profesia.sk."
+        },
+        "languages": ["Python", "Flask"],
+        "thumbnail": "/images/profesiaScrapper.png"
+    },
+    {
+        "id": 6,
+        "title": {
+            "en": "StoryShop",
+            "sk": "StoryShop"
+        },
+        "shortDescription": {
+            "en": "Reservation system website for my client, a barber, built with WordPress.",
+            "sk": "Webová stránka rezervačného systému pre môjho klienta, ktorý je holičom, vytvorená vo WordPresse."
+        },
+        "languages": ["WordPress"],
+        "link": "https://www.storyshop.sk",
+        "thumbnail": "/images/storyshop.png"
+    },
+    {
+        "id": 7,
+        "title": {
+            "en": "TopLook",
+            "sk": "TopLook"
+        },
+        "shortDescription": {
+            "en": "A WordPress based e-commerce website specializing in selling jewelry.",
+            "sk": "E-commerce webová aplikácia zameraná na predaj šperkov vytvorená vo WordPresse."
+        },
+        "languages": ["WordPress"],
+        "link": "https://www.bizuteria-toplook.sk",
+        "thumbnail": "/images/bizuteriaToplook.png"
+    },
+    {
+        "id": 8,
+        "title": {
+            "en": "DJT-Stav",
+            "sk": "DJT-Stav"
+        },
+        "shortDescription": {
+            "en": "A WordPress based portfolio website of a construction company.",
+            "sk": "Portfóliová webová stránka stavebnej spoločnosti vytvorená vo WordPresse."
+        },
+        "languages": ["Wordpress"],
+        "link": "https://www.djtstav.sk",
+        "thumbnail": "/images/djststav.png"
+    },
+    {
+        "id": 9,
+        "title": {
+            "en": "TapetyWolf",
+            "sk": "TapetyWolf"
+        },
+        "shortDescription": {
+            "en": "A WordPress based portfolio website for a wallpaper installer.",
+            "sk": "Portfóliová webová stránka tapetára vytvorená vo WordPresse."
+        },
+        "languages": ["WordPress"],
+        "link": "",
+        "thumbnail": "/images/tapetywolf.png"
+    },
+    {
+        "id": 10,
+        "title": {
+            "en": "Súkromné centrum poradenstva a prevencie Dolný Kubín",
+            "sk": "Private Center for Counseling and Prevention Dolný Kubín"
+        },
+        "shortDescription": {
+            "en": "WordPress website for the Private Center for Special Education Counseling (SŠCPP) in Dolný Kubín, providing information and resources for children’s counseling services.",
+            "sk": "Webová stránka vo WordPresse pre Súkromné centrum špeciálnopedagogického poradenstva (SŠCPP) v Dolnom Kubíne, poskytujúca informácie a zdroje pre detské poradenské služby."
+        },
+        "languages": ["WordPress"],
+        "link": "https://poradenske-centrum.sk",
+        "thumbnail": "/images/poradenskeCentrum.png"
+    }
+]

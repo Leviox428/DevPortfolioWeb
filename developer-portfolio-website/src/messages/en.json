@@ -3,7 +3,7 @@
     {
         "techStack": "My Tech Stack",
         "projects": "My Projects",
-        "experience": "Working Experience",
+        "experience": "Working Experience and Education",
         "about": "About Me"
     },
     "AboutMeSection":
@@ -14,5 +14,12 @@
     "TechStackSection":
     {
         "other": "Other"
+    },
+    "MyProjectsSection":
+    {
+        "notFoundText": "No result",
+        "selection": "All",
+        "searchPlaceHolderText": "Search programming language",
+        "selectionPlaceHolderText": "Select programming language"
     }
 }

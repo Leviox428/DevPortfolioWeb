@@ -3,7 +3,7 @@
     {
         "techStack": "Používané Technológie",
         "projects": "Moje Projekty",
-        "experience": "Pracovné Skúsenosti",
+        "experience": "Pracovné Skúsenosti a Vzdelanie",
         "about": "O Mne"
     },
     "AboutMeSection":
@@ -14,5 +14,12 @@
     "TechStackSection":
     {
         "other": "Ostatné"
+    },
+    "MyProjectsSection":
+    {
+        "notFoundText": "Žiadne zhody",
+        "selection": "Všetky",
+        "searchPlaceHolderText": "Hľadajte programovací jazyk",
+        "selectionPlaceHolderText": "Vyberte programovací jazyk"
     }
 }
