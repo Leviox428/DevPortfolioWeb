@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import React, { useRef, useState, useEffect, forwardRef, RefObject, useImperativeHandle } from "react";
 import { Group, Object3D, Object3DEventMap, LoopRepeat, Vector3 } from "three";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import handlePlanetClick from "../../functions/handlePlanetClick";
+import handlePlanetClick from "../app/functions/handlePlanetClick";
 
 interface PlanetInfo {
     yOffset : number,

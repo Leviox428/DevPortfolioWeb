@@ -7,17 +7,17 @@ import { OrbitControls, Html, Loader } from "@react-three/drei";
 import { useState, Suspense, useRef } from "react";
 import React from "react";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import { PlayPauseButton } from "./PausePlayButton";
-import { LanguageButton } from "./LanguageButton";
-import PortfolioSecion from "./PortfolioSection";
-import Particles from "./animatedComponents/Particles";
-import { planetInfoDict, SolarSystemModelRef } from "./models/SolarSystemModel";
-import handlePlanetIndexChange from "../functions/handlePlanetIndexChange";
+import { PlayPauseButton } from "../app/components/PausePlayButton";
+import { LanguageButton } from "../app/components/LanguageButton";
+import PortfolioSecion from "../app/components/PortfolioSection";
+import Particles from "../app/components/animatedComponents/Particles";
+import { planetInfoDict, SolarSystemModelRef } from "../messages/SolarSystemModel";
+import handlePlanetIndexChange from "../app/functions/handlePlanetIndexChange";
 import { PlanetIndexChangeAction } from "@/src/enums/PlanetIndexChangeAction";
 import dynamic from "next/dynamic";
 
 const SolarSystemModel = dynamic(
-    () => import("./models/SolarSystemModel"),
+    () => import("../messages/SolarSystemModel"),
     { ssr: false }
 );
 

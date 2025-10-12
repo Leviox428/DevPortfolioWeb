@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 import { Group, Object3D, Object3DEventMap, Vector3 } from "three";
-import { planetInfoDict, PlanetRef } from "../components/models/SolarSystemModel";
+import { planetInfoDict, PlanetRef } from "../../messages/SolarSystemModel";
 
 export default function handlePlanetClick(
     planet: { mesh: Object3D; textRef: React.RefObject<any> },
