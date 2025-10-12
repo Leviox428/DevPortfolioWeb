@@ -57,7 +57,7 @@ export default function TechStackSection() {
             ],
         },
         {
-            title: "Other",
+            title: t("other"),
             image: OtherImage,
             icons: [
                 { src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg" },
