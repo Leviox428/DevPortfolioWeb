@@ -4,8 +4,8 @@ import { verifyRequest } from "@/src/lib/verifyRequest";
 
 export async function GET(request: Request) {
     try {
-        const check = await verifyRequest(request);
-        if (!check.authorized) return check.response;
+        /*const check = await verifyRequest(request);
+        if (!check.authorized) return check.response;*/
         
         const snapshot = await adminDb.collection("test").limit(1).get();
 
