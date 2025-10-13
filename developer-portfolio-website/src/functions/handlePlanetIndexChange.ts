@@ -1,5 +1,5 @@
-import { indexToPlanet, SolarSystemModelRef } from "../components/models/SolarSystemModel";
 import { PlanetIndexChangeAction } from "@/src/enums/PlanetIndexChangeAction";
+import { SolarSystemModelRef, indexToPlanet } from "../models/types/solarSystemModelTypes";
 
 export default function handlePlanetIndexChange(action: PlanetIndexChangeAction, solarSystemModelRef: React.RefObject<SolarSystemModelRef | null>, 
     setPlanetIndex: React.Dispatch<React.SetStateAction<number>>, currentIndex: number) {
@@ -14,5 +14,5 @@ export default function handlePlanetIndexChange(action: PlanetIndexChangeAction,
         const planet = solarSystemModelRef.current.planetRefs.find((planet) => planet.mesh.name === planetName);
         if (!planet) return;
 
-        solarSystemModelRef.current.handlePlanetClick(planet);
+        solarSystemModelRef.current.handlePlanetClick(planet, true);
 }

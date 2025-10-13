@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import SkFlagPng from "../../../public/images/slovakia.png"; 
-import GbFlagPng from "../../../public/images/united-kingdom.png"; 
+import SkFlagPng from "@/public/images/slovakia.png"; 
+import GbFlagPng from "@/public/images/united-kingdom.png"; 
 import Image from "next/image";
 
 export function LanguageButton() {

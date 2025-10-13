@@ -1,6 +1,6 @@
-import FrontendImage from "../../../../public/images/frontend.png"
-import BackendImage from "../../../../public/images/backend.png"
-import OtherImage from "../../../../public/images/other.png"
+import FrontendImage from "@/public/images/frontend.png"
+import BackendImage from "@/public/images/backend.png"
+import OtherImage from "@/public/images/other.png"
 import { useTranslations } from "next-intl";
 import TechStack from "../TechStack";
 

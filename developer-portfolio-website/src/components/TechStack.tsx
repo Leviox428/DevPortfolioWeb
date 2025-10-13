@@ -2,13 +2,13 @@
 import Image, { StaticImageData } from "next/image";
 import { JSX } from "react";
 
-interface SkillSectionProps {
+interface TechStackProps {
     title: string;
     image: StaticImageData;
     icons: { src?: string; svg?: JSX.Element }[];
 }
 
-export default function TechStack({ title, image, icons }: SkillSectionProps) {
+export default function TechStack({ title, image, icons }: TechStackProps) {
   return (
         <div className="flex flex-1 flex-row md:flex-col gap-2 justify-center items-center">
             <div className="max-w-1/4 md:max-w-none md:h-auto md:max-h-1/5">
