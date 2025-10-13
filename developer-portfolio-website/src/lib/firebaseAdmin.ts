@@ -1,10 +1,15 @@
 import admin from "firebase-admin";
-import serviceAccount from "@/serviceAccount.json";
 
+if (!process.env.SERVICE_ACCOUNT_JSON) {
+  throw new Error("Missing SERVICE_ACCOUNT_JSON environment variable");
+}
+
+// Parse JSON safely
+const serviceAccount = JSON.parse(process.env.SERVICE_ACCOUNT_JSON) as admin.ServiceAccount;
 
 if (!admin.apps.length) {
     admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount as admin.ServiceAccount),
+        credential: admin.credential.cert(serviceAccount),
     });
 }
 

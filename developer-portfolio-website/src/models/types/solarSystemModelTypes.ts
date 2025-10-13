@@ -17,6 +17,7 @@ export const planetInfoDict: Record<string, PlanetInfo> = {
     earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
     mars: { yOffset: 1.5, zOffset: 2, sectionKey: "experience", index: 4 },
     sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1 },
+    
 };
 
 // Map index back to planet
