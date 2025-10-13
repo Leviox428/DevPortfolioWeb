@@ -49,13 +49,8 @@ export default function MyProjectsSection() {
                 setSelection={setSelection}
                 >
             </ComboBox>
-            <ElectricBorder 
+            <div 
                 className="h-full w-full flex-1 mt-10"
-                color="#7df9ff"
-                speed={0.1}
-                chaos={0.8}
-                thickness={2}
-                style={{ borderRadius: 16 }}
             >
                 <div className="relative w-full h-full p-4">
                     <div className="overflow-y-auto relative h-full w-full flex gap-3 flex-wrap justify-center content-evenly">
@@ -69,8 +64,7 @@ export default function MyProjectsSection() {
                         ))}
                     </div>
                 </div>
-            </ElectricBorder>
-            <div></div>
+            </div>
         </div>
     )
 }
