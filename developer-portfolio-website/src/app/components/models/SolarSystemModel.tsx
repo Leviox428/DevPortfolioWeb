@@ -7,7 +7,7 @@ import React, { useRef, useState, useEffect, forwardRef, RefObject, useImperativ
 import { Group, Object3D, Object3DEventMap, LoopRepeat, Vector3, Intersection } from "three";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import handlePlanetClick from "../app/functions/handlePlanetClick";
+import handlePlanetClick from "../../functions/handlePlanetClick";
 
 interface PlanetInfo {
     yOffset : number,

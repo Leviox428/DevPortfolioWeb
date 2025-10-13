@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 
 const SolarSystemScene = dynamic(
-  () => import("../../scene/SolarSystemScene"),
+  () => import("../components/scene/SolarSystemScene"),
   { ssr: false } // only load in browser
 );
 

@@ -3,7 +3,7 @@
     {
         "techStack": "My Tech Stack",
         "projects": "My Projects",
-        "experience": "Working Experience and Education",
+        "experience": "Experience and Education",
         "about": "About Me"
     },
     "AboutMeSection":
@@ -21,5 +21,14 @@
         "selection": "All",
         "searchPlaceHolderText": "Search programming language",
         "selectionPlaceHolderText": "Select programming language"
+    },
+    "ExperienceAndEducationSection":
+    {
+        "education": "Currently studying 3rd year of bachelor degree at univerzity of Žilina",
+        "selfEmployed": "Self-employed",
+        "experienceWordpress1": "Designed and developed custom WordPress websites for clients.",
+        "experienceWordpress2": "Customized themes and plugins to meet project requirements.",
+        "experienceWordpress3": "Implemented SEO, performance, and security optimizations.",
+        "experienceWordpress4": "Provided ongoing maintenance, support, and technical consultation."
     }
 }

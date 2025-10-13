@@ -1,6 +1,6 @@
 import { RefObject } from "react";
 import { Group, Object3D, Object3DEventMap, Vector3 } from "three";
-import { planetInfoDict, PlanetRef } from "../../messages/SolarSystemModel";
+import { planetInfoDict, PlanetRef } from "../components/models/SolarSystemModel";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 
 export default function handlePlanetClick(

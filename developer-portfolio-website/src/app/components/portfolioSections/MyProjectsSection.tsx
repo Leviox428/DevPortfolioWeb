@@ -2,7 +2,6 @@ import { useLocale, useTranslations } from "next-intl";
 import { ComboBox } from "../shadcnComponents/ui/ComboBox";
 import { UsedTech } from "@/src/enums/UsedTech";
 import { useEffect, useState } from "react";
-import ElectricBorder from "../animatedComponents/ElectricBorder";
 import ProjectCard from "../ProjectCard";
 
 interface Project {

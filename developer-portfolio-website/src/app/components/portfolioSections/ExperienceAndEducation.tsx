@@ -1,7 +1,10 @@
 import { Separator } from "../shadcnComponents/Separator";
 import DecryptedText from "../animatedComponents/DecryptedText";
+import { useTranslations } from "next-intl";
 
-export default function ExperienceAndEducation() {
+export default function ExperienceAndEducationSection() {
+    const t = useTranslations("ExperienceAndEducationSection");
+
     return (
         <div className="relative flex-col flex w-full h-full p-6 gap-8 overflow-y-auto">
             <DecryptedText 
@@ -17,7 +20,7 @@ export default function ExperienceAndEducation() {
             <div className="flex wrap flex-col md:flex-row gap-4 place-items-center">       
                 <img className="w-[150px] h-[80px]" src="/images/unizaLogo.png" alt="Uniza logo" />
                 <p className="text-md lg:text-xl xl:text-2xl"><strong>2022-2025:</strong></p>
-                <p className="xl:text-lg">Currently studying 3rd year of bachelor degree at univerzity of Žilina</p>
+                <p className="xl:text-lg">{t("education")}</p>
             </div>  
 
             <Separator className="bg-zinc-300/90"></Separator>
@@ -38,12 +41,12 @@ export default function ExperienceAndEducation() {
                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg"
                 >
                 </img>
-                <p className="text-md lg:text-xl xl:text-2xl"><strong>Self-employed | 2022 – 2024:</strong></p>
-                <ul className="list-disc list-inside text-base xl:text-lg space-y-1">
-                    <li>Designed and developed custom WordPress websites for clients.</li>
-                    <li>Customized themes and plugins to meet project requirements.</li>
-                    <li>Implemented SEO, performance, and security optimizations.</li>
-                    <li>Provided ongoing maintenance, support, and technical consultation.</li>
+                <p className="text-md lg:text-xl xl:text-2xl"><strong>{t("selfEmployed")} | 2022 – 2024:</strong></p>
+                <ul className="list-disc list-inside text-base xl:text-lg space-y-1 text-left pl-5 list-outside">
+                    <li>{t("experienceWordpress1")}</li>
+                    <li>{t("experienceWordpress2")}</li>
+                    <li>{t("experienceWordpress3")}</li>
+                    <li>{t("experienceWordpress4")}</li>
                 </ul>
             </div>  
         </div>
