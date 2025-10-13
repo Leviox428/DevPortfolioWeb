@@ -1,6 +1,6 @@
 import { useLocale, useTranslations } from "next-intl";
 import { ComboBox } from "../shaddnComponents/ComboBox";
-import { UsedTech } from "@/src/enums/UsedTech";
+import { UsedTech } from "@/src/models/enums/UsedTech";
 
 import ProjectCard from "../ProjectCard";
 import useMyProjectSectionViewModel from "@/src/viewModels/useMyProjectSectionViewModel";
