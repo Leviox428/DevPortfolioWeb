@@ -34,6 +34,27 @@
     },
     "ReachOutSection":
     {
-        
+        "cardTitle": "Kontaktujte ma",
+
+        "emailFieldMin": "Email musí mať aspoň",
+        "emailFieldMax": "Email môže mať najviac",
+        "emailFieldInvalidEmail": "Neplatný email",
+        "emailFieldTitle": "Váš email",
+        "emailPlaceHolder": "you@example.com",
+
+        "subjectFieldTitle": "Predmet",
+        "subjectFieldMin": "Predmet musí mať aspoň",
+        "subjectFieldMax": "Predmet môže mať najviac",
+
+        "messageFieldTitle": "Správa",
+        "messageFieldMin": "Správa musí mať aspoň",
+        "messageFieldMax": "Správa môže mať najviac",
+
+        "characters": "znakov",
+        "reset": "Odznova",
+        "submit": "Potvrdiť",
+        "submitting": "Posielam...",
+        "submitError": "Ups, niečo sa pokazilo.",
+        "submitInfo": "Boli zaslané úspešne tieto hodnoty:"
     }
 }

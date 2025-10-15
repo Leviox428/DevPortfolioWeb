@@ -1,27 +1,23 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
-import z from "zod"
+import * as z from "zod"
 import { toast } from "sonner"
 import { fieldInfoDict } from "../models/types/reachOutSectionTypes"
+import { submitFormToServer } from "../models/reachOutSectionModel"
+import { useRef } from "react"
 
 
 export default function useReachOutSectionViewModel() {
     const t = useTranslations("ReachOutSection");
+    const isSubmitting = useRef(false);
 
     const formSchema = z.object({
-        name: z
-            .string()
-            .min(
-                fieldInfoDict["name"].min,
-                `${t("nameFieldMin")} ${fieldInfoDict["name"].min} ${t("characters")}.`
-            )
-            .max(
-                fieldInfoDict["name"].max,
-                `${t("nameFieldMax")} ${fieldInfoDict["name"].max} ${t("characters")}.`
-            ),
         email: z
-            .string()
+            .email({
+                message: t("emailFieldInvalidEmail"), 
+                pattern: z.regexes.rfc5322Email,
+            })
             .min(
                 fieldInfoDict["email"].min,
                 `${t("emailFieldMin")} ${fieldInfoDict["email"].min} ${t("characters")}.`
@@ -41,7 +37,7 @@ export default function useReachOutSectionViewModel() {
                 `${t("subjectFieldMax")} ${fieldInfoDict["subject"].max} ${t("characters")}.`
             ),
         message: z
-            .string()
+            .string()                   
             .min(
                 fieldInfoDict["message"].min,
                 `${t("messageFieldMin")} ${fieldInfoDict["message"].min} ${t("characters")}.`
@@ -55,15 +51,21 @@ export default function useReachOutSectionViewModel() {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
             email: "",
             subject: "",
             message: ""
         },
     })
 
-    function onSubmit(data: z.infer<typeof formSchema>) {  
-        
+    async function onSubmit(data: z.infer<typeof formSchema>) {
+
+        if (isSubmitting.current) return;
+        isSubmitting.current = true;
+
+        await submitFormToServer(data);
+
+        form.reset();
+        isSubmitting.current = false;
     }
 
     return {
@@ -71,6 +73,7 @@ export default function useReachOutSectionViewModel() {
         form,
         t,
 
+        isSubmitting,
         onSubmit
     }
 }

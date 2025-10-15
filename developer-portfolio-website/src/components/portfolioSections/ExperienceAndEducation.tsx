@@ -6,7 +6,7 @@ export default function ExperienceAndEducationSection() {
     const t = useTranslations("ExperienceAndEducationSection");
 
     return (
-        <div className="relative flex-col flex w-full h-full p-6 gap-8 overflow-y-auto">
+        <div className="relative flex-col flex w-full h-full p-6 gap-8 scrollbar overflow-y-auto">
             <DecryptedText 
                 speed={10}
                 maxIterations={100}

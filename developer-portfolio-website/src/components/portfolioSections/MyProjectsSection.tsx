@@ -24,7 +24,7 @@ export default function MyProjectsSection() {
                 className="h-full w-full flex-1 mt-10"
             >
                 <div className="relative w-full h-full p-4">
-                    <div className="overflow-y-auto relative h-full w-full flex gap-3 flex-wrap justify-center content-evenly">
+                    <div className="overflow-y-auto scrollbar relative h-full w-full flex gap-3 flex-wrap justify-center content-evenly">
                         {vm.filtered.map(project => (
                             <ProjectCard
                                 key={project.id}

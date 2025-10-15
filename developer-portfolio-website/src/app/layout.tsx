@@ -39,7 +39,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={`${inter.variable} ${jakarta.variable} ${montserrat.variable} ${firaCode.variable}`}>
+    <html className={`${inter.variable} ${jakarta.variable} ${montserrat.variable} ${firaCode.variable} scrollbar scrollbar-thumb-white scrollbar-track-zinc-900/90`}>
       <body
         className={`antialiased`}
       >

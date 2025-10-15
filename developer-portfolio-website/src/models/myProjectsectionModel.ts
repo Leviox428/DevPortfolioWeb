@@ -1,4 +1,3 @@
-// src/models/projectModel.ts
 import type { Project } from "@/src/models/types/myProjectSectionTypes";
 
 export async function fetchProjects(): Promise<Project[]> {

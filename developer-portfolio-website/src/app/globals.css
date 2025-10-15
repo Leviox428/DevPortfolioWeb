@@ -1,6 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@plugin 'tailwind-scrollbar' {
+    nocompatible: true;
+}
 
 /* Fonts + colors in base layer */
 @layer base {
@@ -38,4 +41,3 @@
     animation: shine 5s linear infinite;
   }
 }
-

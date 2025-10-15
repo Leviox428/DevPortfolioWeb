@@ -36,12 +36,9 @@
     {
         "cardTitle": "Contact me",
 
-        "nameFielTitle": "Your name / Company name",
-        "nameFieldMin": "Name must be at least",
-        "nameFieldMax": "Name must be at most",
-
         "emailFieldMin": "Email must be at least",
         "emailFieldMax": "Email must be at most",
+        "emailFieldInvalidEmail": "Invalid email",
         "emailFieldTitle": "Your email",
         "emailPlaceHolder": "you@example.com",
 
@@ -53,6 +50,11 @@
         "messageFieldMin": "Message must be at least",
         "messageFieldMax": "Message must be at most",
 
-        "characters": "characters"
+        "characters": "characters",
+        "reset": "Reset",
+        "submit": "Submit",
+        "submitting": "Submitting...",
+        "submitError": "Something wrong happened.",
+        "submitInfo": "You successfully submitted the following values:"
     }
 }
