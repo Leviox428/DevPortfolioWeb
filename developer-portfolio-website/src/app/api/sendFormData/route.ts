@@ -2,7 +2,6 @@ import { RateLimiter } from "@/src/lib/classes/RateLimiter";
 import { adminDb } from "@/src/lib/firebaseAdmin";
 import { verifyRequest } from "@/src/lib/verifyRequest";
 import { NextResponse } from "next/server";
-import { success } from "zod";
 
 const limiter = new RateLimiter({ limit: 5, windowMs: 60_000 });
 

@@ -5,14 +5,12 @@ import { Button } from "../shadcnComponents/Button"
 import {
     Card,
     CardContent,
-    CardDescription,
     CardFooter,
     CardHeader,
     CardTitle,
 } from "../shadcnComponents/Card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -58,7 +56,6 @@ export default function ReachOutSection() {
             vm.isSubmitting.current = false;
         }      
     }
-    
 
     return (
         <div className="relative flex place-items-center place-content-center relative w-full h-full">
