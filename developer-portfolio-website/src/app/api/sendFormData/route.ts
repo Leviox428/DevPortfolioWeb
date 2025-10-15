@@ -1,4 +1,4 @@
-import { RateLimiter } from "@/src/lib/classes/RateLimiter";
+import { RateLimiter } from "@/src/lib/classess/RateLimiter";
 import { adminDb } from "@/src/lib/firebaseAdmin";
 import { verifyRequest } from "@/src/lib/verifyRequest";
 import { NextResponse } from "next/server";
