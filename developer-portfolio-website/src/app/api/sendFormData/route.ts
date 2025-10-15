@@ -29,6 +29,7 @@ export async function POST(request: Request) {
     } catch(error: unknown) {
         const err = error as Error;
         console.error(err);
+        
         return NextResponse.json(
             {
                 success: false,
