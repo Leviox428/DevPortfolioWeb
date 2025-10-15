@@ -25,73 +25,105 @@ import {
   InputGroupTextarea,
 } from "../shaddnComponents/InputGroup"
 import useReachOutSectionViewModel from "@/src/viewModels/useReachOutSectionViewModel"
-
+import { fieldInfoDict } from "@/src/models/types/reachOutSectionTypes"
 
 export default function ReachOutSection() {
     const vm = useReachOutSectionViewModel();
     
     return (
         <div className="flex place-content-center place-items-center relative w-full h-full p-6">
-            <Card className="w-full sm:max-w-md">
+            <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl">
                 <CardHeader>
-                    <CardTitle>Bug Report</CardTitle>
-                    <CardDescription>
-                        Help us improve by reporting bugs you encounter.
-                    </CardDescription>
+                    <CardTitle>{vm.t("cardTitle")}</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <form id="form-rhf-demo" onSubmit={vm.form.handleSubmit(vm.onSubmit)}>
+                    <form id="contact-form" onSubmit={vm.form.handleSubmit(vm.onSubmit)}>
                         <FieldGroup>
                             <Controller
-                                name="title"
+                                name="name"
                                 control={vm.form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="form-rhf-demo-title">
-                                            Bug Title
+                                        <FieldLabel htmlFor="name-field-title">
+                                            {vm.t("nameFielTitle")}
                                         </FieldLabel>
                                         <Input
                                             {...field}
-                                            id="form-rhf-demo-title"
+                                            id="name-field-input"
                                             aria-invalid={fieldState.invalid}
-                                            placeholder="Login button not working on mobile"
                                             autoComplete="off"
                                         />
                                         {fieldState.invalid && (
-                                            <FieldError errors={[fieldState.error]} />
+                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
                                         )}
                                     </Field>
                                 )}
                             />
                             <Controller
-                                name="description"
+                                name="email"
                                 control={vm.form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="form-rhf-demo-description">
-                                            Description
+                                        <FieldLabel htmlFor="email-field-title">
+                                            {vm.t("emailFieldTitle")}
+                                        </FieldLabel>
+                                        <Input
+                                            {...field}
+                                            id="email-field-input"
+                                            aria-invalid={fieldState.invalid}
+                                            placeholder={vm.t("emailPlaceHolder")}
+                                            autoComplete="off"
+                                        />
+                                        {fieldState.invalid && (
+                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                             <Controller
+                                name="subject"
+                                control={vm.form.control}
+                                render={({ field, fieldState }) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="subject-field-title">
+                                            {vm.t("subjectFieldTitle")}
+                                        </FieldLabel>
+                                        <Input
+                                            {...field}
+                                            id="subject-field-input"
+                                            aria-invalid={fieldState.invalid}
+                                            autoComplete="off"
+                                        />
+                                        {fieldState.invalid && (
+                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
+                                        )}
+                                    </Field>
+                                )}
+                            />
+                            <Controller
+                                name="message"
+                                control={vm.form.control}
+                                render={({ field, fieldState }) => (
+                                    <Field data-invalid={fieldState.invalid}>
+                                        <FieldLabel htmlFor="message-field-title">
+                                            {vm.t("messageFieldTitle")}
                                         </FieldLabel>
                                         <InputGroup>
                                             <InputGroupTextarea
                                                 {...field}
-                                                id="form-rhf-demo-description"
-                                                placeholder="I'm having an issue with the login button on mobile."
+                                                id="message-field-input-text-area"
                                                 rows={6}
                                                 className="min-h-24 resize-none"
                                                 aria-invalid={fieldState.invalid}
                                             />
                                             <InputGroupAddon align="block-end">
                                             <InputGroupText className="tabular-nums">
-                                                {field.value.length}/100 characters
+                                                {field.value.length}/{fieldInfoDict["message"].max} {vm.t("characters")}
                                             </InputGroupText>
                                             </InputGroupAddon>
                                         </InputGroup>
-                                        <FieldDescription>
-                                            Include steps to reproduce, expected behavior, and what
-                                            actually happened.
-                                        </FieldDescription>
                                         {fieldState.invalid && (
-                                            <FieldError errors={[fieldState.error]} />
+                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
                                         )}
                                     </Field>
                                 )}
@@ -104,7 +136,7 @@ export default function ReachOutSection() {
                         <Button type="button" variant="outline" onClick={() => vm.form.reset()}>
                             Reset
                         </Button>
-                        <Button type="submit" form="form-rhf-demo">
+                        <Button type="submit" form="contact-form">
                             Submit
                         </Button>
                     </Field>

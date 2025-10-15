@@ -31,5 +31,28 @@
         "experienceWordpress2": "Customized themes and plugins to meet project requirements.",
         "experienceWordpress3": "Implemented SEO, performance, and security optimizations.",
         "experienceWordpress4": "Provided ongoing maintenance, support, and technical consultation."
+    },
+    "ReachOutSection":
+    {
+        "cardTitle": "Contact me",
+
+        "nameFielTitle": "Your name / Company name",
+        "nameFieldMin": "Name must be at least",
+        "nameFieldMax": "Name must be at most",
+
+        "emailFieldMin": "Email must be at least",
+        "emailFieldMax": "Email must be at most",
+        "emailFieldTitle": "Your email",
+        "emailPlaceHolder": "you@example.com",
+
+        "subjectFieldTitle": "Subject",
+        "subjectFieldMin": "Subject must be at least",
+        "subjectFieldMax": "Subject must be at most",
+
+        "messageFieldTitle": "Message",
+        "messageFieldMin": "Message must be at least",
+        "messageFieldMax": "Message must be at most",
+
+        "characters": "characters"
     }
 }

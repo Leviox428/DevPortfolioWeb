@@ -1,48 +1,13 @@
 "use client";
 
-import { useGLTF, useAnimations, Billboard, Text, PerspectiveCamera   } from "@react-three/drei";
+import { useGLTF, Billboard, Text, PerspectiveCamera   } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import React, { forwardRef, useImperativeHandle } from "react";
-import { Object3D, Object3DEventMap, LoopRepeat, Vector3, Intersection } from "three";
+import { Object3D, Object3DEventMap, Vector3, Intersection } from "three";
 import handlePlanetClick from "../../functions/handlePlanetClick";
 import { planetInfoDict, PlanetRef, SolarSystemModelProps, SolarSystemModelRef } from "@/src/models/types/solarSystemModelTypes";
 import { useSolarSystemModelViewModel } from "@/src/viewModels/useSolarSystemModelViewModel";
 
-/*interface PlanetInfo {
-    yOffset : number,
-    zOffset : number,
-    sectionKey : string,
-    index : number
-};
-
-export const planetInfoDict: Record<string, PlanetInfo> = {
-    venus: { yOffset: 2.5, zOffset: 4, sectionKey: "techStack", index: 2 },
-    earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
-    mars: { yOffset: 1.5, zOffset: 2, sectionKey: "experience", index: 4 },
-    sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1},
-};
-
-export const indexToPlanet: Record<number, string> = Object.fromEntries(
-    Object.entries(planetInfoDict).map(([key, info]) => [info.index, key])
-);
-
-export interface PlanetRef {
-    mesh: Object3D;
-    textRef: RefObject<Group<Object3DEventMap> | null>;
-};
-
-type SolarSystemModelProps = {
-    isPlaying: boolean;
-    controlsRef: React.RefObject<OrbitControlsImpl | null>;
-    setShowPortfolioSection: React.Dispatch<React.SetStateAction<boolean>>,
-    setPlanetIndex: React.Dispatch<React.SetStateAction<number>>
-};
-
-export interface SolarSystemModelRef {
-    handlePlanetClick: (planet: PlanetRef, showPortfolioSection: boolean) => void;
-    planetRefs: PlanetRef[];
-    cameraRef: RefObject<ThreePerspectiveCamera | null>;
-};*/
 
 const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(
     ({ isPlaying, controlsRef, setShowPortfolioSection, setPlanetIndex }, ref) => {

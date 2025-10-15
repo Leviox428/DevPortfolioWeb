@@ -1,35 +1,75 @@
 import { zodResolver } from "@hookform/resolvers/zod"
-import React from "react"
+import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
-import { toast } from "sonner"
 import z from "zod"
+import { toast } from "sonner"
+import { fieldInfoDict } from "../models/types/reachOutSectionTypes"
+
 
 export default function useReachOutSectionViewModel() {
+    const t = useTranslations("ReachOutSection");
 
     const formSchema = z.object({
-        title: z
+        name: z
             .string()
-            .min(5, "Bug title must be at least 5 characters.")
-            .max(32, "Bug title must be at most 32 characters."),
-        description: z
+            .min(
+                fieldInfoDict["name"].min,
+                `${t("nameFieldMin")} ${fieldInfoDict["name"].min} ${t("characters")}.`
+            )
+            .max(
+                fieldInfoDict["name"].max,
+                `${t("nameFieldMax")} ${fieldInfoDict["name"].max} ${t("characters")}.`
+            ),
+        email: z
             .string()
-            .min(20, "Description must be at least 20 characters.")
-            .max(100, "Description must be at most 100 characters."),
-    })
+            .min(
+                fieldInfoDict["email"].min,
+                `${t("emailFieldMin")} ${fieldInfoDict["email"].min} ${t("characters")}.`
+            )
+            .max(
+                fieldInfoDict["email"].max,
+                `${t("emailFieldMax")} ${fieldInfoDict["email"].max} ${t("characters")}.`
+            ),
+        subject: z
+            .string()
+            .min(
+                fieldInfoDict["subject"].min,
+                `${t("subjectFieldMin")} ${fieldInfoDict["subject"].min} ${t("characters")}.`
+            )
+            .max(
+                fieldInfoDict["subject"].max,
+                `${t("subjectFieldMax")} ${fieldInfoDict["subject"].max} ${t("characters")}.`
+            ),
+        message: z
+            .string()
+            .min(
+                fieldInfoDict["message"].min,
+                `${t("messageFieldMin")} ${fieldInfoDict["message"].min} ${t("characters")}.`
+            )
+            .max(
+                fieldInfoDict["message"].max,
+                `${t("messageFieldMax")} ${fieldInfoDict["message"].max} ${t("characters")}.`
+            ),
+    });
   
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            title: "",
-            description: "",
+            name: "",
+            email: "",
+            subject: "",
+            message: ""
         },
     })
+
     function onSubmit(data: z.infer<typeof formSchema>) {  
+        
     }
 
     return {
         formSchema,
         form,
+        t,
 
         onSubmit
     }
