@@ -1,5 +1,5 @@
 import { useLocale, useTranslations } from "next-intl";
-import { ComboBox } from "../shaddnComponents/ComboBox";
+import { ComboBox } from "../shadcnComponents/ComboBox";
 import { UsedTech } from "@/src/models/enums/UsedTech";
 
 import ProjectCard from "../ProjectCard";

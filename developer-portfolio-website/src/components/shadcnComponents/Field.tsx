@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/src/lib/utils"
 import { Label } from "@radix-ui/react-label"
-import { Separator } from "../shaddnComponents/Separator"
+import { Separator } from "./Separator"
 
 function FieldSet({ className, ...props }: React.ComponentProps<"fieldset">) {
   return (

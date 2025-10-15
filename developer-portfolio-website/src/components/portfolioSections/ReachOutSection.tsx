@@ -1,7 +1,7 @@
 "use client"
 import * as React from "react"
 import { Controller } from "react-hook-form"
-import { Button } from "../shaddnComponents/Button"
+import { Button } from "../shadcnComponents/Button"
 import {
     Card,
     CardContent,
@@ -9,21 +9,21 @@ import {
     CardFooter,
     CardHeader,
     CardTitle,
-} from "../shaddnComponents/Card"
+} from "../shadcnComponents/Card"
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "../shaddnComponents/Field"
-import { Input } from "../shaddnComponents/Input"
+} from "../shadcnComponents/Field"
+import { Input } from "../shadcnComponents/Input"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "../shaddnComponents/InputGroup"
+} from "../shadcnComponents/InputGroup"
 import useReachOutSectionViewModel from "@/src/viewModels/useReachOutSectionViewModel"
 import { fieldInfoDict } from "@/src/models/types/reachOutSectionTypes"
 

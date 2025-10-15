@@ -1,4 +1,4 @@
-import { Separator } from "../shaddnComponents/Separator";
+import { Separator } from "../shadcnComponents/Separator";
 import DecryptedText from "../animatedComponents/DecryptedText";
 import { useTranslations } from "next-intl";
 
