@@ -12,7 +12,6 @@ export async function verifyRequest(request: Request) {
     ];
 
     const origin = request.headers.get("origin");
-    const apiKey = request.headers.get("x-api-key");
 
     if (!origin || !allowedOrigins.includes(origin)) {
         return {
@@ -24,14 +23,5 @@ export async function verifyRequest(request: Request) {
         };
     }
 
-    if (apiKey !== process.env.API_SECRET_KEY) {
-        return {
-            authorized: false,
-            response: NextResponse.json(
-                { success: false, message: "Invalid API key" },
-                { status: 401 }
-            ),
-        };
-    }
     return { authorized: true };
 }

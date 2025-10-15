@@ -11,7 +11,6 @@ export async function submitFormToServer(data: FormData) {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
-            "x-api-key": process.env.API_SECRET_KEY! 
         },
         body: JSON.stringify(data),
     });

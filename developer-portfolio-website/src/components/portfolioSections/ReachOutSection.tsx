@@ -51,7 +51,7 @@ export default function ReachOutSection() {
                 style: {
                     background: "#18181b",
                 } as React.CSSProperties,
-                duration: 2000
+                duration: 2500
             })
         } catch {
             toast(vm.t("submitError"))
