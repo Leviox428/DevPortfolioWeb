@@ -8,7 +8,7 @@ import { NextResponse } from "next/server";
 export async function verifyRequest(request: Request) {
     const allowedOrigins = [
         "http://localhost:3000",      
-        "https://yourdomain.com",     
+        "https://marekdvorsky.vercel.app",     
     ];
 
     const origin = request.headers.get("origin");
