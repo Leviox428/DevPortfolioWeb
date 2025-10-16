@@ -6,7 +6,7 @@ import React, { forwardRef, useImperativeHandle } from "react";
 import { Object3D, Object3DEventMap, Vector3, Intersection } from "three";
 import handlePlanetClick from "../../functions/handlePlanetClick";
 import { planetInfoDict, PlanetRef, SolarSystemModelProps, SolarSystemModelRef } from "@/src/models/types/solarSystemModelTypes";
-import { useSolarSystemModelViewModel } from "@/src/viewModels/useSolarSystemModelViewModel";
+import useSolarSystemModelViewModel from "@/src/viewModels/useSolarSystemModelViewModel";
 
 
 const SolarSystemModel = forwardRef<SolarSystemModelRef, SolarSystemModelProps>(

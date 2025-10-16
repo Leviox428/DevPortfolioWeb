@@ -2,9 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { toast } from "sonner"
 import { fieldInfoDict } from "../models/types/reachOutSectionTypes"
-import { submitFormToServer } from "../models/reachOutSectionModel"
+import { sendEmail, submitFormToServer } from "../models/reachOutSectionModel"
 import { useRef } from "react"
 
 
@@ -63,6 +62,7 @@ export default function useReachOutSectionViewModel() {
         isSubmitting.current = true;
 
         await submitFormToServer(data);
+        await sendEmail(data);
 
         form.reset();
         isSubmitting.current = false;

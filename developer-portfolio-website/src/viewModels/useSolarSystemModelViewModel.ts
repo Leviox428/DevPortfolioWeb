@@ -9,7 +9,7 @@ import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { useTranslations } from "next-intl";
 import React from "react";
 
-export function useSolarSystemModelViewModel({ isPlaying, controlsRef, setShowPortfolioSection, setPlanetIndex }: SolarSystemModelProps) {
+export default function useSolarSystemModelViewModel({ isPlaying, controlsRef, setShowPortfolioSection, setPlanetIndex }: SolarSystemModelProps) {
     const t = useTranslations("SolarSystemScene");
     const cameraRef = useRef<ThreePerspectiveCamera | null>(null);
     const groupRef = useRef<Group>(null);

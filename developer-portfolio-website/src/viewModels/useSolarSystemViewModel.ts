@@ -4,7 +4,7 @@ import { PlanetIndexChangeAction } from "@/src/models/enums/PlanetIndexChangeAct
 import handlePlanetIndexChange from "@/src/functions/handlePlanetIndexChange";
 import { SolarSystemModelRef, planetInfoDict } from "../models/types/solarSystemModelTypes";
 
-export function useSolarSystemViewModel() {
+export default function useSolarSystemViewModel() {
     const [isPlaying, setIsPlaying] = useState(true);
     const [showPortfolioSection, setShowPortfolioSection] = useState(false);
     const [planetIndex, setPlanetIndex] = useState(0);

@@ -2,6 +2,7 @@ import { RateLimiter } from "@/src/lib/classes/RateLimiter";
 import { adminDb } from "@/src/lib/firebaseAdmin";
 import { verifyRequest } from "@/src/lib/verifyRequest";
 import { NextResponse } from "next/server";
+import admin from 'firebase-admin';
 
 const limiter = new RateLimiter({ limit: 5, windowMs: 60_000 });
 
@@ -21,7 +22,7 @@ export async function POST(request: Request) {
         const data = await request.json();
         await adminDb.collection("forms").add({
             ...data,
-            createdAt: new Date().toISOString()
+            createdAt: admin.firestore.FieldValue.serverTimestamp()
         });
 
         return NextResponse.json({ success: true });

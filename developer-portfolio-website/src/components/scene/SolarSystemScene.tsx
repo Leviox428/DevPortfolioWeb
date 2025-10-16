@@ -11,7 +11,7 @@ import { LanguageButton } from "../LanguageButton";
 import PortfolioSecion from "../PortfolioSection";
 import Particles from "../animatedComponents/Particles";
 import SolarSystemModel from "../models/SolarSystemModel";
-import { useSolarSystemViewModel } from "@/src/viewModels/useSolarSystemViewModel";
+import useSolarSystemViewModel from "@/src/viewModels/useSolarSystemViewModel";
 
 export default function SolarSystemScene() {
     const vm = useSolarSystemViewModel();

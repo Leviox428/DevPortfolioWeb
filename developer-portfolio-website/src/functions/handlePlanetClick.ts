@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { Group, Object3D, Object3DEventMap, Vector3 } from "three";
+import { Group, Object3D, Object3DEventMap } from "three";
 import { PerspectiveCamera as ThreePerspectiveCamera } from "three";
 import { PlanetRef, planetInfoDict } from "../models/types/solarSystemModelTypes";
 
