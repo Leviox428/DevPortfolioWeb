@@ -11,7 +11,7 @@ export default function handlePlanetClick(
     scene: Group<Object3DEventMap>,
     setShowPortfolioSection: React.Dispatch<React.SetStateAction<boolean>>,
     showPortfolioSection: boolean = true
-) {
+): void {
     const planetInfo = planetInfoDict[planet.mesh.name];                                      
     activePlanet.current = planet;
 

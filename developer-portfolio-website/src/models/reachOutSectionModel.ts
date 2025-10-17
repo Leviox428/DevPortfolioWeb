@@ -1,4 +1,4 @@
-import { useToken } from "../contexts/TokenContext";
+import { TokenContextType } from "../contexts/TokenContext";
 
 type FormData = {
     email: string,
@@ -6,9 +6,7 @@ type FormData = {
     message: string
 }
 
-export async function submitFormToServer(data: FormData) {
-    const token = useToken();
-
+export async function submitFormToServer(data: FormData, token: TokenContextType): Promise<void> {
     const response = await fetch("/api/sendFormData", {
         method: "POST",
         headers: { 
@@ -21,9 +19,7 @@ export async function submitFormToServer(data: FormData) {
     if (!response.ok) throw new Error();
 }
 
-export async function sendEmail(data: FormData) {
-    const token = useToken();
-
+export async function sendEmail(data: FormData, token: TokenContextType): Promise<void> {
     const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: {

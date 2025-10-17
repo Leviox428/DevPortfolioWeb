@@ -2,7 +2,7 @@ import { PlanetIndexChangeAction } from "@/src/models/enums/planetIndexChangeAct
 import { SolarSystemModelRef, indexToPlanet } from "../models/types/solarSystemModelTypes";
 
 export default function handlePlanetIndexChange(action: PlanetIndexChangeAction, solarSystemModelRef: React.RefObject<SolarSystemModelRef | null>, 
-    setPlanetIndex: React.Dispatch<React.SetStateAction<number>>, currentIndex: number) {
+    setPlanetIndex: React.Dispatch<React.SetStateAction<number>>, currentIndex: number): void {
         if (!solarSystemModelRef.current) return;
 
         const newIndex = action === PlanetIndexChangeAction.Increment ? currentIndex + 1 : currentIndex - 1;

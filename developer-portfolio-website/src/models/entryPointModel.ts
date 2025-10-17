@@ -1,8 +1,6 @@
-import { useToken } from "../contexts/TokenContext";
+import { TokenContextType } from "../contexts/TokenContext";
 
-export function trackVisitor() {
-    const { token } = useToken();
-    
+export function trackVisitor(token: TokenContextType): void {  
     fetch("/api/trackVisitor", {
         method: "POST",
         headers: { 

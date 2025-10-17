@@ -5,11 +5,13 @@ import * as z from "zod"
 import { fieldInfoDict } from "../models/types/reachOutSectionTypes"
 import { sendEmail, submitFormToServer } from "../models/reachOutSectionModel"
 import { useRef } from "react"
+import { useToken } from "../contexts/TokenContext"
 
 
 export default function useReachOutSectionViewModel() {
     const t = useTranslations("ReachOutSection");
     const isSubmitting = useRef(false);
+    const token = useToken();
 
     const formSchema = z.object({
         email: z
@@ -61,8 +63,8 @@ export default function useReachOutSectionViewModel() {
         if (isSubmitting.current) return;
         isSubmitting.current = true;
 
-        await submitFormToServer(data);
-        await sendEmail(data);
+        await submitFormToServer(data, token);
+        await sendEmail(data, token);
 
         form.reset();
         isSubmitting.current = false;

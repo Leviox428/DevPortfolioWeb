@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 
-type TokenContextType = {
+export type TokenContextType = {
   token: string | null;
 };
 

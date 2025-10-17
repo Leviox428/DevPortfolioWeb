@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import { trackVisitor } from "../models/entryPointModel";
+import { useToken } from "../contexts/TokenContext";
 
 export default function usePageViewModel() { 
+    const token = useToken();
+
     useEffect(() => {
         const THROTTLE_MS = 60 * 60 * 1000; // 1 hour
         const last_seen = "last_seen";
@@ -10,7 +13,7 @@ export default function usePageViewModel() {
         const lastSeen = parseInt(localStorage.getItem(last_seen) || "0", 10);
 
         if (!lastSeen || now - lastSeen > THROTTLE_MS) {
-            trackVisitor();
+            trackVisitor(token);
             localStorage.setItem(last_seen, now.toString());
         }
     },[]);
