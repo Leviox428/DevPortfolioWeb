@@ -1,4 +1,4 @@
-import { PlanetIndexChangeAction } from "@/src/models/enums/planetIndexChangeAction";
+import { PlanetIndexChangeAction } from "@/src/models/enums/planetIndexChangeActione";
 import { SolarSystemModelRef, indexToPlanet } from "../models/types/solarSystemModelTypes";
 
 export default function handlePlanetIndexChange(action: PlanetIndexChangeAction, solarSystemModelRef: React.RefObject<SolarSystemModelRef | null>, 

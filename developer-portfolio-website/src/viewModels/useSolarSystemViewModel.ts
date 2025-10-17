@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { OrbitControls as OrbitControlsImpl } from "three-stdlib";
-import { PlanetIndexChangeAction } from "@/src/models/enums/planetIndexChangeAction";
+import { PlanetIndexChangeAction } from "@/src/models/enums/planetIndexChangeActione";
 import handlePlanetIndexChange from "@/src/functions/handlePlanetIndexChange";
 import { SolarSystemModelRef, planetInfoDict } from "../models/types/solarSystemModelTypes";
 
