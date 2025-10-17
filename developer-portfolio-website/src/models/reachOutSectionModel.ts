@@ -1,3 +1,4 @@
+import { useToken } from "../contexts/TokenContext";
 
 type FormData = {
     email: string,
@@ -6,11 +7,13 @@ type FormData = {
 }
 
 export async function submitFormToServer(data: FormData) {
+    const token = useToken();
 
     const response = await fetch("/api/sendFormData", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify(data),
     });
@@ -19,10 +22,13 @@ export async function submitFormToServer(data: FormData) {
 }
 
 export async function sendEmail(data: FormData) {
+    const token = useToken();
+
     const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`, 
         },
         body: JSON.stringify(data),
     });
