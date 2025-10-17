@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { jwtVerify } from "jose";
 
 /**
  * Universal helper to verify that:
@@ -34,11 +35,11 @@ export async function verifyRequest(request: Request) {
             ),
         };
     }
-
+    console.log(authHeader);
     const token = authHeader.substring(7); 
-
     try {
-        jwt.verify(token, process.env.API_SECRET!);
+        const secret = new TextEncoder().encode(process.env.API_SECRET!);
+        await jwtVerify(token, secret);
         return { authorized: true };
     } catch (err) {
         console.error("JWT verification failed:", err);

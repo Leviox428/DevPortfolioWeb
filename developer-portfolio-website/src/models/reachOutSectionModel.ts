@@ -6,12 +6,12 @@ type FormData = {
     message: string
 }
 
-export async function submitFormToServer(data: FormData, token: TokenContextType): Promise<void> {
+export async function submitFormToServer(data: FormData, tokenContext: TokenContextType): Promise<void> {
     const response = await fetch("/api/sendFormData", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${tokenContext.token}`, 
         },
         body: JSON.stringify(data),
     });
@@ -19,12 +19,12 @@ export async function submitFormToServer(data: FormData, token: TokenContextType
     if (!response.ok) throw new Error();
 }
 
-export async function sendEmail(data: FormData, token: TokenContextType): Promise<void> {
+export async function sendEmail(data: FormData, tokenContext: TokenContextType): Promise<void> {
     const response = await fetch("/api/sendEmail", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${tokenContext.token}`, 
         },
         body: JSON.stringify(data),
     });
