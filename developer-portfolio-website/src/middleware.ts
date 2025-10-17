@@ -1,14 +1,25 @@
 import createMiddleware from 'next-intl/middleware';
 import { routing } from '../src/i18n/routing';
+import { verifyRequest } from './lib/verifyRequest';
+import { NextRequest } from 'next/server';
 
 // Create the base i18n middleware
-export default createMiddleware(routing);
+const i18nMiddleware = createMiddleware(routing);
+
+export default async function middleware(request: NextRequest) {
+  // Only apply JWT/origin check to API routes
+  if (request.nextUrl.pathname.startsWith("/api/")) {
+    const { authorized, response } = await verifyRequest(request);
+    if (!authorized) return response; 
+  }
+
+  // Apply i18n middleware for all other routes
+  return i18nMiddleware(request);
+}
 
 export const config = {
   matcher: [
-    // Match all pathnames except for:
-    // - /api, /trpc, /_next, /_vercel
-    // - and files like favicon.ico
-    '/((?!api|trpc|_next|_vercel|.*\\..*).*)'
+    '/api/:path*',
+    '/((?!trpc|_next|_vercel|.*\\..*).*)'
   ],
 };
