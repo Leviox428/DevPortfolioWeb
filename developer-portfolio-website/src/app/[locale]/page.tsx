@@ -1,11 +1,14 @@
-"use client";
-
-import SolarSystemScene from "@/src/components/scene/SolarSystemScene";
-import usePageViewModel from "@/src/viewModels/usePageViewModel";
+import EntryPoint from "@/src/components/EntryPoint";
+import { generateToken } from "@/src/models/serverModels/pageModel";
 
 
-export default function Home() {
-  const vm = usePageViewModel();
-  
-  return  <SolarSystemScene />;
+export default async function Home() {
+  const token = await generateToken();
+
+  return  (
+    <EntryPoint
+      token={token}
+    >     
+    </EntryPoint>
+  );
 }

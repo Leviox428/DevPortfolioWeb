@@ -1,7 +1,7 @@
 import { useEffect } from "react";
+import { trackVisitor } from "../models/entryPointModel";
 
-export default function usePageViewModel() {
-    
+export default function usePageViewModel() { 
     useEffect(() => {
         const THROTTLE_MS = 60 * 60 * 1000; // 1 hour
         const last_seen = "last_seen";
@@ -10,13 +10,8 @@ export default function usePageViewModel() {
         const lastSeen = parseInt(localStorage.getItem(last_seen) || "0", 10);
 
         if (!lastSeen || now - lastSeen > THROTTLE_MS) {
-            fetch("/api/trackVisitor", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-            }).catch(() => null);
-
+            trackVisitor();
             localStorage.setItem(last_seen, now.toString());
         }
     },[]);
-    
 }

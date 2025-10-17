@@ -1,5 +1,5 @@
 import { ComboBox } from "../shadcnComponents/ComboBox";
-import { UsedTech } from "@/src/models/enums/UsedTech";
+import { UsedTech } from "@/src/models/enums/usedTech";
 
 import ProjectCard from "../ProjectCard";
 import useMyProjectSectionViewModel from "@/src/viewModels/useMyProjectSectionViewModel";

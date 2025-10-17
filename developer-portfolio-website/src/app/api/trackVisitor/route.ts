@@ -4,8 +4,6 @@ import { adminDb } from '@/src/lib/firebaseAdmin';
 import crypto from 'crypto';
 import { NextResponse } from 'next/server';
 import admin from 'firebase-admin';
-import { success } from 'zod';
-
 function hashIP(ip: string) {
   return crypto.createHash('sha256').update(ip).digest('hex');
 }
@@ -53,7 +51,7 @@ export async function POST(request: Request) {
             )
         }
         return NextResponse.json(
-            { success: true }
+            { success: true },
         )
 
 

@@ -5,11 +5,11 @@ import { NextResponse } from "next/server";
  * - The request's origin is allowed (CORS-like protection)
  * - The request includes a valid API key (extra layer)
  */
+const allowedOrigins = [
+    "http://localhost:3000",      
+    "https://marekdvorsky.vercel.app",     
+];
 export async function verifyRequest(request: Request) {
-    const allowedOrigins = [
-        "http://localhost:3000",      
-        "https://marekdvorsky.vercel.app",     
-    ];
 
     const origin = request.headers.get("origin");
 
