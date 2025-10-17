@@ -39,6 +39,7 @@ export default function ExperienceAndEducationSection() {
                 <img 
                     className="w-[150px] h-[80px]" 
                     src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-original.svg"
+                    alt=""
                 >
                 </img>
                 <p className="text-md lg:text-xl xl:text-2xl"><strong>{t("selfEmployed")} | 2022 – 2024:</strong></p>

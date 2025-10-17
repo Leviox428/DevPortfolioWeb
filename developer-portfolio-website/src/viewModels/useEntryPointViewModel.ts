@@ -13,5 +13,5 @@ export default function usePageViewModel(token: string | null) {
             trackVisitor(token);
             localStorage.setItem(last_seen, now.toString());
         }
-    },[]);
+    }, [token]);
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 import { Inter, Plus_Jakarta_Sans, Montserrat, Fira_Code } from "next/font/google";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
         className={`antialiased`}
       >
           {children}     
+          <SpeedInsights />
       </body>
     </html>
   );
