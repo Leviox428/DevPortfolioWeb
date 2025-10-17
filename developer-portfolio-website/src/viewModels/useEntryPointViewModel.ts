@@ -1,10 +1,7 @@
 import { useEffect } from "react";
 import { trackVisitor } from "../models/entryPointModel";
-import { useToken } from "../contexts/TokenContext";
 
-export default function usePageViewModel() { 
-    const token = useToken();
-
+export default function usePageViewModel(token: string | null) { 
     useEffect(() => {
         const THROTTLE_MS = 60 * 60 * 1000; // 1 hour
         const last_seen = "last_seen";

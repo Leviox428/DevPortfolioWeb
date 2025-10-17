@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import { jwtVerify } from "jose";
+import { ratelimit } from "./rateLimiter";
 
 /**
  * Universal helper to verify that:
@@ -24,6 +25,27 @@ export async function verifyRequest(request: Request) {
             ),
         };
     }
+    
+
+    const ip =
+        request.headers.get("x-forwarded-for")?.split(",")[0] ??
+        request.headers.get("x-real-ip") ??
+        "unknown";
+
+    const { success } = await ratelimit.limit(ip);
+
+    if (!success) {
+        return {
+            authorized: false,
+            response: NextResponse.json(
+                {
+                    success: false,
+                    message: "Too many requests. Please slow down.",
+                },
+                { status: 429 }
+            ),
+        };
+    }
 
     const authHeader = request.headers.get("authorization");
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -31,11 +53,11 @@ export async function verifyRequest(request: Request) {
             authorized: false,
             response: NextResponse.json(
                 { success: false, message: "Missing or invalid Authorization header" },
-                { status: 402 }
+                { status: 401 }
             ),
         };
     }
-    console.log(authHeader);
+
     const token = authHeader.substring(7); 
     try {
         const secret = new TextEncoder().encode(process.env.API_SECRET!);
@@ -47,7 +69,7 @@ export async function verifyRequest(request: Request) {
             authorized: false,
             response: NextResponse.json(
                 { success: false, message: "Invalid or expired token" },
-                { status: 403 }
+                { status: 401 }
             ),
         };
     }

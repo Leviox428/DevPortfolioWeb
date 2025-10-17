@@ -1,4 +1,3 @@
-import { RateLimiter } from '@/src/lib/classes/RateLimiter';
 import { verifyRequest } from '@/src/lib/verifyRequest';
 import { adminDb } from '@/src/lib/firebaseAdmin';
 import crypto from 'crypto';
@@ -7,8 +6,6 @@ import admin from 'firebase-admin';
 function hashIP(ip: string) {
   return crypto.createHash('sha256').update(ip).digest('hex');
 }
-
-const limiter = new RateLimiter({ limit: 15, windowMs: 60_000 });
 
 export async function POST(request: Request) {
     try {
@@ -21,13 +18,6 @@ export async function POST(request: Request) {
                 { success: false, error: "No IP found" },
                 { status: 400 },           
             )             
-        }
-
-        if (!limiter.check(ip)) {
-            return NextResponse.json(
-                { success: false },
-                { status: 429 }
-            );
         }
 
         const hashedIP = hashIP(ip);

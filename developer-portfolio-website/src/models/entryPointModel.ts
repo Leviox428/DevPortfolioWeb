@@ -1,11 +1,9 @@
-import { TokenContextType } from "../contexts/TokenContext";
-
-export function trackVisitor(tokenContext: TokenContextType): void {  
+export function trackVisitor(token: string | null): void {  
     fetch("/api/trackVisitor", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
-            Authorization: `Bearer ${tokenContext.token}`, 
+            Authorization: `Bearer ${token}`, 
         },
     }).catch(() => null);
 }
