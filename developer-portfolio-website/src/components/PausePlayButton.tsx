@@ -10,7 +10,7 @@ export function PlayPauseButton({ isPlaying, onToggle }: PlayPauseButtonProps) {
         <div className="fixed top-4 left-4">
             <button
                 onClick={onToggle}
-                className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition cursor-pointer"
             >
                 {isPlaying ? (
                     <Pause className="w-6 h-6 text-gray-800" />

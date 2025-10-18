@@ -21,7 +21,7 @@ export function LanguageButton() {
     <div className="fixed top-4 right-4">
       <button
         onClick={toggleLanguage}
-        className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition"
+        className="flex items-center justify-center w-12 h-12 rounded-full bg-white shadow-lg hover:bg-gray-100 transition cursor-pointer"
       >
          <Image
             src={currentLang === "sk" ? SkFlagPng : GbFlagPng}

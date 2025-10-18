@@ -42,9 +42,9 @@ export default function AboutMeSection() {
 
             <Button
                 onClick={handleOpenResume}
-                className="ml-5 bg-white w-[110px] text-black"
+                className="ml-5 bg-white w-[110px] text-black cursor-pointer"
             >
-               <ArrowUpRightIcon /> Resume
+               <ArrowUpRightIcon /> {t("resume")}
             </Button>
 
             <div className="absolute bottom-0 w-full h-1/10 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between md:justify-start md:gap-2">
@@ -52,7 +52,7 @@ export default function AboutMeSection() {
                     <SiGmail size={26} />
                     <a
                         href="mailto:ma12rek@gmail.com"
-                        className="text-xs sm:text-sm md:text-base text-gray-300 hover:underline"
+                        className="text-xs sm:text-sm md:text-base text-white hover:underline"
                     >
                         ma12rek@gmail.com
                     </a>
@@ -61,7 +61,7 @@ export default function AboutMeSection() {
                     <MdOutlinePhoneAndroid size={26} />
                     <a
                         href="tel:0944502198"
-                        className="text-xs sm:text-sm md:text-base text-gray-300 hover:underline"
+                        className="text-xs sm:text-sm md:text-base text-white hover:underline"
                     >
                         0944502198
                     </a>

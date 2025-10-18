@@ -11,7 +11,8 @@
     "AboutMeSection":
     {
         "intro": "Zdravím, volám sa Marek Dvorský a som",
-        "aboutMeContent": "Som softvérový vývojár so skúsenosťami v objektovo orientovanom programovaní. Vytváram aplikácie, ktoré sú spoľahlivé, udržiavateľné a efektívne. Moja práca zahŕňa desktopové a webové aplikácie, Wordpress, backend systémy a nástroje, ktoré riešia praktické problémy. Píšem čistý a spoľahlivý kód pre praktické aplikácie."
+        "aboutMeContent": "Som softvérový vývojár so skúsenosťami v objektovo orientovanom programovaní. Vytváram aplikácie, ktoré sú spoľahlivé, udržiavateľné a efektívne. Moja práca zahŕňa desktopové a webové aplikácie, Wordpress, backend systémy a nástroje, ktoré riešia praktické problémy. Píšem čistý a spoľahlivý kód pre praktické aplikácie.",
+        "resume": "Životopis"
     },
     "TechStackSection":
     {

@@ -140,10 +140,10 @@ export default function ReachOutSection() {
                 </CardContent>
                 <CardFooter>
                     <Field orientation="horizontal">
-                        <Button type="button" variant="destructive" onClick={() => vm.form.reset()}>
+                        <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer">
                             {vm.t("reset")}
                         </Button>
-                        <Button type="submit" variant="outline" form="contact-form" disabled={vm.form.formState.isSubmitting}>
+                        <Button type="submit" variant="outline" form="contact-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
                              {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
                         </Button>
                     </Field>

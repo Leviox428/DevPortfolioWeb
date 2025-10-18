@@ -30,8 +30,9 @@ export default function MyProjectsSection() {
                                 title={project.title[vm.locale]}
                                 description={project.shortDescription[vm.locale]}
                                 thumbnail={project.thumbnail}
+                                link={project.link}
                             />
-                        ))}
+                        ))}                       
                     </div>
                 </div>
             </div>
