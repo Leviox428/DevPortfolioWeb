@@ -5,6 +5,7 @@
         "projects": "Moje Projekty",
         "experience": "Skúsenosti a Vzdelanie",
         "about": "O Mne",
+        "skills": "Skills a Hobby",
         "reachOut": "Spojte sa so Mnou"
     },
     "AboutMeSection":
@@ -25,12 +26,34 @@
     },
     "ExperienceAndEducationSection":
     {
+        "educationTitle": "Vzdelanie:",
         "education": "Momentálne študujem 3. ročník bakalárskeho štúdia na Žilinskej univerzite",
         "selfEmployed": "Živnosť",
+        "experienceTitle": "Skúsenosti:",
         "experienceWordpress1": "Navrhoval a vyvíjal som vlastné WordPress webstránky pre klientov.",
         "experienceWordpress2": "Prispôsoboval som témy a pluginy podľa požiadaviek projektu.",
         "experienceWordpress3": "Implementoval som SEO, optimalizácie výkonu a bezpečnosti.",
         "experienceWordpress4": "Zabezpečoval som priebežnú údržbu, podporu a technické poradenstvo."
+    },
+    "SkillsAndHobbySection":
+    {
+        "hardSkill1": "Objektové programovanie (C#, Java)",
+        "hardSkill2": "Databázy (MySQL, Oracle, Firebase Firestore)",
+        "hardSkill3": "Frontend (TypeScript, NextJS, React, Tailwind, JavaFX, AvaloniaUI)",
+        "hardSkill4": "Webscrapping a dátová analýza v pythone",
+        "hardSkill5": "Wordpress",
+        "hardSkill6": "Git",
+        "hardSkill7": "Backend (Flask, Express + NodeJS, Firebase, Upstash)",
+        "hardSkill8": "API bezpečnosť (Rate limiting, JWT tokenizácia)",
+
+        "softSkill1": "Vedenie menších tímov",
+        "softSkill2": "Tímová spolupráca",
+        "softSkill3": "Plánovanie projektov (Softvérové inžinierstvo)",
+        "softSkill4": "Zodpovednosť a spoľahlivosť",
+        "softSkill5": "Flexibilita",
+        "softSkill6": "Komunikácia",
+
+        "hobby": "Cvičím a chodím behať. Aktívne sa vzdelávam čítaním kníh a odbornej literatúry. Zaoberám sa systémovým dizajnom a architektúrou. Rád sa učím ako funguje technológia okolo mňa."
     },
     "ReachOutSection":
     {

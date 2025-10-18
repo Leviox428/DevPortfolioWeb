@@ -3,7 +3,7 @@ import { trackVisitor } from "../models/entryPointModel";
 
 export default function usePageViewModel(token: string | null) { 
     useEffect(() => {
-        const THROTTLE_MS = 60 * 60 * 1000; // 1 hour
+        const THROTTLE_MS = 30 * 60 * 1000; 
         const last_seen = "last_seen";
 
         const now = Date.now();

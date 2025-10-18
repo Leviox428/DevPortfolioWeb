@@ -3,6 +3,7 @@ import TechStackSection from "./portfolioSections/TechStackSection";
 import MyProjectsSection from "./portfolioSections/MyProjectsSection";
 import ExperienceAndEducationSection from "./portfolioSections/ExperienceAndEducation";
 import ReachOutSection from "./portfolioSections/ReachOutSection";
+import SkillsAndHobbySection from "./portfolioSections/SkillsAndHobbySection";
 
 interface PortfolioSectionProps {
     onClose: () => void;
@@ -22,6 +23,8 @@ export default function PortfolioSecion({ onClose, planetIndex } : PortfolioSect
             case 4:
                 return <ExperienceAndEducationSection/>;
             case 5:
+                return <SkillsAndHobbySection/>;
+            case 6:
                 return <ReachOutSection/>;
             default:
                 return <div className="text-white p-6">Coming soon 🚀</div>;

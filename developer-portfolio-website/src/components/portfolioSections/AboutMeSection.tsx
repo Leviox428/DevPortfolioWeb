@@ -1,16 +1,24 @@
 import { SiGmail } from "react-icons/si";
 import { MdOutlinePhoneAndroid } from "react-icons/md";
 import ShinyText from "../animatedComponents/ShinyText"
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { ScrollArea } from "../animatedComponents/ScrollArea";
+import { Button } from "../shadcnComponents/Button";
+import { ArrowUpRightIcon } from "lucide-react";
 
 
 export default function AboutMeSection() {
 
     const t = useTranslations('AboutMeSection');
+    const locale = useLocale();
+
+    const handleOpenResume = () => {
+        const resumeUrl = locale === 'sk' ? 'https://pmnhapadgqmn5xru.public.blob.vercel-storage.com/%C5%BDivotopis.pdf' : 'https://pmnhapadgqmn5xru.public.blob.vercel-storage.com/Resume.pdf';
+        window.open(resumeUrl, '_blank');
+    };
 
     return(
-        <div className="relative flex gap-4 justify-center flex-col w-full h-full bg-cover bg-[url('/images/photoOfMeBG.png')] bg-position-[79%] md:bg-position-[80%] lg:bg-position-[90%] xl:bg-position-[100%]">  
+        <div className="overflow-y-auto scrollbar relative flex gap-4 justify-center flex-col w-full h-full bg-cover bg-[url('/images/photoOfMeBG.png')] bg-position-[79%] md:bg-position-[80%] lg:bg-position-[90%] xl:bg-position-[100%]">  
             <div className="absolute bottom-0 z-0 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0"
             >
 
@@ -31,6 +39,13 @@ export default function AboutMeSection() {
                     {t("aboutMeContent")}
                 </ScrollArea>
             </div>
+
+            <Button
+                onClick={handleOpenResume}
+                className="ml-5 bg-white w-[110px] text-black"
+            >
+               <ArrowUpRightIcon /> Resume
+            </Button>
 
             <div className="absolute bottom-0 w-full h-1/10 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between md:justify-start md:gap-2">
                 <div className="flex items-center gap-2">

@@ -5,6 +5,7 @@
         "projects": "My Projects",
         "experience": "Experience and Education",
         "about": "About Me",
+        "skills": "Skills and Hobby",
         "reachOut": "Reach Out"
     },
     "AboutMeSection":
@@ -25,12 +26,35 @@
     },
     "ExperienceAndEducationSection":
     {
+        "educationTitle": "Education:",
         "education": "Currently studying 3rd year of bachelor degree at univerzity of Žilina",
+
+        "experienceTitle": "Experience:",
         "selfEmployed": "Self-employed",
         "experienceWordpress1": "Designed and developed custom WordPress websites for clients.",
         "experienceWordpress2": "Customized themes and plugins to meet project requirements.",
         "experienceWordpress3": "Implemented SEO, performance, and security optimizations.",
         "experienceWordpress4": "Provided ongoing maintenance, support, and technical consultation."
+    },
+    "SkillsAndHobbySection":
+    {
+        "hardSkill1": "Object oriented programming (C#, Java)",
+        "hardSkill2": "Database (MySQL, Oracle, Firebase Firestore)",
+        "hardSkill3": "Frontend (TypeScript, NextJS, React, Tailwind, JavaFX, AvaloniaUI)",
+        "hardSkill4": "Webscrapping and data analysis in python",
+        "hardSkill5": "Wordpress",
+        "hardSkill6": "Git",
+        "hardSkill7": "Backend (Flask, Express + NodeJS, Firebase, Upstash)",
+        "hardSkill8": "API security (Rate limiting, JWT tokenization)",
+
+        "softSkill1": "Leading small teams",
+        "softSkill2": "Team work",
+        "softSkill3": "Project planning (Software Engineering)",
+        "softSkill4": "Responsibility and reliability",
+        "softSkill5": "Flexibility",
+        "softSkill6": "Communication",
+
+        "hobby": "I work out and go running. I actively pursue self-education by reading books and professional literature. I’m interested in system design and architecture. I enjoy learning how the technology around me works."
     },
     "ReachOutSection":
     {

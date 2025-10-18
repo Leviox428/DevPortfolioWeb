@@ -11,11 +11,12 @@ export interface PlanetInfo {
 }
 
 export const planetInfoDict: Record<string, PlanetInfo> = {
+    sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1 },
     venus: { yOffset: 2.5, zOffset: 4, sectionKey: "techStack", index: 2 },
     earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
     mars: { yOffset: 1.5, zOffset: 2, sectionKey: "experience", index: 4 },
-    sun: { yOffset: 8.5, zOffset: 15, sectionKey: "about", index: 1 },
-    jupiter: { yOffset: 4.83, zOffset: 8, sectionKey: "reachOut", index: 5 }
+    jupiter: { yOffset: 4.83, zOffset: 8, sectionKey: "skills", index: 5 },
+    saturn: { yOffset: 4.83, zOffset: 8, sectionKey: "reachOut", index: 6 }
 };
 
 export const indexToPlanet: Record<number, string> = Object.fromEntries(

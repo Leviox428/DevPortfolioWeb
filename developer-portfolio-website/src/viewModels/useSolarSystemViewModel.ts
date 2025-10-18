@@ -41,18 +41,15 @@ export default function useSolarSystemViewModel() {
     const canGoPrev = planetIndex > 1;
 
     return {
-        // state
         isPlaying,
         showPortfolioSection,
         planetIndex,
         controlsRef,
         solarSystemModelRef,
         
-        // computed
         canGoNext,
         canGoPrev,
 
-        // actions
         togglePlay,
         setShowPortfolioSection,
         closePortfolio,
