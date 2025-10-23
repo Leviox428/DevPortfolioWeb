@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { fieldInfoDict } from "../models/types/reachOutSectionTypes"
+import { reachOutFieldInfoDict } from "../models/types/reachOutSectionTypes"
 import { sendEmail, submitFormToServer } from "../models/reachOutSectionModel"
 import { useRef } from "react"
 import { useToken } from "../contexts/TokenContext"
@@ -20,32 +20,32 @@ export default function useReachOutSectionViewModel() {
                 pattern: z.regexes.rfc5322Email,
             })
             .min(
-                fieldInfoDict["email"].min,
-                `${t("emailFieldMin")} ${fieldInfoDict["email"].min} ${t("characters")}.`
+                reachOutFieldInfoDict["email"].min,
+                `${t("emailFieldMin")} ${reachOutFieldInfoDict["email"].min} ${t("characters")}.`
             )
             .max(
-                fieldInfoDict["email"].max,
-                `${t("emailFieldMax")} ${fieldInfoDict["email"].max} ${t("characters")}.`
+                reachOutFieldInfoDict["email"].max,
+                `${t("emailFieldMax")} ${reachOutFieldInfoDict["email"].max} ${t("characters")}.`
             ),
         subject: z
             .string()
             .min(
-                fieldInfoDict["subject"].min,
-                `${t("subjectFieldMin")} ${fieldInfoDict["subject"].min} ${t("characters")}.`
+                reachOutFieldInfoDict["subject"].min,
+                `${t("subjectFieldMin")} ${reachOutFieldInfoDict["subject"].min} ${t("characters")}.`
             )
             .max(
-                fieldInfoDict["subject"].max,
-                `${t("subjectFieldMax")} ${fieldInfoDict["subject"].max} ${t("characters")}.`
+                reachOutFieldInfoDict["subject"].max,
+                `${t("subjectFieldMax")} ${reachOutFieldInfoDict["subject"].max} ${t("characters")}.`
             ),
         message: z
             .string()                   
             .min(
-                fieldInfoDict["message"].min,
-                `${t("messageFieldMin")} ${fieldInfoDict["message"].min} ${t("characters")}.`
+                reachOutFieldInfoDict["message"].min,
+                `${t("messageFieldMin")} ${reachOutFieldInfoDict["message"].min} ${t("characters")}.`
             )
             .max(
-                fieldInfoDict["message"].max,
-                `${t("messageFieldMax")} ${fieldInfoDict["message"].max} ${t("characters")}.`
+                reachOutFieldInfoDict["message"].max,
+                `${t("messageFieldMax")} ${reachOutFieldInfoDict["message"].max} ${t("characters")}.`
             ),
     });
   

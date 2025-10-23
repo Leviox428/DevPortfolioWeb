@@ -1,8 +1,8 @@
 import { adminDb } from "@/src/lib/firebaseAdmin";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import admin from 'firebase-admin';
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const data = await request.json();
         await adminDb.collection("forms").add({

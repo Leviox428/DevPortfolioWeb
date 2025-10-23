@@ -1,13 +1,13 @@
 import { verifyRequest } from '@/src/lib/verifyRequest';
 import { adminDb } from '@/src/lib/firebaseAdmin';
 import crypto from 'crypto';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import admin from 'firebase-admin';
 function hashIP(ip: string) {
   return crypto.createHash('sha256').update(ip).digest('hex');
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const check = await verifyRequest(request);
         if (!check.authorized) return check.response;

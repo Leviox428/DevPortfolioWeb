@@ -6,7 +6,8 @@
         "experience": "Skúsenosti a Vzdelanie",
         "about": "O Mne",
         "skills": "Skills a Hobby",
-        "reachOut": "Spojte sa so Mnou"
+        "reachOut": "Spojte sa so Mnou",
+        "reviews": "Recenzie"
     },
     "AboutMeSection":
     {
@@ -73,6 +74,55 @@
         "messageFieldTitle": "Správa",
         "messageFieldMin": "Správa musí mať aspoň",
         "messageFieldMax": "Správa môže mať najviac",
+
+        "characters": "znakov",
+        "reset": "Odznova",
+        "submit": "Potvrdiť",
+        "submitting": "Posielam...",
+        "submitError": "Ups, niečo sa pokazilo.",
+        "submitInfo": "Boli zaslané úspešne tieto hodnoty:"
+    },
+    "ReviewSection": 
+    {
+        "addReview": "Pridaj recenziu"
+    },
+    "AuthCard":
+    {
+        "cardTitleLogin": "Prihlásenie",
+        "cardTitleRegister": "Registrácia",
+
+        "emailFieldTitle": "Váš email",
+        "emailFieldMin": "Email musí mať aspoň",
+        "emailFieldMax": "Email môže mať najviac",
+        "emailFieldInvalidEmail": "Neplatný email",
+        "emailPlaceHolder": "you@example.com",
+
+        "passwordFieldMin": "Heslo musi mať aspoň",
+        "passwordFieldMax": "Heslo môže mať najviac",
+        "passwordFieldTitle": "Heslo",
+        "confirmPasswordFieldTitle": "Potvrďte heslo",
+        "passwordsNoMatch": "Heslá sa nezhodujú",
+
+        "characters": "znakov",
+        "reset": "Odznova",
+        "submit": "Potvrdiť",
+        "submitting": "Posielam...",
+        "submitError": "Ups, niečo sa pokazilo.",
+
+        "clickRegister": "Pre registáciu klikni sem.",
+        "clickLogin": "Pre prihlásenie klikni sem."
+    },
+    "ReviewEditor":
+    {
+        "cardTitleAddReview": "Pridaj recenziu",
+
+        "authorFieldTitle": "Autor",
+        "authorFieldMin": "Autor musí mať aspoň",
+        "authorFieldMax": "Autor môže mať najviac",
+
+        "contentFieldTitle": "Obsah",
+        "contentFieldMin": "Obsah musí mať aspoň",
+        "contentFieldMax": "Obsah môže mať najviac",
 
         "characters": "znakov",
         "reset": "Odznova",

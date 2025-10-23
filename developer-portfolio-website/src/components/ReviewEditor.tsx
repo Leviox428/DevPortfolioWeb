@@ -1,38 +1,24 @@
-"use client"
-import * as React from "react"
-import { Controller } from "react-hook-form"
-import { Button } from "../shadcnComponents/Button"
-import {
-    Card,
-    CardContent,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "../shadcnComponents/Card"
-import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "../shadcnComponents/Field"
-import { Input } from "../shadcnComponents/Input"
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroupTextarea,
-} from "../shadcnComponents/InputGroup"
-import useReachOutSectionViewModel from "@/src/viewModels/useReachOutSectionViewModel"
-import { reachOutFieldInfoDict } from "@/src/models/types/reachOutSectionTypes"
-import { toast, Toaster } from "sonner"
-import z from "zod"
+import { Controller } from "react-hook-form";
+import { toast, Toaster } from "sonner";
+import { Button } from "./shadcnComponents/Button";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./shadcnComponents/Card";
+import { FieldGroup, Field, FieldLabel, FieldError } from "./shadcnComponents/Field";
+import { Input } from "./shadcnComponents/Input";
+import useReviewEditorViewModel from "@/src/viewModels/useReviewEditorViewModel";
+import z from "zod";
+import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from "./shadcnComponents/InputGroup";
+import { reviewEditorFieldInfoDict } from "../models/types/reviewsSectionTypes";
 
-export default function ReachOutSection() {
-    const vm = useReachOutSectionViewModel();
+type ReviewEditorProps = {
+    authToken: string;
+}
+
+export default function ReviewEditor({ authToken }: ReviewEditorProps) {
+    const vm = useReviewEditorViewModel(authToken);
 
     async function onSubmit(data: z.infer<typeof vm.formSchema>) {
         try {
-            await vm.onSubmit(data);
+            await vm.onSubmit(data); 
 
             toast(vm.t("submitInfo"), {
                 className: "scrollbar",
@@ -50,7 +36,7 @@ export default function ReachOutSection() {
                     background: "#18181b",
                 } as React.CSSProperties,
                 duration: 2500
-            })
+            })                  
         } catch {
             toast(vm.t("submitError"))
             vm.isSubmitting.current = false;
@@ -61,43 +47,24 @@ export default function ReachOutSection() {
         <div className="relative flex place-items-center place-content-center w-full h-full">
             <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl m-6 overflow-hidden max-h-[80%]">
                 <CardHeader>
-                    <CardTitle>{vm.t("cardTitle")}</CardTitle>
+                    <CardTitle>
+                        {vm.t("cardTitleAddReview")}
+                    </CardTitle>
                 </CardHeader>
                 <CardContent className="overflow-y-auto scrollbar">
-                    <form id="contact-form" onSubmit={vm.form.handleSubmit(onSubmit)}>
+                    <form id="add-review-form" onSubmit={vm.form.handleSubmit(onSubmit)}>
                         <FieldGroup>                           
                             <Controller
-                                name="email"
+                                name="author"
                                 control={vm.form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="email-field-input">
-                                            {vm.t("emailFieldTitle")}
+                                        <FieldLabel htmlFor="author-field-input">
+                                            {vm.t("authorFieldTitle")}
                                         </FieldLabel>
                                         <Input
                                             {...field}
-                                            id="email-field-input"
-                                            aria-invalid={fieldState.invalid}
-                                            placeholder={vm.t("emailPlaceHolder")}
-                                            autoComplete="off"
-                                        />
-                                        {fieldState.invalid && (
-                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
-                                        )}
-                                    </Field>
-                                )}
-                            />
-                             <Controller
-                                name="subject"
-                                control={vm.form.control}
-                                render={({ field, fieldState }) => (
-                                    <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="subject-field-input">
-                                            {vm.t("subjectFieldTitle")}
-                                        </FieldLabel>
-                                        <Input
-                                            {...field}
-                                            id="subject-field-input"
+                                            id="author-field-input"
                                             aria-invalid={fieldState.invalid}
                                             autoComplete="off"
                                         />
@@ -108,24 +75,24 @@ export default function ReachOutSection() {
                                 )}
                             />
                             <Controller
-                                name="message"
+                                name="content"
                                 control={vm.form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="message-field-input-text-area">
-                                            {vm.t("messageFieldTitle")}
+                                        <FieldLabel htmlFor="content-field-input-text-area">
+                                            {vm.t("contentFieldTitle")}
                                         </FieldLabel>
                                         <InputGroup>
                                             <InputGroupTextarea
                                                 {...field}
-                                                id="message-field-input-text-area"
+                                                id="content-field-input-text-area"
                                                 rows={6}
                                                 className="min-h-24 resize-none"
                                                 aria-invalid={fieldState.invalid}
                                             />
                                             <InputGroupAddon align="block-end">
                                             <InputGroupText className="tabular-nums [word-spacing:0.3rem]">
-                                                {field.value.length}/{reachOutFieldInfoDict["message"].max} {vm.t("characters")}
+                                                {field.value.length}/{reviewEditorFieldInfoDict["content"].max} {vm.t("characters")}
                                             </InputGroupText>
                                             </InputGroupAddon>
                                         </InputGroup>
@@ -134,22 +101,22 @@ export default function ReachOutSection() {
                                         )}
                                     </Field>
                                 )}
-                            />
+                            />                           
                         </FieldGroup>
                     </form>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex flex-col gap-2">
                     <Field orientation="horizontal">
                         <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer">
                             {vm.t("reset")}
                         </Button>
-                        <Button type="submit" variant="outline" form="contact-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
-                             {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
-                        </Button>
+                        <Button type="submit" variant="outline" form="add-review-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
+                            {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
+                        </Button>                    
                     </Field>
                 </CardFooter>
             </Card>
             <Toaster position="bottom-right" />
         </div>
-  )
+    )
 }

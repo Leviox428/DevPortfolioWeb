@@ -6,7 +6,8 @@
         "experience": "Experience and Education",
         "about": "About Me",
         "skills": "Skills and Hobby",
-        "reachOut": "Reach Out"
+        "reachOut": "Reach Out",
+        "reviews": "Reviews"
     },
     "AboutMeSection":
     {
@@ -74,6 +75,55 @@
         "messageFieldTitle": "Message",
         "messageFieldMin": "Message must be at least",
         "messageFieldMax": "Message must be at most",
+
+        "characters": "characters",
+        "reset": "Reset",
+        "submit": "Submit",
+        "submitting": "Submitting...",
+        "submitError": "Something wrong happened.",
+        "submitInfo": "You successfully submitted the following values:"
+    },
+    "ReviewSection": 
+    {
+        "addReview": "Add review"
+    },
+    "AuthCard":
+    {
+        "cardTitleLogin": "Login",
+        "cardTitleRegister": "Register",
+
+        "emailFieldMin": "Email must be at least",
+        "emailFieldMax": "Email must be at most",
+        "emailFieldInvalidEmail": "Invalid email",
+        "emailFieldTitle": "Your email",
+        "emailPlaceHolder": "you@example.com",
+
+        "passwordFieldMin": "Password must be at leas",
+        "passwordFieldMax": "Password must be at most",
+        "passwordFieldTitle": "Password",
+        "confirmPasswordFieldTitle": "Confirm password",
+        "passwordsNoMatch": "Passwords do not match",
+
+        "characters": "characters",
+        "reset": "Reset",
+        "submit": "Submit",
+        "submitting": "Submitting...",
+        "submitError": "Something wrong happened.",
+
+        "clickRegister": "Click here to register.",
+        "clickLogin": "Click here to login."
+    },
+    "ReviewEditor":
+    {
+        "cardTitleAddReview": "Add Review",
+
+        "authorFieldTitle": "Author",
+        "authorFieldMin": "Author must be at least",
+        "authorFieldMax": "Author must be at most",
+
+        "contentFieldTitle": "Content",
+        "contentFieldMin": "Content must be at least",
+        "contentFieldMax": "Content must be at most",
 
         "characters": "characters",
         "reset": "Reset",

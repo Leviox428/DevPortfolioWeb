@@ -16,7 +16,8 @@ export const planetInfoDict: Record<string, PlanetInfo> = {
     earth: { yOffset: 2.7, zOffset: 4, sectionKey: "projects", index: 3 },
     mars: { yOffset: 1.5, zOffset: 2, sectionKey: "experience", index: 4 },
     jupiter: { yOffset: 4.83, zOffset: 8, sectionKey: "skills", index: 5 },
-    saturn: { yOffset: 4.83, zOffset: 8, sectionKey: "reachOut", index: 6 }
+    saturn: { yOffset: 4.83, zOffset: 8, sectionKey: "reachOut", index: 6 },
+    uranus: { yOffset: 4.83, zOffset: 8, sectionKey: "reviews", index: 7 }
 };
 
 export const indexToPlanet: Record<number, string> = Object.fromEntries(

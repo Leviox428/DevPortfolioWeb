@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 import * as nodemailer from "nodemailer";
 
@@ -10,7 +10,7 @@ const transporter = nodemailer.createTransport({
     },
 });
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
     try {
         const { subject, email, message } = await request.json();
         await transporter.sendMail({
