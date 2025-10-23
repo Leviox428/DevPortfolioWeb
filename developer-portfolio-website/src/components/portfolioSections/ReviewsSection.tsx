@@ -12,7 +12,7 @@ export default function ReviewsSection() {
     return (
         <div className="relative flex flex-col place-items-center place-content-center w-full h-full">
             <Button onClick={vm.handleOpenModal} variant={"outline"} className="w-90px mt-6 ml-6 h-40px self-start cursor-pointer">{vm.t("addReview")}</Button>
-            <div className="m-6 p-4 overflow-y-auto scrollbar place-content-center flex flex-1 flex-col gap-4 w-[90%] sm:w-[80%] md:w-[65%] lg:w-[50%]">
+            <div className="m-6 pt-4 overflow-y-auto scrollbar place-content-center flex flex-1 flex-col gap-4 w-[90%] sm:w-[80%] md:w-[65%] lg:w-[50%]">
                 {!vm.loading && vm.reviews.map((review, index) => (
                     <Review key={index} review={review}></Review>
                 ))}
