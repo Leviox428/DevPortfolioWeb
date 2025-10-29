@@ -2,7 +2,7 @@ import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { ReviewType } from "../models/types/reviewsSectionTypes";
 import { useToken } from "../contexts/TokenContext";
-import { fetchReviews } from "../models/reviewSectionModel";
+import { fetchReviews, getSession } from "../models/reviewSectionModel";
 
 export default function useReviewSectionViewModel() {
     const t = useTranslations("ReviewSection");
@@ -29,8 +29,7 @@ export default function useReviewSectionViewModel() {
         async function checkSession() {
             setLoading(true);
             try {
-                const res = await fetch("/api/session");
-                const data = await res.json();
+                const data = await getSession();
                 authToken.current = data.authToken;
                 setIsAuth(data.isAuth);
             } catch (err: unknown) {

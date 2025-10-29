@@ -21,6 +21,12 @@ export async function fetchReviews(tokenContext: TokenContextType): Promise<Revi
     return response.json();
 }
 
+export async function getSession() {
+    const res = await fetch("/api/session");
+    const data = await res.json();
+    return data;
+}
+
 export async function addReview(tokenContext: TokenContextType, authToken: string, author: string, content: string, stars: number) {
     await fetch("/api/review", {
         method: "POST",
