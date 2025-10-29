@@ -16,97 +16,84 @@ The website supports two languages (slovak and english) and includes features su
 ## 🧰 Tech Stack
 
 **Frontend:**  
+
 ![Next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js&logoColor=white)
 ![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)
 ![ThreeJS](https://img.shields.io/badge/-Three.js-000000?logo=three.js&logoColor=white)
 
-**Frameworks & Libraries:**  
-- React, TailwindCSS, Chart.js  
+**Backend:**  
 
-**Tools & Platforms:**  
-- Git, Vite, Netlify, Figma  
+![Node.js](https://img.shields.io/badge/-Node.js-339933?logo=node.js&logoColor=white)
+![Firebase](https://img.shields.io/badge/-Firebase-FFCA28?logo=firebase&logoColor=black)
+![Redis](https://img.shields.io/badge/-Redis-DC382D?logo=redis&logoColor=white) 
 
-*(You can use badges too for a nice visual touch:)*  
-![React](https://img.shields.io/badge/-React-61DAFB?logo=react&logoColor=white)
-![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
-![Vite](https://img.shields.io/badge/-Vite-646CFF?logo=vite&logoColor=white)
+**Security:**  
+- JWT for session verification
+- Firebase Auth Tokens for login/register
+- Secure HTTP-only cookies (1-day validity)
+- Upstash Redist Rate Limiter
+
+**Other Tools:**
+
+![Vercel](https://img.shields.io/badge/-Vercel-000000?logo=vercel&logoColor=white)
+![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
 
 ---
 
 ## 🎬 Showcase
 
 ### 🖼️ Screenshots
-| | |
+| Home / Solar System View | Planet Navigation Example |
 |:--:|:--:|
-| ![Screenshot 1](assets/screenshot1.png) | ![Screenshot 2](assets/screenshot2.png) |
+| ![Screenshot 1](developer-portfolio-website/public/images/myPortfolio1.png) | ![Screenshot 2](developer-portfolio-website/public/images/myPortfolio2.png) |
 
+<!--
 ### 🎥 Demo
 > [🎞️ Watch the Demo Video](https://youtu.be/your-demo-link)  
 or  
 > ![Demo GIF](assets/demo.gif)
 
 *(Keep GIFs under ~5MB for faster loading.)*
-
+-->
 ---
 
 ## 💡 Project Highlights
 
-- 🚀 Built a fully responsive dashboard with live data visualization  
-- 🧩 Designed UI components from scratch in Figma  
-- 🧠 Implemented custom hooks for state management  
-- ⚡ Optimized API calls for better performance  
+- 🌟 Fully interactive 3D solar system interface with **Three.js**  
+- 🔒 Robust authentication system using **JWT** + **Firebase Auth**  
+- 🗄️ Secure API endpoints with server-side token verification  
+- ⚡ Rate-limiting implemented with **Upstash Redis**  
+- 🌐 Bilingual support for wider accessibility  
+- 🎨 Polished, responsive UI built with **Tailwind CSS**
+- 📱 Responsive design
 
 ---
 
 ## 🧭 The Process
 
-1. **Planning:** Defined features, user flow, and wireframes.  
-2. **Design:** Created UI/UX mockups in Figma.  
-3. **Development:** Coded the app using React and TailwindCSS.  
-4. **Testing & Deployment:** Tested responsiveness and deployed via Netlify.
-
-*(This section shows that you understand a professional workflow — great for recruiters.)*
+1. **Design & Planning** – Defined each section as a planet and mapped the user journey.  
+2. **3D Modeling & Rendering** – Built the solar system navigation with Three.js.  
+3. **Frontend Development** – Next.js + TypeScript for scalable architecture.  
+4. **Backend & Security** – Node.js API, Firebase DB/Auth, JWT handling, secure cookies.  
+5. **Testing & Optimization** – Ensured performance and smooth animations across devices.  
+6. **Deployment** – Hosted live on Vercel.
 
 ---
 
 ## 📚 What I Learned
 
-- Better understanding of component-driven design  
-- How to integrate APIs and manage async data  
-- Improved debugging and deployment workflow  
-
----
-
-## 🔍 Challenges & Solutions
-
-**Challenge:** Data visualization library caused re-render performance issues.  
-**Solution:** Used `React.memo()` and optimized state updates to reduce unnecessary renders.
-
-*(Optional but powerful — shows problem-solving ability.)*
-
----
-
-## 🔮 Next Steps
-
-Even though this project is complete, here’s what I’d add if I had more time:
-- Add user authentication  
-- Dark/light mode toggle  
-- Mobile-friendly dashboard animations  
+- Advanced **Three.js 3D rendering** techniques for web interfaces  
+- Secure authentication patterns combining JWT and Firebase tokens  
+- Managing **stateful sessions** using HTTP-only cookies  
+- Rate-limiting strategies with Redis for API security  
+- Building a bilingual, interactive web experience
 
 ---
 
 ## 🏁 Conclusion
 
-A closing paragraph summarizing the impact of the project:
-> This project helped me bridge the gap between design and development, and it strengthened my understanding of full-stack web apps.  
+This project allowed me to merge **design, 3D graphics, and full-stack development** into a single immersive portfolio.  
+It demonstrates both **technical skills** and **creativity**, making it a standout project for showcasing my abilities.
 
-You can view the live version here: 👉 [Live Demo](https://yourprojectlink.com)
-
----
-
-## 🌐 Connect With Me
-
-[![Portfolio](https://img.shields.io/badge/Portfolio-000?style=flat&logo=vercel&logoColor=white)](https://yourportfolio.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourhandle)
-[![GitHub](https://img.shields.io/badge/GitHub-000?style=flat&logo=github&logoColor=white)](https://github.com/yourusername)
+> Live showcase: [🌌 Explore the Solar System Portfolio](https://marekdvorsky.vercel.app/en)
