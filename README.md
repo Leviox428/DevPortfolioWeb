@@ -10,12 +10,16 @@ This is an interactive 3D portfolio website designed as a solar system — each 
 It merges creative storytelling with cutting-edge web technologies to create a truly immersive and unique browsing experience.
 
 The website supports two languages (slovak and english) and includes features such as authentication, contact forms, and real-time data fetching.
+
 ---
 
 ## 🧰 Tech Stack
 
 **Frontend:**  
-- JavaScript, HTML, CSS  
+![Next.js](https://img.shields.io/badge/-Next.js-000000?logo=next.js&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/-TailwindCSS-38B2AC?logo=tailwind-css&logoColor=white)
+![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)
+![ThreeJS](https://img.shields.io/badge/-Three.js-000000?logo=three.js&logoColor=white)
 
 **Frameworks & Libraries:**  
 - React, TailwindCSS, Chart.js  
