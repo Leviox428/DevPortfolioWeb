@@ -66,7 +66,6 @@ or
 - ⚡ Rate-limiting implemented with **Upstash Redis**  
 - 🌐 Bilingual support for wider accessibility  
 - 🎨 Polished, responsive UI built with **Tailwind CSS**
-- 📱 Responsive design
 
 ---
 
