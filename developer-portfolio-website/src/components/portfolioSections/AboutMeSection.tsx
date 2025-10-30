@@ -5,6 +5,9 @@ import { useLocale, useTranslations } from "next-intl";
 import { ScrollArea } from "../animatedComponents/ScrollArea";
 import { Button } from "../shadcnComponents/Button";
 import { ArrowUpRightIcon } from "lucide-react";
+import Image from "next/image";
+import LinkedinImage from "@/public/images/linkedin.png"
+import GithubImage from "@/public/images/github.png"
 
 
 export default function AboutMeSection() {
@@ -17,8 +20,16 @@ export default function AboutMeSection() {
         window.open(resumeUrl, '_blank');
     };
 
+    const handleGithubIconClicked = () => {
+        window.open("https://github.com/Leviox428", '_blank');
+    }
+
+    const handleLinkedinIconClicked = () => {
+        window.open("https://www.linkedin.com/in/marek-dvorský-bba20a295", '_blank');
+    }
+
     return(
-        <div className="overflow-y-auto scrollbar relative flex gap-4 justify-center flex-col w-full h-full bg-cover bg-[url('/images/photoOfMeBG.png')] bg-position-[79%] md:bg-position-[80%] lg:bg-position-[90%] xl:bg-position-[100%]">  
+        <div className="pb-15 overflow-y-auto scrollbar relative flex gap-4 justify-center flex-col w-full h-full bg-cover bg-[url('/images/photoOfMeBG.png')] bg-position-[79%] md:bg-position-[80%] lg:bg-position-[90%] xl:bg-position-[100%]">  
             <div className="absolute bottom-0 z-0 left-1/2 -translate-x-1/2 sm:left-auto sm:right-0 sm:translate-x-0"
             >
 
@@ -47,7 +58,29 @@ export default function AboutMeSection() {
                <ArrowUpRightIcon /> {t("resume")}
             </Button>
 
-            <div className="absolute bottom-0 w-full h-1/10 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between md:justify-start md:gap-2">
+            <div className="mx-5 relative flex gap-2 h-auto w-auto">
+                <Image
+                    src={LinkedinImage}
+                    width={32}
+                    height={32}
+                    alt="linkedin"
+                    onClick={handleLinkedinIconClicked}
+                    className="cursor-pointer"
+                >
+                </Image>
+                <Image
+                    src={GithubImage}
+                    width={32}
+                    height={32}
+                    alt="github"
+                    onClick={handleGithubIconClicked}
+                    className="cursor-pointer"
+                >
+                </Image>
+            </div>
+
+
+            <div className="absolute bottom-0 w-full h-15 backdrop-blur-md bg-black/40 text-white p-4 flex items-center justify-between md:justify-start md:gap-2">
                 <div className="flex items-center gap-2">
                     <SiGmail size={26} />
                     <a
@@ -60,7 +93,7 @@ export default function AboutMeSection() {
                 <div className="flex items-center gap-2">
                     <MdOutlinePhoneAndroid size={26} />
                     <a
-                        href="tel:0944502198"
+                        href="tel:+421944502198"
                         className="text-xs sm:text-sm md:text-base text-white hover:underline"
                     >
                         0944502198
