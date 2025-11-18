@@ -4,7 +4,7 @@ import Review from "../Review";
 import { Button } from "../shadcnComponents/Button";
 import { Spinner } from "../shadcnComponents/Spinner";
 import AuthCard from "../AuthCard";
-import ReviewEditor from "../ReviewEditor";
+import ReviewEditor from "../AccountManager";
 
 export default function ReviewsSection() {
     const vm = useReviewSectionViewModel();
@@ -22,13 +22,13 @@ export default function ReviewsSection() {
             </div>
 
             {vm.showModal && !vm.isAuth && (
-                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/95 rounded-2xl shadow-lg backdrop-blur-sm">
+                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/65 rounded-2xl shadow-lg backdrop-blur-sm">
                     <MdArrowBack onClick={vm.handleCloseModal} className="m-1 w-[24px] h-[24px] absolute top-1 right-1 cursor-pointer z-4" />
                     <AuthCard setIsAuth={vm.setIsAuth}></AuthCard>
                 </div>
             )}
             {vm.showModal && vm.isAuth && (
-                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/95 rounded-2xl shadow-lg backdrop-blur-sm">
+                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/65 rounded-2xl shadow-lg backdrop-blur-sm">
                     <MdArrowBack onClick={vm.handleCloseModal} className="m-1 w-[24px] h-[24px] absolute top-1 right-1 cursor-pointer z-4" />
                     <ReviewEditor authToken={vm.authToken.current}></ReviewEditor>
                 </div>

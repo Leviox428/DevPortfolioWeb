@@ -1,15 +1,15 @@
 import { Controller } from "react-hook-form";
 import { toast, Toaster } from "sonner";
+import { reviewEditorFieldInfoDict } from "../models/types/reviewsSectionTypes";
 import { Button } from "./shadcnComponents/Button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./shadcnComponents/Card";
 import { FieldGroup, Field, FieldLabel, FieldError } from "./shadcnComponents/Field";
 import { Input } from "./shadcnComponents/Input";
-import useReviewEditorViewModel from "@/src/viewModels/useReviewEditorViewModel";
-import z from "zod";
 import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from "./shadcnComponents/InputGroup";
-import { reviewEditorFieldInfoDict } from "../models/types/reviewsSectionTypes";
+import useReviewEditorViewModel from "../viewModels/useReviewEditorViewModel";
+import z from "zod";
 
-type ReviewEditorProps = {
+interface ReviewEditorProps {
     authToken: string;
 }
 
@@ -44,8 +44,8 @@ export default function ReviewEditor({ authToken }: ReviewEditorProps) {
     }
 
     return (
-        <div className="relative flex place-items-center place-content-center w-full h-full">
-            <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl m-6 overflow-hidden max-h-[80%]">
+        <>
+            <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl overflow-hidden">
                 <CardHeader>
                     <CardTitle>
                         {vm.t("cardTitleAddReview")}
@@ -117,6 +117,6 @@ export default function ReviewEditor({ authToken }: ReviewEditorProps) {
                 </CardFooter>
             </Card>
             <Toaster position="bottom-right" />
-        </div>
+        </>
     )
 }
