@@ -14,7 +14,10 @@ export async function GET(request: NextRequest) {
         }
 
         const snapshot = await query.get();
-        const reviews = snapshot.docs.map((doc) => doc.data());
+        const reviews = snapshot.docs.map((doc) => ({
+            id: doc.id,          
+            ...doc.data()
+        }));
 
         return NextResponse.json(reviews);
 
@@ -86,7 +89,6 @@ export async function PATCH(request: NextRequest) {
 
         const decoded = await adminAuth.verifyIdToken(firebaseToken);
         const { reviewId, content, stars } = await request.json();
-
         if (!reviewId || typeof reviewId !== "string") return NextResponse.json({ error: "Invalid reviewId" }, { status: 400 });
         if (content && (typeof content !== "string" || content.length < 10)) return NextResponse.json({ error: "Invalid content" }, { status: 400 });
         if (stars && (typeof stars !== "number" || stars < 1 || stars > 5)) return NextResponse.json({ error: "Invalid stars" }, { status: 400 });

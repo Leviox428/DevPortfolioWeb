@@ -5,6 +5,7 @@ export interface ReviewType {
     content: string;
     stars: number;
     source: string;
+    id: string;
 }
 
 export const authCardFieldInfoDict: Record<string, FieldInfo> = {
