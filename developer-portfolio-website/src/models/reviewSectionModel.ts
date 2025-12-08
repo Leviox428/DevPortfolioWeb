@@ -6,7 +6,7 @@ import { Auth } from "./types/authTypes";
 
 export async function fetchReviews(
     tokenContext: TokenContextType,
-    userId?: string
+    userId?: string | null
 ): Promise<ReviewType[]> {
 
     const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
