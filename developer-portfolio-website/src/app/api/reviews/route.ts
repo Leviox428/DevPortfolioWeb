@@ -1,11 +1,23 @@
 import { adminAuth, adminDb } from "@/src/lib/firebaseAdmin";
 import { NextRequest, NextResponse } from "next/server";
+import type { Query } from "firebase-admin/firestore";
 
 export async function GET(request: NextRequest) {
-    try {    
-        const snapshot = await adminDb.collection("reviews").get();
+
+    try { 
+        const { searchParams } = new URL(request.url);
+        const userId = searchParams.get("userId");
+        let query: Query = adminDb.collection("reviews");
+
+        if (userId) {
+            query = query.where("userId", "==", userId);
+        }
+
+        const snapshot = await query.get();
         const reviews = snapshot.docs.map((doc) => doc.data());
+
         return NextResponse.json(reviews);
+
     } catch(error: unknown) {
         const err = error as Error;
         console.error(err);
@@ -30,6 +42,20 @@ export async function POST(request: NextRequest) {
         const decoded = await adminAuth.verifyIdToken(firebaseToken);
 
         const { author, content, stars } = await request.json();
+
+        if (!author || typeof author !== "string") {
+            return NextResponse.json({ error: "Invalid author" }, { status: 400 });
+        }
+
+        if (!content || typeof content !== "string" || content.length < 10) {
+            return NextResponse.json({ error: "Invalid content" }, { status: 400 });
+        }
+
+        if (!stars || typeof stars !== "number" || stars < 1 || stars > 5) {
+            return NextResponse.json({ error: "Invalid stars" }, { status: 400 });
+        }
+
+
         const review = {
             author,
             content,

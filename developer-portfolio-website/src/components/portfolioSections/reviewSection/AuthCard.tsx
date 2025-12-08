@@ -1,23 +1,19 @@
 import { Controller } from "react-hook-form";
-import { Button } from "./shadcnComponents/Button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./shadcnComponents/Card";
-import { FieldGroup, Field, FieldLabel, FieldError } from "./shadcnComponents/Field";
-import { Input } from "./shadcnComponents/Input";
-import useAuthCardViewModel from "../viewModels/useAuthCardViewModel";
+import { Button } from "../../shadcnComponents/Button";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../../shadcnComponents/Card";
+import { FieldGroup, Field, FieldLabel, FieldError } from "../../shadcnComponents/Field";
+import { Input } from "../../shadcnComponents/Input";
+import useAuthCardViewModel from "../../../viewModels/useAuthCardViewModel";
 import z from "zod";
 import { toast, Toaster } from "sonner";
 
-type AuthCardProps = {
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
-export default function AuthCard({ setIsAuth }: AuthCardProps) {
+export default function AuthCard() {
     const vm = useAuthCardViewModel();
-
+    
     async function onSubmit(data: z.infer<typeof vm.formSchema>) {
         try {
-            await vm.onSubmit(data); 
-            setIsAuth(true);         
+            await vm.onSubmit(data);      
         } catch {
             toast(vm.t("submitError"))
             vm.isSubmitting.current = false;

@@ -1,20 +1,20 @@
 import { Controller } from "react-hook-form";
 import { toast, Toaster } from "sonner";
-import { reviewEditorFieldInfoDict } from "../models/types/reviewsSectionTypes";
-import { Button } from "./shadcnComponents/Button";
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "./shadcnComponents/Card";
-import { FieldGroup, Field, FieldLabel, FieldError } from "./shadcnComponents/Field";
-import { Input } from "./shadcnComponents/Input";
-import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from "./shadcnComponents/InputGroup";
-import useReviewEditorViewModel from "../viewModels/useReviewEditorViewModel";
+import { reviewEditorFieldInfoDict } from "../../../models/types/reviewsSectionTypes";
+import { Button } from "../../shadcnComponents/Button";
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../../shadcnComponents/Card";
+import { FieldGroup, Field, FieldLabel, FieldError } from "../../shadcnComponents/Field";
+import { Input } from "../../shadcnComponents/Input";
+import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from "../../shadcnComponents/InputGroup";
+import useReviewFormViewModel from "../../../viewModels/useReviewFormViewModel";
 import z from "zod";
 
 interface ReviewEditorProps {
     authToken: string;
 }
 
-export default function ReviewEditor({ authToken }: ReviewEditorProps) {
-    const vm = useReviewEditorViewModel(authToken);
+export default function ReviewForm() {
+    const vm = useReviewFormViewModel();
 
     async function onSubmit(data: z.infer<typeof vm.formSchema>) {
         try {

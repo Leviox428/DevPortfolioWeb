@@ -2,15 +2,21 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { TokenContextType } from "../contexts/TokenContext";
 import { ReviewType } from "./types/reviewsSectionTypes";
 import { auth } from "@/src/lib/firebaseClient";
+import { Auth } from "./types/authTypes";
 
-export async function fetchReviews(tokenContext: TokenContextType): Promise<ReviewType[]> {
-    const response = await fetch("/api/review", {
-        method: "Get",
+export async function fetchReviews(
+    tokenContext: TokenContextType,
+    userId?: string
+): Promise<ReviewType[]> {
+
+    const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
+    
+    const response = await fetch(`/api/reviews${query}`, {
+        method: "GET",
         headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${tokenContext.token}`, 
+            Authorization: `Bearer ${tokenContext.token}`,
         },
-        
     });
 
     if (!response.ok) {
@@ -27,15 +33,16 @@ export async function getSession() {
     return data;
 }
 
-export async function addReview(tokenContext: TokenContextType, authToken: string, author: string, content: string, stars: number) {
-    await fetch("/api/review", {
+export async function addReview(tokenContext: TokenContextType, auth: Auth, author: string, content: string, stars: number) {
+    let id = auth.uid;
+    await fetch("/api/reviews", {
         method: "POST",
         headers: { 
             "Content-Type": "application/json",
             Authorization: `Bearer ${tokenContext.token}` ,
-            Auth: `${authToken}`
+            Auth: `${auth.authToken}`
         },
-        body: JSON.stringify({ author, content, stars }),
+        body: JSON.stringify({ author, content, id, stars }),
     });
 }
 
@@ -50,14 +57,16 @@ export async function handleAuth(tokenContext: TokenContextType, authToken: stri
     });
 }
 
-export async function login(password: string, email: string): Promise<string> {  
+export async function login(password: string, email: string): Promise<Auth> {  
     const userCred = await signInWithEmailAndPassword(auth, email, password);
     const authToken = await userCred.user.getIdToken();
-    return authToken;
+    const uid = userCred.user.uid;
+    return { authToken, uid };
 }
 
-export async function register(password: string, email: string): Promise<string> {
+export async function register(password: string, email: string): Promise<Auth> {
     const userCred = await createUserWithEmailAndPassword(auth, email, password);
     const authToken = await userCred.user.getIdToken();
-    return authToken;
+    const uid = userCred.user.uid;
+    return { authToken, uid };
 }

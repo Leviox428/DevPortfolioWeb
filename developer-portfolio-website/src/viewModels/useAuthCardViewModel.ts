@@ -6,12 +6,15 @@ import { authCardFieldInfoDict } from "../models/types/reviewsSectionTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleAuth, login, register } from "../models/reviewSectionModel";
+import { Auth } from "../models/types/authTypes";
+import { useAuth } from "../contexts/AuthContext";
 
 export default function useAuthCardViewModel() {
     const t = useTranslations("AuthCard");
     const token = useToken();
     const [isLogin, setIsLogin] = useState(true);
     const isSubmitting = useRef(false);
+    const { setIsAuth, setUid, setAuthToken } = useAuth();
 
     const baseSchema  = z
         .object({
@@ -72,13 +75,17 @@ export default function useAuthCardViewModel() {
         if (isSubmitting.current) return;
         isSubmitting.current = true;
         
-        let autToken: string;
+        let auth: Auth;
         if (isLogin) {
-            autToken = await login(data.password, data.email);
+            auth = await login(data.password, data.email);
         } else {
-            autToken = await register(data.password, data.email);
+            auth = await register(data.password, data.email);
         }
-        await handleAuth(token, autToken);
+        await handleAuth(token, auth.authToken);
+
+        setIsAuth(true);
+        setUid(auth.uid);
+        setAuthToken(auth.authToken);
 
         form.reset();
         isSubmitting.current = false;

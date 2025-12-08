@@ -4,7 +4,7 @@ import MyProjectsSection from "./portfolioSections/MyProjectsSection";
 import ExperienceAndEducationSection from "./portfolioSections/ExperienceAndEducation";
 import ReachOutSection from "./portfolioSections/ReachOutSection";
 import SkillsAndHobbySection from "./portfolioSections/SkillsAndHobbySection";
-import ReviewsSection from "./portfolioSections/ReviewsSection";
+import ReviewsSection from "./portfolioSections/reviewSection/ReviewsSection";
 
 interface PortfolioSectionProps {
     onClose: () => void;
