@@ -1,28 +1,28 @@
 "use client"
 import * as React from "react"
 import { Controller } from "react-hook-form"
-import { Button } from "../shadcnComponents/Button"
+import { Button } from "../../shadcnComponents/Button"
 import {
     Card,
     CardContent,
     CardFooter,
     CardHeader,
     CardTitle,
-} from "../shadcnComponents/Card"
+} from "../../shadcnComponents/Card"
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "../shadcnComponents/Field"
-import { Input } from "../shadcnComponents/Input"
+} from "../../shadcnComponents/Field"
+import { Input } from "../../shadcnComponents/Input"
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "../shadcnComponents/InputGroup"
-import useReachOutSectionViewModel from "@/src/viewModels/useReachOutSectionViewModel"
+} from "../../shadcnComponents/InputGroup"
+import useReachOutSectionViewModel from "@/src/viewModels/portfolioSectionViewModels/useReachOutSectionViewModel"
 import { reachOutFieldInfoDict } from "@/src/models/types/reachOutSectionTypes"
 import { toast, Toaster } from "sonner"
 import z from "zod"
@@ -72,13 +72,13 @@ export default function ReachOutSection() {
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
                                         <FieldLabel htmlFor="email-field-input">
-                                            {vm.t("emailFieldTitle")}
+                                            {vm.tCommon("emailFieldTitle")}
                                         </FieldLabel>
                                         <Input
                                             {...field}
                                             id="email-field-input"
                                             aria-invalid={fieldState.invalid}
-                                            placeholder={vm.t("emailPlaceHolder")}
+                                            placeholder={vm.tCommon("emailPlaceHolder")}
                                             autoComplete="off"
                                         />
                                         {fieldState.invalid && (
@@ -125,7 +125,7 @@ export default function ReachOutSection() {
                                             />
                                             <InputGroupAddon align="block-end">
                                             <InputGroupText className="tabular-nums [word-spacing:0.3rem]">
-                                                {field.value.length}/{reachOutFieldInfoDict["message"].max} {vm.t("characters")}
+                                                {field.value.length}/{reachOutFieldInfoDict["message"].max} {vm.tCommon("characters")}
                                             </InputGroupText>
                                             </InputGroupAddon>
                                         </InputGroup>
@@ -141,10 +141,10 @@ export default function ReachOutSection() {
                 <CardFooter>
                     <Field orientation="horizontal">
                         <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer">
-                            {vm.t("reset")}
+                            {vm.tCommon("reset")}
                         </Button>
                         <Button type="submit" variant="outline" form="contact-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
-                             {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
+                             {vm.form.formState.isSubmitting ? vm.tCommon("submitting") : vm.tCommon("submit")}
                         </Button>
                     </Field>
                 </CardFooter>

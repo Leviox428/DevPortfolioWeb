@@ -1,6 +1,6 @@
-import { Separator } from "../shadcnComponents/Separator";
-import DecryptedText from "../animatedComponents/DecryptedText";
 import { useTranslations } from "next-intl";
+import DecryptedText from "../../animatedComponents/DecryptedText";
+import { Separator } from "@radix-ui/react-separator";
 
 export default function ExperienceAndEducationSection() {
     const t = useTranslations("ExperienceAndEducationSection");

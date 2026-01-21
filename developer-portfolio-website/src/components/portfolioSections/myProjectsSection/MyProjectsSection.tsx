@@ -1,8 +1,7 @@
-import { ComboBox } from "../shadcnComponents/ComboBox";
 import { UsedTech } from "@/src/models/enums/usedTech";
-
-import ProjectCard from "../ProjectCard";
-import useMyProjectSectionViewModel from "@/src/viewModels/useMyProjectSectionViewModel";
+import { ComboBox } from "../../shadcnComponents/ComboBox";
+import ProjectCard from "../../ProjectCard";
+import useMyProjectSectionViewModel from "@/src/viewModels/portfolioSectionViewModels/useMyProjectSectionViewModel";
 
 
 export default function MyProjectsSection() {

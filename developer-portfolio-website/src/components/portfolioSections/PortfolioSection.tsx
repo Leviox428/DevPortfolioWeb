@@ -1,10 +1,10 @@
-import AboutMeSection from "./portfolioSections/AboutMeSection";
-import TechStackSection from "./portfolioSections/TechStackSection";
-import MyProjectsSection from "./portfolioSections/MyProjectsSection";
-import ExperienceAndEducationSection from "./portfolioSections/ExperienceAndEducation";
-import ReachOutSection from "./portfolioSections/ReachOutSection";
-import SkillsAndHobbySection from "./portfolioSections/SkillsAndHobbySection";
-import ReviewsSection from "./portfolioSections/reviewSection/ReviewsSection";
+import AboutMeSection from "./aboutMeSection/AboutMeSection";
+import ExperienceAndEducationSection from "./experienceAndEducationSection/ExperienceAndEducation";
+import MyProjectsSection from "./myProjectsSection/MyProjectsSection";
+import ReachOutSection from "./reachOutSection/ReachOutSection";
+import ReviewsSection from "./reviewSection/ReviewsSection";
+import SkillsAndHobbySection from "./skillsAndHobbySection/SkillsAndHobbySection";
+import TechStackSection from "./techStackSection/TechStackSection";
 
 interface PortfolioSectionProps {
     onClose: () => void;
@@ -30,7 +30,7 @@ export default function PortfolioSecion({ onClose, planetIndex } : PortfolioSect
             case 7:
                 return <ReviewsSection/>;
             default:
-                return <div className="text-white p-6">Coming soon 🚀</div>;
+                return <div className="text-white p-6">Coming soon</div>;
         }
     };
     return (
