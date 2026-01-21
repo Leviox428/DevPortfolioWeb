@@ -3,58 +3,52 @@ import z from "zod";
 import { reviewEditorFieldInfoDict } from "../models/types/reviewsSectionTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useToken } from "../contexts/TokenContext";
-import { addReview } from "../models/reviewSectionModel";
 import { useAuth } from "../contexts/AuthContext";
+import { addReview } from "../models/sectionsModels/reviewSectionModel";
 
 export default function useReviewFormViewModel() {
     const token = useToken();
-    const { authToken, uid } = useAuth();
+    const { fullName } = useAuth();
     const t = useTranslations("ReviewEditor");
+    const tCommon = useTranslations("Common");
     const isSubmitting = useRef(false);
+    const [stars, setStars] = useState<number>(1);
 
-    const formSchema  = z.object({
-        author: z
-            .string()
-            .min(
-                reviewEditorFieldInfoDict["author"].min,
-                `${t("authorFieldMin")} ${reviewEditorFieldInfoDict["author"].min} ${t("characters")}.`
-            )
-            .max(
-                reviewEditorFieldInfoDict["author"].max,
-                `${t("authorFieldMax")} ${reviewEditorFieldInfoDict["author"].max} ${t("characters")}.`
-            ),
+    const formSchema  = z.object({     
         content: z
             .string()
             .min(
                 reviewEditorFieldInfoDict["content"].min,
-                `${t("contentFieldMin")} ${reviewEditorFieldInfoDict["content"].min} ${t("characters")}.`
+                `${t("contentFieldMin")} ${reviewEditorFieldInfoDict["content"].min} ${tCommon("characters")}.`
             )
             .max(
                 reviewEditorFieldInfoDict["content"].max,
-                `${t("contentFieldMax")} ${reviewEditorFieldInfoDict["content"].max} ${t("characters")}.`
+                `${t("contentFieldMax")} ${reviewEditorFieldInfoDict["content"].max} ${tCommon("characters")}.`
             ),
     })
     
     const form = useForm<z.infer<typeof formSchema>>({
             resolver: zodResolver(formSchema),
             defaultValues: {
-                author: "",
                 content: "",
             },
         })
     
-    async function onSubmit(data: z.infer<typeof formSchema>) {
-        await addReview(token, { authToken, uid }, data.author, data.content, 2);
+    async function onSubmit(data: z.infer<typeof formSchema>) {              
+        await addReview(token, fullName, data.content, stars);      
     }
 
     return {
         t,
+        tCommon,
         formSchema,
         form,
         isSubmitting,
+        stars,
 
+        setStars,
         onSubmit
     }
 }

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { ReviewType } from "../models/types/reviewsSectionTypes";
-import { fetchReviews } from "../models/reviewSectionModel";
 import { useToken } from "../contexts/TokenContext";
 import { useAuth } from "../contexts/AuthContext";
+import { fetchReviews } from "../models/sectionsModels/reviewSectionModel";
 
 export default function useReviewEditorViewModel() {
     const [reviews, setReviews] = useState<ReviewType[]>([]);
-    const [loading, setIsLoading] = useState();
+    const [loading, setIsLoading] = useState(true);
     const token = useToken();
     const { uid } = useAuth();
     useEffect(() => {
@@ -14,6 +14,7 @@ export default function useReviewEditorViewModel() {
             try {
                 const data = await fetchReviews(token, uid);
                 setReviews(data);
+                setIsLoading(false);
             } catch (err) {
                 console.log("Failed to load reviews");
             } 
@@ -25,6 +26,8 @@ export default function useReviewEditorViewModel() {
 
     return {
         loading,
-        reviews
+        reviews,
+
+        setReviews
     }
 }

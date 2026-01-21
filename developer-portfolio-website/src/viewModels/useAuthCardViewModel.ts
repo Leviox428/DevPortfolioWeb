@@ -5,53 +5,60 @@ import z from "zod";
 import { authCardFieldInfoDict } from "../models/types/reviewsSectionTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { handleAuth, login, register } from "../models/reviewSectionModel";
-import { Auth } from "../models/types/authTypes";
+import { AuthData } from "../models/types/authTypes";
 import { useAuth } from "../contexts/AuthContext";
+import { handleAuth, login, register } from "../models/authModel";
+import { toast } from "sonner";
 
 export default function useAuthCardViewModel() {
-    const t = useTranslations("AuthCard");
+    const t = useTranslations("Auth");
+    const tCommon = useTranslations("Common");
     const token = useToken();
     const [isLogin, setIsLogin] = useState(true);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const isSubmitting = useRef(false);
-    const { setIsAuth, setUid, setAuthToken } = useAuth();
+    const { setIsAuth, setUid, setFullName, setEmail } = useAuth();
 
     const baseSchema  = z
         .object({
             email: z
                 .email({
-                    message: t("emailFieldInvalidEmail"), 
+                    message: tCommon("emailFieldInvalidEmail"), 
                     pattern: z.regexes.rfc5322Email,
                 })
                 .min(
                     authCardFieldInfoDict["email"].min,
-                    `${t("emailFieldMin")} ${authCardFieldInfoDict["email"].min} ${t("characters")}.`
+                    `${tCommon("emailFieldMin")} ${authCardFieldInfoDict["email"].min} ${tCommon("characters")}.`
                 )
                 .max(
                     authCardFieldInfoDict["email"].max,
-                    `${t("emailFieldMax")} ${authCardFieldInfoDict["email"].max} ${t("characters")}.`
+                    `${tCommon("emailFieldMax")} ${authCardFieldInfoDict["email"].max} ${tCommon("characters")}.`
                 ),
             password: z
                 .string()
                 .min(
                     authCardFieldInfoDict["password"].min,
-                    `${t("passwordFieldMin")} ${authCardFieldInfoDict["password"].min} ${t("characters")}.`
+                    `${tCommon("passwordFieldMin")} ${authCardFieldInfoDict["password"].min} ${tCommon("characters")}.`
                 )
                 .max(
                     authCardFieldInfoDict["password"].max,
-                    `${t("passwordFieldMax")} ${authCardFieldInfoDict["password"].max} ${t("characters")}.`
+                    `${tCommon("passwordFieldMax")} ${authCardFieldInfoDict["password"].max} ${tCommon("characters")}.`
                 ),
         })
 
     const registerSchema = baseSchema
         .extend({
             confirmPassword: z
-            .string()
-            .min(authCardFieldInfoDict.password.min, `${t("passwordFieldMin")} ${authCardFieldInfoDict.password.min} ${t("characters")}.`)
-            .max(authCardFieldInfoDict.password.max, `${t("passwordFieldMax")} ${authCardFieldInfoDict.password.max} ${t("characters")}.`)
-        })
+                .string()
+                .min(authCardFieldInfoDict.password.min, `${tCommon("passwordFieldMin")} ${authCardFieldInfoDict.password.min} ${tCommon("characters")}.`)
+                .max(authCardFieldInfoDict.password.max, `${tCommon("passwordFieldMax")} ${authCardFieldInfoDict.password.max} ${tCommon("characters")}.`),
+            fullName: z
+                .string()
+                .min(authCardFieldInfoDict.fullName.min, `${t("fullNameFieldMin")} ${authCardFieldInfoDict.fullName.min} ${tCommon("characters")}.`)
+                .max(authCardFieldInfoDict.fullName.max, `${t("fullNameFieldMax")} ${authCardFieldInfoDict.fullName.max} ${tCommon("characters")}.`),
+            })
         .refine((data) => data.password === data.confirmPassword, {
-            message: t("passwordsNoMatch"),
+            message: tCommon("passwordsNoMatch"),
             path: ["confirmPassword"]
         });
     
@@ -71,23 +78,39 @@ export default function useAuthCardViewModel() {
         },
     })
 
-    async function onSubmit(data: z.infer<typeof formSchema>) {
+    async function onSubmit(data: AuthSchema) {
         if (isSubmitting.current) return;
         isSubmitting.current = true;
-        
-        let auth: Auth;
-        if (isLogin) {
-            auth = await login(data.password, data.email);
+
+        let auth: AuthData | null;
+
+        try {
+            if (isLogin) {      
+                const loginData = data as LoginSchema;
+                auth = await login(loginData.password, loginData.email, isAdmin, token);
         } else {
-            auth = await register(data.password, data.email);
+            const registerData = data as RegisterSchema;
+
+            auth = await register(
+                registerData.password,
+                registerData.email,
+                registerData.fullName
+            );
         }
-        await handleAuth(token, auth.authToken);
+            if (!isAdmin && auth) {
+                await handleAuth(token, auth.authToken);
 
-        setIsAuth(true);
-        setUid(auth.uid);
-        setAuthToken(auth.authToken);
+                setIsAuth(true);
+                setUid(auth.uid);
+                setFullName(auth.fullName);
+                setEmail(data.email);
+            }
 
-        form.reset();
+            form.reset();
+        } catch {
+            toast(tCommon("submitError"))
+        }
+        
         isSubmitting.current = false;
     }
 
@@ -97,12 +120,14 @@ export default function useAuthCardViewModel() {
 
     return {
         t,
+        tCommon,
         isLogin,
         form,
         formSchema,
         isSubmitting,
 
+        setIsAdmin,
         onSubmit,
-        onRegisterClicked: onChangeAuthClicked
+        onChangeAuthClicked
     }
 }

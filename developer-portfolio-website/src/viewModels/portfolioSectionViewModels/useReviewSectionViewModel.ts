@@ -1,8 +1,9 @@
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { ReviewType } from "../models/types/reviewsSectionTypes";
-import { useToken } from "../contexts/TokenContext";
-import { fetchReviews } from "../models/reviewSectionModel";
+import { ReviewType } from "../../models/types/reviewsSectionTypes";
+import { useToken } from "../../contexts/TokenContext";
+import { fetchReviews } from "../../models/sectionsModels/reviewSectionModel";
+
 
 export default function useReviewSectionViewModel() {
     const t = useTranslations("ReviewSection");
@@ -25,9 +26,7 @@ export default function useReviewSectionViewModel() {
                 console.log("Failed to load reviews");
             } 
         };
-
         loadReviews();
-
     }, []);
 
     return {

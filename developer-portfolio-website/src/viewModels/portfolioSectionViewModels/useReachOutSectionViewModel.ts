@@ -2,50 +2,51 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useTranslations } from "next-intl"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
-import { reachOutFieldInfoDict } from "../models/types/reachOutSectionTypes"
-import { sendEmail, submitFormToServer } from "../models/reachOutSectionModel"
+import { reachOutFieldInfoDict } from "../../models/types/reachOutSectionTypes"
+import { sendEmail, submitFormToServer } from "../../models/sectionsModels/reachOutSectionModel"
 import { useRef } from "react"
-import { useToken } from "../contexts/TokenContext"
+import { useToken } from "../../contexts/TokenContext"
 
 
 export default function useReachOutSectionViewModel() {
     const t = useTranslations("ReachOutSection");
+    const tCommon = useTranslations("Common");
     const isSubmitting = useRef(false);
     const token = useToken();
 
     const formSchema = z.object({
         email: z
             .email({
-                message: t("emailFieldInvalidEmail"), 
+                message: tCommon("emailFieldInvalidEmail"), 
                 pattern: z.regexes.rfc5322Email,
             })
             .min(
                 reachOutFieldInfoDict["email"].min,
-                `${t("emailFieldMin")} ${reachOutFieldInfoDict["email"].min} ${t("characters")}.`
+                `${tCommon("emailFieldMin")} ${reachOutFieldInfoDict["email"].min} ${tCommon("characters")}.`
             )
             .max(
                 reachOutFieldInfoDict["email"].max,
-                `${t("emailFieldMax")} ${reachOutFieldInfoDict["email"].max} ${t("characters")}.`
+                `${tCommon("emailFieldMax")} ${reachOutFieldInfoDict["email"].max} ${tCommon("characters")}.`
             ),
         subject: z
             .string()
             .min(
                 reachOutFieldInfoDict["subject"].min,
-                `${t("subjectFieldMin")} ${reachOutFieldInfoDict["subject"].min} ${t("characters")}.`
+                `${t("subjectFieldMin")} ${reachOutFieldInfoDict["subject"].min} ${tCommon("characters")}.`
             )
             .max(
                 reachOutFieldInfoDict["subject"].max,
-                `${t("subjectFieldMax")} ${reachOutFieldInfoDict["subject"].max} ${t("characters")}.`
+                `${t("subjectFieldMax")} ${reachOutFieldInfoDict["subject"].max} ${tCommon("characters")}.`
             ),
         message: z
             .string()                   
             .min(
                 reachOutFieldInfoDict["message"].min,
-                `${t("messageFieldMin")} ${reachOutFieldInfoDict["message"].min} ${t("characters")}.`
+                `${t("messageFieldMin")} ${reachOutFieldInfoDict["message"].min} ${tCommon("characters")}.`
             )
             .max(
                 reachOutFieldInfoDict["message"].max,
-                `${t("messageFieldMax")} ${reachOutFieldInfoDict["message"].max} ${t("characters")}.`
+                `${t("messageFieldMax")} ${reachOutFieldInfoDict["message"].max} ${tCommon("characters")}.`
             ),
     });
   
@@ -74,8 +75,9 @@ export default function useReachOutSectionViewModel() {
         formSchema,
         form,
         t,
-
+        tCommon,
         isSubmitting,
+        
         onSubmit
     }
 }

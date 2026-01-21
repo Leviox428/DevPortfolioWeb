@@ -1,7 +1,7 @@
+import { fetchProjects } from "@/src/models/sectionsModels/projectSectionModel";
+import { Project } from "@/src/models/types/myProjectSectionTypes";
 import { useLocale, useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
-import { Project } from "../models/types/myProjectSectionTypes";
-import { fetchProjects } from "../models/myProjectsectionModel";
 
 export default function useMyProjectSectionViewModel() {
     const locale = useLocale() as "en" | "sk";
