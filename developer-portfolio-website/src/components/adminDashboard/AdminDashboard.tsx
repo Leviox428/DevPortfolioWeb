@@ -9,7 +9,7 @@ export default function AdminDashboard() {
     const { isAuth } = useAuth();
      return (
     <div className="flex h-screen w-full items-center justify-center bg-black/65 p-8">
-      {!isAuth && <AuthCard isAdmin={false} />}
+      {!isAuth && <AuthCard isAdmin={true} />}
 
       {isAuth && (
         <Tabs

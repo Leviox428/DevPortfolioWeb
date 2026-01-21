@@ -12,10 +12,7 @@ interface AuthCardProps {
 }
 
 export default function AuthCard({ isAdmin }: AuthCardProps) {
-    const vm = useAuthCardViewModel();
-    useEffect(() => {
-        vm.setIsAdmin(isAdmin);
-    }, []);
+    const vm = useAuthCardViewModel(isAdmin);
 
     return (
         <div className="relative flex place-items-center place-content-center w-full h-full">
@@ -128,7 +125,7 @@ export default function AuthCard({ isAdmin }: AuthCardProps) {
                             {vm.form.formState.isSubmitting ? vm.tCommon("submitting") : vm.tCommon("submit")}
                         </Button>                    
                     </Field>
-                    {isAdmin &&
+                    {!isAdmin &&
                         <p 
                             onClick={vm.onChangeAuthClicked} 
                             className="cursor-pointer text-muted-foreground mt-2"
