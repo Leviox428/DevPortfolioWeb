@@ -8,10 +8,7 @@ function hashIP(ip: string) {
 }
 
 export async function POST(request: NextRequest) {
-    try {
-        const check = await verifyRequest(request);
-        if (!check.authorized) return check.response;
-        
+    try { 
         const ip = request.headers.get('x-forwarded-for') || "unknown";
         if (ip === "unknown")  {
             return NextResponse.json(
