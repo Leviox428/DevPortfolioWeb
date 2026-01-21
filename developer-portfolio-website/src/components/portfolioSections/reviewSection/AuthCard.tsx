@@ -4,21 +4,18 @@ import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../../shad
 import { FieldGroup, Field, FieldLabel, FieldError } from "../../shadcnComponents/Field";
 import { Input } from "../../shadcnComponents/Input";
 import useAuthCardViewModel from "../../../viewModels/useAuthCardViewModel";
-import z from "zod";
-import { toast, Toaster } from "sonner";
+import { Toaster } from "sonner";
+import { useEffect } from "react";
 
+interface AuthCardProps {
+    isAdmin: boolean
+}
 
-export default function AuthCard() {
+export default function AuthCard({ isAdmin }: AuthCardProps) {
     const vm = useAuthCardViewModel();
-    
-    async function onSubmit(data: z.infer<typeof vm.formSchema>) {
-        try {
-            await vm.onSubmit(data);      
-        } catch {
-            toast(vm.t("submitError"))
-            vm.isSubmitting.current = false;
-        }      
-    }
+    useEffect(() => {
+        vm.setIsAdmin(isAdmin);
+    }, []);
 
     return (
         <div className="relative flex place-items-center place-content-center w-full h-full">
@@ -29,21 +26,44 @@ export default function AuthCard() {
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="overflow-y-auto scrollbar">
-                    <form id="login-form" onSubmit={vm.form.handleSubmit(onSubmit)}>
-                        <FieldGroup>                           
+                    <form id="login-form" onSubmit={vm.form.handleSubmit(vm.onSubmit)}>
+                        <FieldGroup>
+                            {!vm.isLogin &&
+                                <Controller
+                                    name="fullName"
+                                    control={vm.form.control}
+                                    render={({ field, fieldState }) => (
+                                        <Field data-invalid={fieldState.invalid}>
+                                            <FieldLabel htmlFor="fullName-field-input">
+                                                {vm.t("fullNameFieldTitle")}
+                                            </FieldLabel>
+                                            <Input
+                                                {...field}
+                                                value={field.value ?? ""}
+                                                id="fullName-field-input"
+                                                aria-invalid={fieldState.invalid}
+                                                autoComplete="off"
+                                                />
+                                            {fieldState.invalid && (
+                                                <FieldError className="text-red-400" errors={[fieldState.error]} />
+                                            )}
+                                        </Field>
+                                    )}
+                                />
+                            }                           
                             <Controller
                                 name="email"
                                 control={vm.form.control}
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
                                         <FieldLabel htmlFor="email-field-input">
-                                            {vm.t("emailFieldTitle")}
+                                            {vm.tCommon("emailFieldTitle")}
                                         </FieldLabel>
                                         <Input
                                             {...field}
                                             id="email-field-input"
                                             aria-invalid={fieldState.invalid}
-                                            placeholder={vm.t("emailPlaceHolder")}
+                                            placeholder={vm.tCommon("emailPlaceHolder")}
                                             autoComplete="off"
                                         />
                                         {fieldState.invalid && (
@@ -58,7 +78,7 @@ export default function AuthCard() {
                                 render={({ field, fieldState }) => (
                                     <Field data-invalid={fieldState.invalid}>
                                         <FieldLabel htmlFor="password-field-input">
-                                            {vm.t("passwordFieldTitle")}
+                                            {vm.tCommon("passwordFieldTitle")}
                                         </FieldLabel>
                                         <Input
                                             type="password"
@@ -73,14 +93,14 @@ export default function AuthCard() {
                                     </Field>
                                 )}
                             />
-                            { !vm.isLogin &&
+                            {!vm.isLogin &&
                                 <Controller
                                     name="confirmPassword"
                                     control={vm.form.control}
                                     render={({ field, fieldState }) => (
                                         <Field data-invalid={fieldState.invalid}>
                                             <FieldLabel htmlFor="confirm-password-field-input">
-                                                {vm.t("confirmPasswordFieldTitle")}
+                                                {vm.tCommon("confirmPasswordFieldTitle")}
                                             </FieldLabel>
                                             <Input
                                                 type="password"
@@ -95,25 +115,27 @@ export default function AuthCard() {
                                         </Field>
                                     )}
                                 />
-                            }
+                            }                         
                         </FieldGroup>
                     </form>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-2">
                     <Field orientation="horizontal">
                         <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer">
-                            {vm.t("reset")}
+                            {vm.tCommon("reset")}
                         </Button>
                         <Button type="submit" variant="outline" form="login-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
-                            {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
+                            {vm.form.formState.isSubmitting ? vm.tCommon("submitting") : vm.tCommon("submit")}
                         </Button>                    
                     </Field>
-                    <p 
-                        onClick={vm.onRegisterClicked} 
-                        className="cursor-pointer text-muted-foreground mt-2"
-                    >
-                        {vm.isLogin ? vm.t("clickRegister") : vm.t("clickLogin")}                        
-                    </p>
+                    {isAdmin &&
+                        <p 
+                            onClick={vm.onChangeAuthClicked} 
+                            className="cursor-pointer text-muted-foreground mt-2"
+                        >
+                            {vm.isLogin ? vm.t("clickRegister") : vm.t("clickLogin")}                        
+                        </p>
+                    }
                 </CardFooter>
             </Card>
             <Toaster position="bottom-right" />
