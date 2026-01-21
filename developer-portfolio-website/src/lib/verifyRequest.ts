@@ -1,31 +1,8 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { jwtVerify } from "jose";
 import { ratelimit } from "./rateLimiter";
 
-/**
- * Universal helper to verify that:
- * - The request's origin is allowed (CORS-like protection)
- * - The request includes a valid JWT token (extra layer)
- */
-const allowedOrigins = [
-    "http://localhost:3000",      
-    "https://marekdvorsky.vercel.app",     
-];
-
-export async function verifyRequest(request: Request) {
-    const origin = request.headers.get("origin");
-
-    if (!origin || !allowedOrigins.includes(origin)) {
-        return {
-            authorized: false,
-            response: NextResponse.json(
-                { success: false, message: "Unauthorized origin" },
-                { status: 401 }
-            ),
-        };
-    }
-    
-
+export async function verifyRequest(request: NextRequest) {
     const ip =
         request.headers.get("x-forwarded-for")?.split(",")[0] ??
         request.headers.get("x-real-ip") ??
@@ -46,7 +23,10 @@ export async function verifyRequest(request: Request) {
         };
     }
 
+    const response = NextResponse.next();
+    let authorized = false;
     const authHeader = request.headers.get("authorization");
+
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
         return {
             authorized: false,
@@ -61,7 +41,7 @@ export async function verifyRequest(request: Request) {
     try {
         const secret = new TextEncoder().encode(process.env.API_SECRET!);
         await jwtVerify(token, secret);
-        return { authorized: true };
+        authorized = true;
     } catch (err) {
         console.error("JWT verification failed:", err);
         return {
@@ -71,5 +51,11 @@ export async function verifyRequest(request: Request) {
                 { status: 401 }
             ),
         };
+    }
+
+
+    return {
+        authorized: authorized,
+        response
     }
 }
