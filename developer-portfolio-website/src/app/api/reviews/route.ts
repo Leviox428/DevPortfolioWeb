@@ -1,15 +1,23 @@
 import { adminAuth, adminDb } from "@/src/lib/firebaseAdmin";
 import { NextRequest, NextResponse } from "next/server";
 import type { Query } from "firebase-admin/firestore";
+import { verifyUser } from "@/src/lib/verifyUser";
 
 export async function GET(request: NextRequest) {
-
     try { 
         const { searchParams } = new URL(request.url);
         const userId = searchParams.get("userId");
         let query: Query = adminDb.collection("reviews");
 
         if (userId) {
+            const uid = await verifyUser(request);
+            if (!uid) {
+                return NextResponse.json(
+                    { success: false, message: "Unauthorized" },
+                    { status: 401 }
+                );
+            }
+
             query = query.where("userId", "==", userId);
         }
 
@@ -35,18 +43,18 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+    const uid = await verifyUser(request);
+    if (!uid) {
+        return NextResponse.json(
+            { success: false, message: "Unauthorized" },
+            { status: 401 }
+        );
+    }
+
     try {
-        const firebaseToken = request.headers.get("Auth");
+        const { fullName, content, stars } = await request.json();
 
-        if (!firebaseToken) {
-            return NextResponse.json({ error: "Missing Firebase ID token" }, { status: 401 });
-        }
-
-        const decoded = await adminAuth.verifyIdToken(firebaseToken);
-
-        const { author, content, stars } = await request.json();
-
-        if (!author || typeof author !== "string") {
+        if (!fullName || typeof fullName !== "string") {
             return NextResponse.json({ error: "Invalid author" }, { status: 400 });
         }
 
@@ -58,12 +66,11 @@ export async function POST(request: NextRequest) {
             return NextResponse.json({ error: "Invalid stars" }, { status: 400 });
         }
 
-
         const review = {
-            author,
+            fullName,
             content,
             stars,
-            userId: decoded.uid,
+            userId: uid,
             createdAt: new Date().toISOString(),
         };
 
@@ -83,11 +90,16 @@ export async function POST(request: NextRequest) {
 }
 
 export async function PATCH(request: NextRequest) {
-    try {
-        const firebaseToken = request.headers.get("Auth");
-        if (!firebaseToken) return NextResponse.json({ error: "Missing Firebase ID token" }, { status: 401 });
+    const uid = await verifyUser(request);
+    
+    if (!uid) {
+        return NextResponse.json(
+            { success: false, message: "Unauthorized" },
+            { status: 401 }
+        );
+    }
 
-        const decoded = await adminAuth.verifyIdToken(firebaseToken);
+    try {
         const { reviewId, content, stars } = await request.json();
         if (!reviewId || typeof reviewId !== "string") return NextResponse.json({ error: "Invalid reviewId" }, { status: 400 });
         if (content && (typeof content !== "string" || content.length < 10)) return NextResponse.json({ error: "Invalid content" }, { status: 400 });
@@ -98,7 +110,7 @@ export async function PATCH(request: NextRequest) {
         if (!doc.exists) return NextResponse.json({ error: "Review not found" }, { status: 404 });
 
         const reviewData = doc.data();
-        if (reviewData?.userId !== decoded.uid) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+        if (reviewData?.userId !== uid) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
 
         const updatedData: any = {};
         updatedData.content = content;
@@ -116,11 +128,16 @@ export async function PATCH(request: NextRequest) {
 }
 
 export async function DELETE(request: NextRequest) {
-    try {
-        const firebaseToken = request.headers.get("Auth");
-        if (!firebaseToken) return NextResponse.json({ error: "Missing Firebase ID token" }, { status: 401 });
+    const uid = await verifyUser(request);
+    
+    if (!uid) {
+        return NextResponse.json(
+            { success: false, message: "Unauthorized" },
+            { status: 401 }
+        );
+    }
 
-        const decoded = await adminAuth.verifyIdToken(firebaseToken);
+    try {
         const { reviewId } = await request.json();
 
         if (!reviewId || typeof reviewId !== "string") return NextResponse.json({ error: "Invalid reviewId" }, { status: 400 });
@@ -130,7 +147,7 @@ export async function DELETE(request: NextRequest) {
         if (!doc.exists) return NextResponse.json({ error: "Review not found" }, { status: 404 });
 
         const reviewData = doc.data();
-        if (reviewData?.userId !== decoded.uid) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
+        if (reviewData?.userId !== uid) return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
 
         await reviewRef.delete();
 
