@@ -4,14 +4,10 @@ import { reviewEditorFieldInfoDict } from "../../../models/types/reviewsSectionT
 import { Button } from "../../shadcnComponents/Button";
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "../../shadcnComponents/Card";
 import { FieldGroup, Field, FieldLabel, FieldError } from "../../shadcnComponents/Field";
-import { Input } from "../../shadcnComponents/Input";
 import { InputGroup, InputGroupTextarea, InputGroupAddon, InputGroupText } from "../../shadcnComponents/InputGroup";
 import useReviewFormViewModel from "../../../viewModels/useReviewFormViewModel";
 import z from "zod";
-
-interface ReviewEditorProps {
-    authToken: string;
-}
+import StarSelector from "./StarSelector";
 
 export default function ReviewForm() {
     const vm = useReviewFormViewModel();
@@ -20,7 +16,7 @@ export default function ReviewForm() {
         try {
             await vm.onSubmit(data); 
 
-            toast(vm.t("submitInfo"), {
+            toast(vm.tCommon("submitInfo"), {
                 className: "scrollbar",
                 description: (
                     <pre className="scrollbar bg-code text-white text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
@@ -45,35 +41,15 @@ export default function ReviewForm() {
 
     return (
         <>
-            <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl overflow-hidden">
+            <Card className="w-full sm:max-w-md md:max-w-lg lg:max-w-xl max-h-[450px] overflow-hidden">
                 <CardHeader>
                     <CardTitle>
-                        {vm.t("cardTitleAddReview")}
+                        {vm.t("cardTitleAddReview")}                  
                     </CardTitle>
                 </CardHeader>
                 <CardContent className="overflow-y-auto scrollbar">
                     <form id="add-review-form" onSubmit={vm.form.handleSubmit(onSubmit)}>
-                        <FieldGroup>                           
-                            <Controller
-                                name="author"
-                                control={vm.form.control}
-                                render={({ field, fieldState }) => (
-                                    <Field data-invalid={fieldState.invalid}>
-                                        <FieldLabel htmlFor="author-field-input">
-                                            {vm.t("authorFieldTitle")}
-                                        </FieldLabel>
-                                        <Input
-                                            {...field}
-                                            id="author-field-input"
-                                            aria-invalid={fieldState.invalid}
-                                            autoComplete="off"
-                                        />
-                                        {fieldState.invalid && (
-                                            <FieldError className="text-red-400" errors={[fieldState.error]} />
-                                        )}
-                                    </Field>
-                                )}
-                            />
+                        <FieldGroup>                                                     
                             <Controller
                                 name="content"
                                 control={vm.form.control}
@@ -92,7 +68,7 @@ export default function ReviewForm() {
                                             />
                                             <InputGroupAddon align="block-end">
                                             <InputGroupText className="tabular-nums [word-spacing:0.3rem]">
-                                                {field.value.length}/{reviewEditorFieldInfoDict["content"].max} {vm.t("characters")}
+                                                {field.value.length}/{reviewEditorFieldInfoDict["content"].max} {vm.tCommon("characters")}
                                             </InputGroupText>
                                             </InputGroupAddon>
                                         </InputGroup>
@@ -106,12 +82,15 @@ export default function ReviewForm() {
                     </form>
                 </CardContent>
                 <CardFooter className="flex flex-col gap-2">
-                    <Field orientation="horizontal">
-                        <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer">
-                            {vm.t("reset")}
+                    <Field>
+                        <StarSelector value={vm.stars} onChange={vm.setStars}></StarSelector>
+                    </Field>      
+                    <Field orientation="horizontal" className="mt-3">
+                        <Button type="button" variant="destructive" onClick={() => vm.form.reset()} className="cursor-pointer p-0">
+                            {vm.tCommon("reset")}
                         </Button>
                         <Button type="submit" variant="outline" form="add-review-form" disabled={vm.form.formState.isSubmitting} className="cursor-pointer">
-                            {vm.form.formState.isSubmitting ? vm.t("submitting") : vm.t("submit")}
+                            {vm.form.formState.isSubmitting ? vm.tCommon("submitting") : vm.tCommon("submit")}
                         </Button>                    
                     </Field>
                 </CardFooter>

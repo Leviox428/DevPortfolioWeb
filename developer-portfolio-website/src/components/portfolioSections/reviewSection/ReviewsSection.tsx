@@ -3,7 +3,7 @@ import ReviewsSectionInner from "./ReviewSectionInner";
 
 export default function ReviewsSection() {
     return (
-        <AuthProvider>
+        <AuthProvider isAdmin={false}>
             <ReviewsSectionInner />
         </AuthProvider>
     );
