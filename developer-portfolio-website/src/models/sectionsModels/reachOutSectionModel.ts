@@ -1,4 +1,4 @@
-import { TokenContextType } from "../contexts/TokenContext";
+import { TokenContextType } from "@/src/contexts/TokenContext";
 
 type FormData = {
     email: string,
