@@ -1,3 +1,10 @@
+Návod na inštaláciu:
+1. Pre spustenie servera lokálne, musíte mať nainštalovaný node
+2. Clonnite toto repo
+3. nainštalujte potrebné dependency npm install
+4. spustite npm run dev
+
+
 # 🌌 3D Solar System Portfolio
 
 > A 3D bilingual portfolio website where each planet in the solar system represents a different section of my personal portfolio.
