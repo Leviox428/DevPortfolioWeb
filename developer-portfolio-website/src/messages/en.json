@@ -12,7 +12,6 @@
     "AboutMeSection":
     {
         "intro": "Hi, my name is Marek Dvorský and I am a",
-        "aboutMeContent": "I am a software developer with experience in object oriented programming. I build applications that are reliable, maintainable, and efficient. My work includes desktop and web applications, Wordpress, backend systems and tools that solve practical problems. I write clear, reliable code for practical applications.",
         "resume": "Resume"
     },
     "TechStackSection":
@@ -62,56 +61,66 @@
     {
         "cardTitle": "Contact me",
 
-        "emailFieldMin": "Email must be at least",
-        "emailFieldMax": "Email must be at most",
-        "emailFieldInvalidEmail": "Invalid email",
-        "emailFieldTitle": "Your email",
-        "emailPlaceHolder": "you@example.com",
-
         "subjectFieldTitle": "Subject",
         "subjectFieldMin": "Subject must be at least",
         "subjectFieldMax": "Subject must be at most",
 
         "messageFieldTitle": "Message",
         "messageFieldMin": "Message must be at least",
-        "messageFieldMax": "Message must be at most",
-
-        "characters": "characters",
-        "reset": "Reset",
-        "submit": "Submit",
-        "submitting": "Submitting...",
-        "submitError": "Something wrong happened.",
-        "submitInfo": "You successfully submitted the following values:"
+        "messageFieldMax": "Message must be at most"
     },
     "ReviewSection": 
     {
-        "addReview": "Add review"
+        "myReviews": "My reviews",
+        "account": "Account",
+        "addReview": "Add review"     
     },
-    "AuthCard":
+    "Common":
     {
-        "cardTitleLogin": "Login",
-        "cardTitleRegister": "Register",
-
         "emailFieldMin": "Email must be at least",
         "emailFieldMax": "Email must be at most",
         "emailFieldInvalidEmail": "Invalid email",
         "emailFieldTitle": "Your email",
         "emailPlaceHolder": "you@example.com",
-
-        "passwordFieldMin": "Password must be at leas",
-        "passwordFieldMax": "Password must be at most",
-        "passwordFieldTitle": "Password",
-        "confirmPasswordFieldTitle": "Confirm password",
-        "passwordsNoMatch": "Passwords do not match",
-
         "characters": "characters",
         "reset": "Reset",
         "submit": "Submit",
         "submitting": "Submitting...",
         "submitError": "Something wrong happened.",
+        "submitInfo": "You successfully submitted the following values:",
+        "passwordFieldMin": "Password must be at leas",
+        "passwordFieldMax": "Password must be at most",
+        "passwordFieldTitle": "Password",
+        "confirmPasswordFieldTitle": "Confirm password",
+        "passwordsNoMatch": "Passwords do not match",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "edit": "Edit",
+        "save": "Save"
+    },
+    "Auth":
+    {
+        "cardTitleLogin": "Login",
+        "cardTitleRegister": "Register",
+
+        "fullNameFieldMin": "Full name must be at least",
+        "fullNameFieldMax": "Full name must be at most",
+        "fullNameFieldTitle": "Full Name",
 
         "clickRegister": "Click here to register.",
-        "clickLogin": "Click here to login."
+        "clickLogin": "Click here to login.",
+
+        "changeName": "Change Name",
+        "currentName": "Your Name",
+        "newName": "New Name",
+        "currentEmail": "Your Email",
+        "changeEmail": "Change Email",
+        "newEmail": "New Email",
+        "changePassword": "Change Password",
+        "newPassword": "New Password",
+        "confirmPassword": "Confirm Password",
+        "update": "Save",
+        "emailSubmited": "Email verification sent"
     },
     "ReviewEditor":
     {
@@ -123,13 +132,6 @@
 
         "contentFieldTitle": "Content",
         "contentFieldMin": "Content must be at least",
-        "contentFieldMax": "Content must be at most",
-
-        "characters": "characters",
-        "reset": "Reset",
-        "submit": "Submit",
-        "submitting": "Submitting...",
-        "submitError": "Something wrong happened.",
-        "submitInfo": "You successfully submitted the following values:"
+        "contentFieldMax": "Content must be at most"
     }
 }

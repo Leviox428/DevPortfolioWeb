@@ -12,7 +12,6 @@
     "AboutMeSection":
     {
         "intro": "Zdravím, volám sa Marek Dvorský a som",
-        "aboutMeContent": "Som softvérový vývojár so skúsenosťami v objektovo orientovanom programovaní. Vytváram aplikácie, ktoré sú spoľahlivé, udržiavateľné a efektívne. Moja práca zahŕňa desktopové a webové aplikácie, Wordpress, backend systémy a nástroje, ktoré riešia praktické problémy. Píšem čistý a spoľahlivý kód pre praktické aplikácie.",
         "resume": "Životopis"
     },
     "TechStackSection":
@@ -61,56 +60,66 @@
     {
         "cardTitle": "Kontaktujte ma",
 
-        "emailFieldMin": "Email musí mať aspoň",
-        "emailFieldMax": "Email môže mať najviac",
-        "emailFieldInvalidEmail": "Neplatný email",
-        "emailFieldTitle": "Váš email",
-        "emailPlaceHolder": "you@example.com",
-
         "subjectFieldTitle": "Predmet",
         "subjectFieldMin": "Predmet musí mať aspoň",
         "subjectFieldMax": "Predmet môže mať najviac",
 
         "messageFieldTitle": "Správa",
         "messageFieldMin": "Správa musí mať aspoň",
-        "messageFieldMax": "Správa môže mať najviac",
-
+        "messageFieldMax": "Správa môže mať najviac"
+    },
+    "Common":
+    {
+        "emailFieldMin": "Email musí mať aspoň",
+        "emailFieldMax": "Email môže mať najviac",
+        "emailFieldInvalidEmail": "Neplatný email",
+        "emailFieldTitle": "Váš email",
+        "emailPlaceHolder": "you@example.com",
         "characters": "znakov",
         "reset": "Odznova",
         "submit": "Potvrdiť",
         "submitting": "Posielam...",
         "submitError": "Ups, niečo sa pokazilo.",
-        "submitInfo": "Boli zaslané úspešne tieto hodnoty:"
-    },
-    "ReviewSection": 
-    {
-        "addReview": "Pridaj recenziu"
-    },
-    "AuthCard":
-    {
-        "cardTitleLogin": "Prihlásenie",
-        "cardTitleRegister": "Registrácia",
-
-        "emailFieldTitle": "Váš email",
-        "emailFieldMin": "Email musí mať aspoň",
-        "emailFieldMax": "Email môže mať najviac",
-        "emailFieldInvalidEmail": "Neplatný email",
-        "emailPlaceHolder": "you@example.com",
-
+        "submitInfo": "Boli zaslané úspešne tieto hodnoty:",
         "passwordFieldMin": "Heslo musi mať aspoň",
         "passwordFieldMax": "Heslo môže mať najviac",
         "passwordFieldTitle": "Heslo",
         "confirmPasswordFieldTitle": "Potvrďte heslo",
         "passwordsNoMatch": "Heslá sa nezhodujú",
+        "cancel": "Zrušiť",
+        "delete": "Zmazať",
+        "edit": "Upraviť",
+        "save": "Uložiť"
+    },
+    "ReviewSection": 
+    {
+        "myReviews": "Moje recenzie",
+        "account": "Účet",
+        "addReview": "Pridaj recenziu"
+    },
+    "Auth":
+    {
+        "cardTitleLogin": "Prihlásenie",
+        "cardTitleRegister": "Registrácia",
 
-        "characters": "znakov",
-        "reset": "Odznova",
-        "submit": "Potvrdiť",
-        "submitting": "Posielam...",
-        "submitError": "Ups, niečo sa pokazilo.",
+        "fullNameFieldMin": "Meno musí mať aspoň",
+        "fullNameFieldMax": "Meno musí mať najviac",
+        "fullNameFieldTitle": "Meno",
 
         "clickRegister": "Pre registáciu klikni sem.",
-        "clickLogin": "Pre prihlásenie klikni sem."
+        "clickLogin": "Pre prihlásenie klikni sem.",
+
+        "changeName": "Zmena Mena",
+        "currentName": "Vaše Meno",
+        "newName": "Nové Meno",
+        "currentEmail": "Váš Email",
+        "changeEmail": "Zmena Emailu",
+        "newEmail": "Nový Email",
+        "changePassword": "Zmena Hesla",
+        "newPassword": "Nové Heslo",
+        "confirmPassword": "Potvrďte Heslo",
+        "update": "Uložiť",
+        "emailSubmited": "Na váš mail bolo zaslané potvrdenie o zmenu emailu"
     },
     "ReviewEditor":
     {
@@ -122,13 +131,6 @@
 
         "contentFieldTitle": "Obsah",
         "contentFieldMin": "Obsah musí mať aspoň",
-        "contentFieldMax": "Obsah môže mať najviac",
-
-        "characters": "znakov",
-        "reset": "Odznova",
-        "submit": "Potvrdiť",
-        "submitting": "Posielam...",
-        "submitError": "Ups, niečo sa pokazilo.",
-        "submitInfo": "Boli zaslané úspešne tieto hodnoty:"
+        "contentFieldMax": "Obsah môže mať najviac"
     }
 }
