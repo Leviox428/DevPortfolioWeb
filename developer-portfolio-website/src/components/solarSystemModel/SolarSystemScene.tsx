@@ -5,13 +5,13 @@ import { VscDebugStepBack } from "react-icons/vsc";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, Html, Loader } from "@react-three/drei";
 import { Suspense } from "react";
-import React from "react";
-import { PlayPauseButton } from "../PausePlayButton";
-import { LanguageButton } from "../LanguageButton";
-import PortfolioSecion from "../PortfolioSection";
+import { PlayPauseButton } from "../buttons/PausePlayButton";
+import { LanguageButton } from "../buttons/LanguageButton";
 import Particles from "../animatedComponents/Particles";
-import SolarSystemModel from "../models/SolarSystemModel";
+import SolarSystemModel from "./SolarSystemModel";
 import useSolarSystemViewModel from "@/src/viewModels/useSolarSystemViewModel";
+import PortfolioSecion from "../portfolioSections/PortfolioSection";
+import { AdminDashboardButton } from "../buttons/AdminDashboardButton";
 
 export default function SolarSystemScene() {
     const vm = useSolarSystemViewModel();
@@ -57,6 +57,7 @@ export default function SolarSystemScene() {
                 isPlaying={vm.isPlaying}
                 onToggle={vm.togglePlay}
             />
+            <AdminDashboardButton></AdminDashboardButton>
             <LanguageButton></LanguageButton>
             { vm.showPortfolioSection && vm.canGoPrev &&  (
                 <div className="fixed bottom-4 left-4">
