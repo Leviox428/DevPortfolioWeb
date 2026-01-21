@@ -2,14 +2,19 @@
 
 import { TokenProvider } from "../contexts/TokenContext";
 import usePageViewModel from "../viewModels/useEntryPointViewModel";
-import SolarSystemScene from "./scene/SolarSystemScene";
+import SolarSystemScene from "./solarSystemModel/SolarSystemScene";
 
-export default function EntryPoint({ token }: { token: string | null }) {
+type EntryPointProps = {
+  token: string | null;
+  children: React.ReactNode;
+};
+
+export default function EntryPoint({ token, children }: EntryPointProps) {
   usePageViewModel(token);
 
-  return  (
+  return (
     <TokenProvider initialToken={token}>
-      <SolarSystemScene />
+      {children}
     </TokenProvider>
   );
 }
