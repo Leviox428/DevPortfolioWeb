@@ -12,14 +12,13 @@ import useAboutMeSectionViewModel from "@/src/viewModels/portfolioSectionViewMod
 
 
 export default function AboutMeSection() {
-    const { text } = useAboutMeSectionViewModel();
+    const { text, cvUrl } = useAboutMeSectionViewModel();
 
     const t = useTranslations('AboutMeSection');
     const locale = useLocale();
 
-    const handleOpenResume = () => {
-        const resumeUrl = locale === 'sk' ? 'https://pmnhapadgqmn5xru.public.blob.vercel-storage.com/%C5%BDivotopis.pdf' : 'https://pmnhapadgqmn5xru.public.blob.vercel-storage.com/Resume.pdf';
-        window.open(resumeUrl, '_blank');
+    const handleOpenResume = () => {   
+        window.open(cvUrl, '_blank');
     };
 
     const handleGithubIconClicked = () => {

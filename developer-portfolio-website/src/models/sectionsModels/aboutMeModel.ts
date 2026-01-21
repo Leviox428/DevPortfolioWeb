@@ -25,3 +25,14 @@ export async function updateAboutMe(text: string, token: TokenContextType, local
 
     if (!res.ok) throw new Error("Failed to save About Me");
 }
+
+export async function getCvUrl(token: TokenContextType, locale: string) {
+    const res = await fetch(`/api/cv/?locale=${encodeURIComponent(locale)}`, {
+        headers: {
+          "Content-Type": "application/json",
+           Authorization: `Bearer ${token.token}`,
+        },
+    });
+    const { url } = await res.json();
+    return url;
+}

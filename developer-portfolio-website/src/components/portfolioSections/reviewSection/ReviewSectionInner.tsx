@@ -23,13 +23,13 @@ export default function ReviewsSectionInner() {
             </div>
 
             {vm.showModal && !isAuth && (
-                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/65 rounded-2xl shadow-lg backdrop-blur-sm">
+                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/95 rounded-2xl shadow-lg backdrop-blur-sm">
                     <MdArrowBack onClick={vm.handleCloseModal} className="m-1 w-[24px] h-[24px] absolute top-1 right-1 cursor-pointer z-4" />
                     <AuthCard isAdmin={false}></AuthCard>
                 </div>
             )}
             {vm.showModal && isAuth && (
-                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/65 rounded-2xl shadow-lg backdrop-blur-sm">
+                <div className="fixed z-3 inset-0 flex items-center justify-center bg-black/95 rounded-2xl shadow-lg backdrop-blur-sm">
                     <MdArrowBack onClick={vm.handleCloseModal} className="m-1 w-[24px] h-[24px] absolute top-1 right-1 cursor-pointer z-4" />
                     <UserDashBoard></UserDashBoard>
                 </div>

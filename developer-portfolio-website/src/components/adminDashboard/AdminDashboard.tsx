@@ -14,7 +14,7 @@ export default function AdminDashboard() {
       {isAuth && (
         <Tabs
           defaultValue="about-me"
-          className="w-full max-w-3xl h-[80vh] rounded-xl bg-zinc-800 p-4"
+          className="w-full max-w-3xl h-[80vh] max-h-[80vh] rounded-xl bg-zinc-800 p-4"
         >
           <TabsList className="flex w-full justify-between rounded-lg bg-zinc-700 p-1">
             <TabsTrigger
@@ -52,14 +52,14 @@ export default function AdminDashboard() {
             <TabsContent value="reviews" className="text-zinc-200">
               <h2 className="mb-2 text-lg font-semibold">Reviews</h2>
               <p className="text-sm text-zinc-400">
-                User feedback, ratings, and moderation tools.
+
               </p>
             </TabsContent>
 
             <TabsContent value="projects" className="text-zinc-200">
               <h2 className="mb-2 text-lg font-semibold">Projects</h2>
               <p className="text-sm text-zinc-400">
-                Manage and review active projects here.
+
               </p>
             </TabsContent>
           </div>

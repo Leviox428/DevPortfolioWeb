@@ -34,7 +34,7 @@ export default function ReachOutSection() {
         try {
             await vm.onSubmit(data);
 
-            toast(vm.t("submitInfo"), {
+            toast(vm.tCommon("submitInfo"), {
                 className: "scrollbar",
                 description: (
                     <pre className="scrollbar bg-code text-white text-code-foreground mt-2 w-[320px] overflow-x-auto rounded-md p-4">
@@ -52,7 +52,7 @@ export default function ReachOutSection() {
                 duration: 2500
             })
         } catch {
-            toast(vm.t("submitError"))
+            toast(vm.tCommon("submitError"))
             vm.isSubmitting.current = false;
         }      
     }
